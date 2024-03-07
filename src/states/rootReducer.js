@@ -8,14 +8,14 @@ import tagReducer from './modules/tag/index.js';
 import configReducer from './modules/config/index.js';
 
 const rootReducer = {
-  app: appReducer,
-  auth: authReducer,
-  profile: proFileReducer,
-  user: userReducer,
-  project: projectReducer,
-  tag: tagReducer,
-  server: serverReducer,
-  config: configReducer
-}
+    app: appReducer,
+    auth: authReducer,
+    profile: proFileReducer,
+    user: userReducer,
+    project: projectReducer,
+    tag: tagReducer,
+    server: serverReducer,
+    config: configReducer
+};
 
-export default rootReducer
+export default rootReducer;

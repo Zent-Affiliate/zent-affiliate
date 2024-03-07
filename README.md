@@ -6,7 +6,7 @@ Server Monitoring Frontend using ReactJs.
 
 1. Clone project
 2. Create `.env` file, copy content from [.env.example](./.env.example) to `.env` file and config in `.env`:
-  
+
 - Config Runtime Environment
 
 ```

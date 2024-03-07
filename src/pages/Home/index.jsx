@@ -1,10 +1,10 @@
-import React from "react";
-import MainLayout from "@/layouts/MainLayout/index.jsx";
+import React from 'react';
+import MainLayout from '@/layouts/MainLayout/index.jsx';
 
 function Home() {
-  return (
-    <MainLayout/>
-  )
+    return (
+        <MainLayout />
+    );
 }
 
 export default Home;
