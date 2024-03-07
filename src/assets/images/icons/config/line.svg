@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="width: 1.5em; height: 1.5em; vertical-align: middle; fill: ; overflow: hidden;" viewBox="0 0 512 512">
+    <g fill="#3b82f6">
+        <path xmlns="http://www.w3.org/2000/svg" class="fa-primary" style="fill:var(--fa-primary-color,inherit);opacity:var(--fa-primary-opacity,1);" d="M0 64C0 46.3 14.3 32 32 32s32 14.3 32 32V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V64z"/>
+        <path xmlns="http://www.w3.org/2000/svg" class="fa-secondary" style="fill:var(--fa-secondary-color,inherit);opacity:var(--fa-secondary-opacity,.4);" d="M128 64c0-17.7 14.3-32 32-32s32 14.3 32 32V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V64z"/>
+    </g>
+</svg>

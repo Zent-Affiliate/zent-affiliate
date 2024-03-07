@@ -1,0 +1,95 @@
+.content {
+  @apply flex items-center py-1;
+
+  &::before {
+    @apply content-[""] inline-block bg-blue-55 rounded-md w-2 h-1 shrink-0 mr-3;
+  }
+}
+
+.brick_primary {
+  @apply pt-[9px];
+
+  &::before {
+    @apply content-[""] inline-block bg-blue-55 rounded-md w-2 h-1 shrink-0 mr-3;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.5);
+  }
+  80%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.animationPulseGreen {
+  animation: pulseGreen 2s infinite;
+  @apply bg-[#17c653] h-2 w-2 rounded-full flex justify-center items-center;
+}
+.animationPulseRed {
+  animation: pulseRed 2s infinite;
+  @apply bg-[#f8285a] h-2 w-2 rounded-full flex justify-center items-center;
+}
+
+
+@keyframes pulseGreen {
+  0% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 #17c653;
+
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 7px rgba(229, 62, 62, 0);
+  }
+
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+@keyframes pulseRed {
+  0% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 0 #f8285a;
+
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 7px rgba(229, 62, 62, 0);
+  }
+
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+.greenUnderline {
+  @apply flex items-center;
+
+  &::before {
+    @apply content-[""] bg-[#17c653] h-2 w-2 rounded-full mr-2;
+  }
+}
+
+.redUnderline {
+  @apply flex items-center;
+
+  &::before {
+    @apply content-[""] bg-[#f8285a] h-2 w-2 rounded-full mr-2;
+  }
+}

@@ -1,0 +1,17 @@
+.headerMainWrap {
+  .titleWrap {
+    @apply text-lg text-black-title font-semibold;
+  }
+
+  .breadcrumbWrap {
+    .text {
+      &:hover {
+        @apply text-blue-55;
+      }
+
+      @apply cursor-pointer ;
+    }
+  }
+
+  @apply text-xs text-black-subContent font-medium ml-[15px] transition-all duration-300;
+}
