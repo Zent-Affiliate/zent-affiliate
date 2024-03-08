@@ -13,7 +13,7 @@ export const routeMap = [
         routeActive: ['/']
     },
     {
-        label: 'Quản lý người dùng',
+        label: 'Danh sách khách hàng',
         icon: (<InlineSVG src={UsersIcon} />),
         path: '/users',
         routeActive: ['/users']

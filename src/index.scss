@@ -148,6 +148,12 @@
 
             @apply bg-white text-gray-65 #{!important}
         }
+
+        tr {
+            &:first-child {
+                padding-left: 25px;
+            }
+        }
     }
 
     .ant-table-cell {
@@ -159,6 +165,21 @@
     }
 
     .ant-table-body {
+        &::-webkit-scrollbar {
+            @apply h-[5px];
+            @apply w-[5px];
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply bg-[#d9dbe2];
+            @apply rounded-lg;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply bg-[#bec3cd];
+            @apply rounded-lg;
+        }
+
         @apply h-[calc(100vh-420px)]
     }
 }

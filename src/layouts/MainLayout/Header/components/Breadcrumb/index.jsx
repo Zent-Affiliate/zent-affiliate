@@ -11,7 +11,7 @@ function Breadcrumb() {
         switch (index) {
             case 0:
                 return (
-                    <><Link to={'/'}><span className={`${styles.text}`}>Trang chủ</span></Link> - </>
+                    <><Link to={'/'}><span className={`${styles.text}`}>Quản lý dự án</span></Link> - </>
                 );
             case breadcrumb.length - 1:
                 return (

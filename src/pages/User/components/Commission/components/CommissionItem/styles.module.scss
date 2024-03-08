@@ -1,0 +1,8 @@
+.valueWrap {
+    @apply h-[55px] overflow-y-hidden pr-2 hover:overflow-y-auto;
+    scrollbar-gutter: stable both-edges;
+
+    &::-webkit-scrollbar {
+        @apply w-[4px] transition-all duration-200
+    }
+}

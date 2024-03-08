@@ -6,6 +6,7 @@ import ForgotPassword from '@/pages/Auth/ForgotPassword';
 import ResetPassword from '@/pages/Auth/ResetPassword';
 import Home from '@/pages/Home';
 import User from '@/pages/User/index.jsx';
+import Commission from '@/pages/User/components/Commission/index.jsx';
 
 const router = createBrowserRouter([
     {
@@ -33,14 +34,21 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />,
         loader: ({request, params}) => rootLoader(
-            {request, params}, false, 'LOAD_HOME_PAGE'
+            {request, params}, true, 'LOAD_HOME_PAGE'
         )
     },
     {
         path: '/users',
         element: <User />,
         loader: ({request, params}) => rootLoader(
-            {request, params}, false, 'LOAD_USER_PAGE'
+            {request, params}, true, 'LOAD_USER_PAGE'
+        )
+    },
+    {
+        path: '/users/:id',
+        element: <Commission />,
+        loader: ({request, params}) => rootLoader(
+            {request, params}, true, 'LOAD_COMMISSION_PAGE'
         )
     }
 ]);
