@@ -1,4 +1,4 @@
-import {ACTIVE_STATUS} from '@/utils/constains';
+import {ACTIVE_STATUS} from '@/utils/constants';
 import Swal from 'sweetalert2';
 import {useDispatch, useSelector} from 'react-redux';
 import { setDataFilter,setErrorInfoProject, setInfoProject, setProjectActive, setVisibleModalCreateProject, 
@@ -83,7 +83,7 @@ export default function Handle() {
     };
 
     const redirectToProject = (project_id) => {
-        navigate(`/my-project-detail/${project_id}`)
+        navigate(`/my-project-detail/${project_id}/users`)
     }
 
     return {

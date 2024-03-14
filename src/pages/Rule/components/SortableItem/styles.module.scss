@@ -1,0 +1,37 @@
+.itemWrapper {
+    .itemDrag {
+        svg {
+            fill: #6f7b88
+        }
+
+        @apply w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] absolute right-4 ;
+    }
+
+    .itemDrag:active {
+        @apply cursor-grabbing #{!important};
+    }
+
+    .deleteIcon {
+        svg {
+            fill: #6f7b88
+        }
+
+        @apply hidden w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] absolute right-10 cursor-pointer;
+    }
+
+    &:hover {
+        .deleteIcon {
+            &:active {
+                svg {
+                    fill: #ff4646f2;
+                }
+
+                @apply bg-[#ffecec];
+            }
+
+            @apply flex;
+        }
+    }
+
+    @apply bg-[white] relative select-none;
+}

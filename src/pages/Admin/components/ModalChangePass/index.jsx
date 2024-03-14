@@ -5,7 +5,7 @@ import IconWarning from '@/assets/images/icons/light/warning.svg';
 import {Button, Input} from 'antd';
 import Handle from './handle';
 import HandleAdmin from '@/pages/Admin/handle';
-import {TYPE_SUBMIT} from '@/utils/constains';
+import {TYPE_SUBMIT} from '@/utils/constants';
 import {passwordAdminSchema} from '../../schema';
 
 function ModalChangePassAdmin() {

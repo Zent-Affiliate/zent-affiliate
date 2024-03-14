@@ -7,7 +7,7 @@ import IconChangePass from '@/assets/images/icons/duotone/lock.svg';
 import {Avatar, Switch, Tooltip} from 'antd';
 import Handle from './handle';
 import {useSelector} from 'react-redux';
-import {ACTIVE_STATUS} from '@/utils/constains';
+import {ACTIVE_STATUS} from '@/utils/constants';
 
 function TableProject() {
     const dataListProjects = useSelector((state) => state.project.projects);

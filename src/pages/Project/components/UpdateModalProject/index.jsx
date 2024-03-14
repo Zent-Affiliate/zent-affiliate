@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import IconWarning from '@/assets/images/icons/light/warning.svg';
 import { Button, Input, Switch, Tooltip } from 'antd';
 import Handle from '@/pages/Project/handle';
-import { TYPE_SUBMIT } from '@/utils/constains';
+import { TYPE_SUBMIT } from '@/utils/constants';
 import { setInfoAdmin } from '@/states/modules/admin';
 import { updateProjectSchema } from '../../schema';
 

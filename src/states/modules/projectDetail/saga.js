@@ -1,37 +1,36 @@
 import {all, fork, put, select, takeLatest} from 'redux-saga/effects';
-import { goToPage, setBreadcrumb, setTitlePage } from '../app';
-import { hasPermission, isRouteActive } from '@/utils/helper';
-import { requestGetProjectDetail } from '@/api/projectDetail';
-import { getProjectDetailSuccess } from '.';
+import {setBreadcrumb, setTitlePage} from '../app';
+import {isRouteActive} from '@/utils/helper';
+import {requestGetProjectDetail} from '@/api/projectDetail';
+import {getProjectDetailSuccess} from '.';
 
 function* loadRouteData() {
-    const { app } = yield select();
-    yield put(requestGetProjectDetail())
+    const {app} = yield select();
+    yield put(requestGetProjectDetail());
 
-    if(isRouteActive('my-project-detail/:project_id')){
+    if (isRouteActive('my-project-detail/:project_id')) {
         yield put(setTitlePage(`Dự án`));
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
                 name: 'My Project'
-            },
-        ])) 
-    }else{
+            }
+        ]));
+    } else {
         yield put(setTitlePage(`Quản lý dự án `));
         yield put(setBreadcrumb([
             {
                 path: '/admin-management',
                 name: 'Admin Management'
             }
-        ])) 
+        ]));
     }
-
 }
 
 function* handleActions() {
-    yield takeLatest(getProjectDetailSuccess, function* (action){
-        const project = action.payload.data
-        if(isRouteActive('my-project-detail/:project_id')){
+    yield takeLatest(getProjectDetailSuccess, function* (action) {
+        const project = action.payload.data;
+        if (isRouteActive('my-project-detail/:project_id')) {
             yield put(setTitlePage(`Dự án - ${project.name}`));
             yield put(setBreadcrumb([
                 {
@@ -41,9 +40,9 @@ function* handleActions() {
                 {
                     path: `/my-project-detail/${project._id}`,
                     name: project.name
-                },
-            ]))
-        }else{
+                }
+            ]));
+        } else {
             yield put(setTitlePage(`Quản lý dự án - ${project.name}`));
             yield put(setBreadcrumb([
                 {
@@ -57,10 +56,10 @@ function* handleActions() {
                 {
                     path: `/project-detail/${project._id}`,
                     name: project.name
-                },
-            ]))
+                }
+            ]));
         }
-    })
+    });
 }
 
 export default function* projectDetailSaga() {

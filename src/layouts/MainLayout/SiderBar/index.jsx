@@ -5,7 +5,7 @@ import Logo from '@/assets/images/logos/zent.png';
 import IconLogo from '@/assets/images/logos/icon_zent.png';
 import NavItem from './components/NavItem';
 import {routeMap} from '@/router/routeMap';
-import {handleCheckRoute, hasPermission} from '@/utils/helper';
+import {getDynamicRoute, handleCheckRoute, hasPermission} from '@/utils/helper';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {handleSetIsShowSideBar} from '@/states/modules/app';
@@ -36,7 +36,7 @@ function SideBar(props) {
 
     const handleToggleMenu = (indexNavItem, menuNavItem) => {
         if (menuNavItem.path) {
-            navigate(menuNavItem.path);
+            navigate(getDynamicRoute(menuNavItem.path));
         }
         if (isShowSideBar) {
             setIndexNavItemSelect(indexNavItem !== indexNavItemSelect ? indexNavItem : null);

@@ -15,7 +15,9 @@ import { getListAdmins, handleCreateAdmin, handleUpdateAdmin } from '@/api/admin
 import { validate } from '@/utils/validates';
 import { handleNotification } from '@/utils/helper';
 import _ from 'lodash';
-import { TYPE_SUBMIT } from '@/utils/constains';
+import { TYPE_SUBMIT } from '@/utils/constants';
+import {useEffect} from 'react';
+import {setBreadcrumb} from '@/states/modules/app/index.js';
 
 export default function Handle() {
     const dispatch = useDispatch();

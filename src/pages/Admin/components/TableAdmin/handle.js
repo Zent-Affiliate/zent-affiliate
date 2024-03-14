@@ -1,4 +1,4 @@
-import {ACTIVE_STATUS} from '@/utils/constains';
+import {ACTIVE_STATUS} from '@/utils/constants';
 import Swal from 'sweetalert2';
 import {useDispatch, useSelector} from 'react-redux';
 import { setDataChangePassAdmin, setDataFilter, setErrorDataChangePassAdmin, setErrorInfoAdmin, 

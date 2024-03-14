@@ -66,58 +66,58 @@ const handleGetTypeNotification = (type) => {
     return typeNotification;
 };
 
-export const isRouteActive = (path) => {
+export const getDynamicRoute = (path) => {
     const {location} = store.getState().app;
     const params = location?.params || {};
-    const currentPath = location.pathName;
-  
-    let isActive = false;
-  
+
     let pathActive = path;
     if (_.isString(pathActive) && pathActive && !!pathActive.length) {
-      if (pathActive.startsWith('/')) {
-        pathActive = pathActive.substring(1);
-      }
-      const pathArray = pathActive.split('/');
-  
-      const newArray = pathArray.map((item) => {
-        if (item.startsWith(':')) {
-          const pathWithoutColon = item.replace(/:/g, '');
-          return params[pathWithoutColon];
+        if (pathActive.startsWith('/')) {
+            pathActive = pathActive.substring(1);
         }
-        return item;
-      });
-      let pathString = newArray.join('/');
-      if (!pathString.startsWith('/')) {
-        pathString = '/' + pathString;
-      }
-  
-      if (currentPath === pathString) {
-        isActive = true;
-      }
+        const pathArray = pathActive.split('/');
+
+        const newArray = pathArray.map((item) => {
+            if (item.startsWith(':')) {
+                const pathWithoutColon = item.replace(/:/g, '');
+                return params[pathWithoutColon];
+            }
+            return item;
+        });
+        let pathString = newArray.join('/');
+        if (!pathString.startsWith('/')) {
+            pathString = '/' + pathString;
+        }
+
+        return pathString;
     }
-  
-    return isActive;
-  };
-  
-  export const handleCheckRoute = (routes) => {
+};
+
+export const isRouteActive = (path) => {
+    const {location} = store.getState().app;
+    const currentPath = location.pathName;
+
+    return getDynamicRoute(path) === currentPath;
+};
+
+export const handleCheckRoute = (routes) => {
     let isActive = false;
-  
+
     const handleCheckArr = (index) => {
-      if (index >= routes.length) return
-  
-      if(isRouteActive(routes[index])){
-          isActive = true
-          return
-      }else {
-         return handleCheckArr(++index)
-      }
+        if (index >= routes.length) return;
+
+        if (isRouteActive(routes[index])) {
+            isActive = true;
+            return;
+        } else {
+            return handleCheckArr(++index);
+        }
     };
-  
+
     handleCheckArr(0);
-  
+
     return isActive;
-  };
+};
 
 
 export const convertQueryStringToObject = (queryString) => {
@@ -170,3 +170,4 @@ export function handleNotification(type, message) {
     const notification = document.querySelector('.swal2-container');
     notification.style.zIndex = 99999;
 }
+

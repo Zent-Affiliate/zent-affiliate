@@ -1,28 +1,33 @@
-import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
-import {setTitlePage} from '../app';
+import {all, fork, put, select} from 'redux-saga/effects';
+import {setBreadcrumb, setTitlePage} from '../app';
 import {getListUsers} from '@/api/users';
-import {
-    changePassWordUserFail,
-    changePassWordUserSuccess,
-    changeStatusUserSuccess,
-    createUserFail,
-    createUserSuccess,
-    deleteUserFail,
-    deleteUserSuccess,
-    setDataFilter,
-    setErrorDataChangePassUser,
-    setErrorInfoUser,
-    setVisibleModalChangePass,
-    setVisibleModalCreateUser,
-    setVisibleModalDeleteUser,
-    setVisibleModalUpdateUser,
-    updateUserFail,
-    updateUserSuccess
-} from '.';
-import {handleNotification} from '@/utils/helper';
+import {setDataFilter} from '.';
+import {isRouteActive} from '@/utils/helper.js';
 
 function* loadRouteData() {
-    yield put(setTitlePage('Quản lý người dùng'));
+    const location = yield select(state => state.app.location);
+
+    if (isRouteActive('/my-project-detail/:project_id/users')) {
+        yield put(setTitlePage(`Danh sách khách hàng`));
+        yield put(setBreadcrumb([
+            {
+                path: '/my-project',
+                name: 'Dự án của tôi'
+            },
+            {
+                path: `/my-project-detail/${location.params.project_id}/users`,
+                name: 'Danh sách khách hàng'
+            }
+        ]));
+    } else {
+        yield put(setTitlePage(`Admin Management`));
+        yield put(setBreadcrumb([
+            {
+                path: '/admin-management',
+                name: 'Admin Management'
+            }
+        ]));
+    }
     yield put(setDataFilter({
         keySearch: '',
         perPage: 20,
@@ -34,78 +39,6 @@ function* loadRouteData() {
 }
 
 function* handleActions() {
-    yield takeLatest(changeStatusUserSuccess, function* () {
-        yield put(getListUsers());
-        handleNotification('success', 'Thay đổi trạng thái thành công.');
-    });
-
-    yield takeLatest(createUserSuccess, function* () {
-        yield put(getListUsers());
-        yield put(setVisibleModalCreateUser(false));
-        handleNotification('success', 'Tạo mới người dùng thành công.');
-    });
-
-    yield takeLatest(createUserFail, function* (action) {
-        let status = action.payload.status;
-        if (status === 400) {
-            let errors = action.payload.data.detail;
-            yield put(
-                setErrorInfoUser({
-                    ...errors
-                })
-            );
-        } else {
-            handleNotification('error', 'Tạo mới người dùng thất bại.');
-        }
-    });
-
-    yield takeLatest(updateUserSuccess, function* () {
-        yield put(getListUsers());
-        yield put(setVisibleModalUpdateUser(false));
-        handleNotification('success', 'Cập nhật người dùng thành công.');
-    });
-
-    yield takeLatest(updateUserFail, function* (action) {
-        let status = action.payload.status;
-        if (status === 400) {
-            let errors = action.payload.data.detail;
-            yield put(
-                setErrorInfoUser({
-                    ...errors
-                })
-            );
-        } else {
-            handleNotification('error', 'Cập nhật người dùng thất bại.');
-        }
-    });
-
-    yield takeLatest(changePassWordUserSuccess, function* () {
-        handleNotification('success', 'Thay đổi mật khẩu thành công.');
-        yield put(setVisibleModalChangePass(false));
-    });
-
-    yield takeLatest(changePassWordUserFail, function* (action) {
-        let status = action.payload.status;
-        if (status === 400) {
-            let errors = action.payload.data.detail;
-            yield put(
-                setErrorDataChangePassUser({
-                    ...errors
-                })
-            );
-        }
-        handleNotification('error', 'Thay đổi mật khẩu thất bại.');
-    });
-
-    yield takeLatest(deleteUserSuccess, function* () {
-        handleNotification('success', 'Xoá người dùng thành công.');
-        yield put(setVisibleModalDeleteUser(false));
-        yield put(getListUsers());
-    });
-
-    yield takeLatest(deleteUserFail, function* () {
-        yield call(handleNotification, 'error', 'Xoá người dùng thất bại.');
-    });
 }
 
 export default function* userSaga() {

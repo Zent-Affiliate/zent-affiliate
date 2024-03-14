@@ -7,7 +7,7 @@ import {
     setVisibleModalCreateProjectAdmin, 
     setVisibleModalDeleteProjectAdmin, 
     setVisibleModalUpdateProjectAdmin } from "@/states/modules/projectAdmin";
-import { TYPE_SUBMIT } from "@/utils/constains";
+import { TYPE_SUBMIT } from "@/utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 // import './styles.module.scss';
 import { validate } from "@/utils/validates";
