@@ -1,8 +1,9 @@
 import React from 'react';
-import {PERMISSIONS} from '@/utils/constains';
+import {PERMISSIONS} from '@/utils/constants.js';
 import OverviewIcon from '@/assets/images/icons/menu/overview.svg';
 import AccountIcon from '@/assets/images/icons/menu/account.svg';
 import UsersIcon from '@/assets/images/icons/menu/users.svg';
+import RewardIcon from '@/assets/images/icons/menu/reward.svg';
 import InlineSVG from 'react-inlinesvg';
 
 export const routeMap = [
@@ -24,5 +25,12 @@ export const routeMap = [
         path: '/account-management',
         routeActive: ['/account-management'],
         permissions: [PERMISSIONS.LIST.USERS]
+    },
+    {
+        label: 'Cấu hình trả thưởng',
+        icon: (<InlineSVG src={RewardIcon} alt='' />),
+        path: '/rule-config',
+        routeActive: ['/rule-config'],
+        permissions: []
     }
 ];

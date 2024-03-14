@@ -135,6 +135,12 @@
         }
     }
 
+    .ant-input-number-input-wrap {
+        input {
+            @apply w-[95%]
+        }
+    }
+
     @apply bg-gray-95 border-gray-95 text-black-20 py-[5px] px-5 rounded-[0.425rem] text-sm outline-none font-medium
 }
 

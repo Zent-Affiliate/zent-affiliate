@@ -1,0 +1,18 @@
+.rule-card-custom {
+    .ant-card-head {
+        @apply border-y-white px-[30px] py-[15px];
+    }
+
+    .ant-card-body {
+        @apply pt-0 relative;
+        @apply h-[calc(280px)] overflow-y-hidden hover:overflow-y-auto scroll-smooth ease-linear;
+        scrollbar-gutter: stable both-edges;
+    }
+
+    .ant-card:not(.ant-card-bordered) {
+        @apply bg-none shadow-none;
+    }
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+}
+    

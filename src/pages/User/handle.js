@@ -13,7 +13,7 @@ import {
 } from '@/states/modules/user';
 import {getListUsers, handleChangePassUser, handleCreateUser, handleUpdateUser} from '@/api/users';
 import {validate} from '@/utils/validates';
-import {ACTIVE_STATUS, TYPE_FILE, TYPE_SUBMIT} from '@/utils/constains';
+import {ACTIVE_STATUS, TYPE_FILE, TYPE_SUBMIT} from '@/utils/constants.js';
 import {handleNotification} from '@/utils/helper';
 import _ from 'lodash';
 

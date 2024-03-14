@@ -8,7 +8,7 @@ import {
     setVisibleModalDeleteUser,
     setVisibleModalUpdateUser
 } from '@/states/modules/user';
-import {ACTIVE_STATUS} from '@/utils/constains';
+import {ACTIVE_STATUS} from '@/utils/constants.js';
 import Swal from 'sweetalert2';
 import {useDispatch, useSelector} from 'react-redux';
 

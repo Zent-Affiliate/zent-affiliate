@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Joi from 'joi';
 import {validate} from '@/utils/validates/index.js';
 import {setErrorInformation} from '@/states/modules/profile/index.js';
-import {TYPE_FILE} from '@/utils/constains.js';
+import {TYPE_FILE} from '@/utils/constants.js';
 
 const updateProfileValidateSchema = Joi.object({
     name: Joi.string()

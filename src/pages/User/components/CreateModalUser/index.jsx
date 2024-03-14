@@ -8,7 +8,7 @@ import {setInfoUser} from '@/states/modules/user';
 import IconWarning from '@/assets/images/icons/light/warning.svg';
 import {Button, Input, Tooltip} from 'antd';
 import Handle from '@/pages/User/handle';
-import {TYPE_SUBMIT} from '@/utils/constains';
+import {TYPE_SUBMIT} from '@/utils/constants.js';
 import {createUserSchema} from '../../schema';
 
 function ModalCreateUser() {

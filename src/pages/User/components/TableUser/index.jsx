@@ -8,7 +8,7 @@ import {Avatar, Switch, Tooltip} from 'antd';
 import Handle from './handle';
 import {useSelector} from 'react-redux';
 import avatarDefault from '@/assets/images/user/default-avatar-point.png';
-import {ACTIVE_STATUS} from '@/utils/constains';
+import {ACTIVE_STATUS} from '@/utils/constants.js';
 
 function TableUser() {
     const dataListUsers = useSelector((state) => state.user.users);

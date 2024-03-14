@@ -9,7 +9,7 @@ import IconWarning from '@/assets/images/icons/light/warning.svg';
 import {Button, Input, Switch, Tooltip} from 'antd';
 import Handle from '@/pages/User/handle';
 import {updateUserSchema} from '@/pages/User/schema';
-import {TYPE_SUBMIT} from '@/utils/constains';
+import {TYPE_SUBMIT} from '@/utils/constants.js';
 
 function ModalUpdateUser() {
     const dispatch = useDispatch();

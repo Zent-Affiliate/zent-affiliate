@@ -49,3 +49,8 @@ export const PERMISSIONS = {
 export const MAX_NAME_PROJECT_STRING_SIZE = 50;
 
 export const VALIDATE_NAME_PROJECT_REGEX = /^[\p{L} ]*\d*$/u;
+
+export const RULE_CONFIG = {
+    PERCENT: 0,
+    FIXED: 1
+};

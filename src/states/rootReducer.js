@@ -6,6 +6,7 @@ import projectReducer from './modules/project/index.js';
 import serverReducer from './modules/server/index.js';
 import tagReducer from './modules/tag/index.js';
 import configReducer from './modules/config/index.js';
+import ruleReducer from './modules/rule/index.js';
 
 const rootReducer = {
     app: appReducer,
@@ -15,7 +16,8 @@ const rootReducer = {
     project: projectReducer,
     tag: tagReducer,
     server: serverReducer,
-    config: configReducer
+    config: configReducer,
+    rule: ruleReducer
 };
 
 export default rootReducer;

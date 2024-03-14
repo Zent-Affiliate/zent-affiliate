@@ -1,4 +1,4 @@
-import {ACTIVE_STATUS, MAX_SIZE_NAME, MAX_STRING_SIZE} from '@/utils/constains';
+import {ACTIVE_STATUS, MAX_SIZE_NAME, MAX_STRING_SIZE} from '@/utils/constants.js';
 import {VALIDATE_NAME_REGEX_RULE, VALIDATE_PASSWORD_REGEX, VALIDATE_PHONE_REGEX_RULE} from '@/utils/helper';
 import Joi from 'joi';
 
