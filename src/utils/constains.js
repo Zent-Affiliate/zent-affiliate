@@ -27,23 +27,33 @@ export const TYPE_SUBMIT = {
 export const PERMISSIONS = {
     LIST: {
         // List permission
-        USERS: 'list-users'
+        USERS: 'list-users',
+        ADMIN: 'list-admins'
     },
     ADD: {
         // Add permission
+        ADMIN: 'create-admin',
         USERS: 'create-user'
     },
     EDIT: {
         // Edit permission
+        ADMIN: 'edit-admin',
         USERS: 'edit-user'
     },
     DELETE: {
         // Delete permission
+        ADMIN: 'delete-admin',
         USERS: 'delete-user'
     },
     DETAIL: {
         // Detail permission
-    }
+    },
+    SUPER:{
+        SUPER_ADMIN: 'super_admin'
+    },
+    NORMAL: {
+        ADMIN: 'admin'
+    } 
 };
 
 export const MAX_NAME_PROJECT_STRING_SIZE = 50;

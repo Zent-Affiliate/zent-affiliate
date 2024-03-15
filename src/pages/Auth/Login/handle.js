@@ -18,7 +18,7 @@ const loginValidateSchema = Joi.object({
         .min(8)
         .max(255)
         .required()
-        .label('Mật khẩu')
+        .label('Password')
 });
 
 export default function Handle() {

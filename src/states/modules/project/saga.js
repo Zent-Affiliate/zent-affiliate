@@ -1,5 +1,5 @@
 import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
-import {setTitlePage} from '../app';
+import app, {setBreadcrumb, setTitlePage} from '../app';
 import {getListProjects} from '@/api/project';
 import {
     createProjectFail,
@@ -17,7 +17,7 @@ import {
 import {handleNotification} from '@/utils/helper';
 
 function* loadRouteData() {
-    yield put(setTitlePage('Quản lý dự án'));
+    yield put(setTitlePage('My Project'));
     yield put(setDataFilter({
         keySearch: '',
         perPage: 20,
@@ -29,6 +29,16 @@ function* loadRouteData() {
         status: null
     }));
     yield put(getListProjects());
+    yield put(setBreadcrumb([
+        {
+            path: '/',
+            name: 'Home'
+        },
+        {
+            path: '/my-project',
+            name: 'My Project'
+        },
+    ]))
 }
 
 function* handleActions() {
@@ -85,6 +95,6 @@ function* handleActions() {
 
 }
 
-export default function* userSaga() {
+export default function* projectSaga() {
     yield all([fork(loadRouteData), fork(handleActions)]);
 }

@@ -7,7 +7,7 @@ import ImageUser from '@/assets/images/logos/user_default.png';
 import {useSelector} from 'react-redux';
 
 const Header = () => {
-    const authUser = useSelector(state => state.auth.authUser);
+    const me = useSelector(state => state.auth.me);
 
     return (
         <header className={styles.headerWrap}>
@@ -17,7 +17,7 @@ const Header = () => {
                              trigger='click'>
                         <div className={styles.infoWrap}>
                             <div className={styles.avatarWrap}>
-                                <img crossOrigin='anonymous' src={authUser.avatar ? authUser.avatar : ImageUser}
+                                <img crossOrigin='anonymous' src={me.avatar ? me.avatar : ImageUser}
                                      alt='' />
                             </div>
                         </div>

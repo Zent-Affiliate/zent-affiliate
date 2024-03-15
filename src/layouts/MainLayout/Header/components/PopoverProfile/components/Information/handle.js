@@ -43,25 +43,25 @@ export default function Handle(props) {
 
     const errorInformation = useSelector(state => state.profile.errorInformation);
     const isLoadingBtnInformation = useSelector(state => state.profile.isLoadingBtnInformation);
-    const authUser = useSelector(state => state.auth.authUser);
+    const me = useSelector(state => state.auth.me);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (authUser) {
+        if (me) {
             setDataInformation({
-                name: authUser.name,
-                email: authUser.email,
-                phone: authUser.phone,
-                avatar: authUser.avatar ? authUser.avatar : null
+                name: me.name,
+                email: me.email,
+                phone: me.phone,
+                avatar: me.avatar ? me.avatar : null
             });
         }
-    }, [authUser]);
+    }, [me]);
 
     useEffect(() => {
-        if (authUser) {
-            setImageUrl(authUser.avatar);
+        if (me) {
+            setImageUrl(me.avatar);
         }
-    }, [authUser]);
+    }, [me]);
 
     const handleChangeInput = (e, type) => {
         let value = e.target.value;

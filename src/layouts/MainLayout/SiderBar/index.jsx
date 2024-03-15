@@ -104,7 +104,7 @@ function SideBar(props) {
                 <ul className={`${styles.menuNav}`}>
                     {
                         routeMap.map((route, index) => {
-                            if (!route.permissions || hasPermission(route.permissions) || route.permissions?.length === 0) {
+                            if ((!route.permissions || hasPermission(route.permissions) || route.permissions?.length === 0) && (!hasPermission(route.exceptPermissions) || !route.exceptPermissions || route.exceptPermissions?.length === 0)) {
                                 return (
                                     <li
                                         onMouseEnter={(e) => handleHoverMenuNavItem(e, route)}

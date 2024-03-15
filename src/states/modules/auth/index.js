@@ -4,7 +4,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         isAuthSuccess: false,
-        authUser: {},
+        me: {},
         errorLogin: {
             email: '',
             password: ''
@@ -43,12 +43,12 @@ const authSlice = createSlice({
         startRequestGetMeSuccess: (state, action) => ({
             ...state,
             isAuthSuccess: true,
-            authUser: action.payload.data
+            me: action.payload.data
         }),
         startRequestGetMeFail: (state) => ({
             ...state,
             isAuthSuccess: false,
-            authUser: {}
+            me: {}
         }),
         setErrorForgotPassword: (state, action) => ({
             ...state,
