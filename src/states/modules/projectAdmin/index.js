@@ -24,14 +24,14 @@ const projectAdminSlice = createSlice({
             perPage: 20,
             totalRecord: 0
         },
-        infoProjectAdmin: {
+        infoProject: {
             id: '',
             code: '',
             name: '',
             admin_id: '',
             secret_key: ''
         },
-        errorInfoProjectAdmin: {
+        errorInfoProject: {
             id: '',
             code: '',
             name: '',
@@ -124,45 +124,48 @@ const projectAdminSlice = createSlice({
         }),
         setVisibleModalCreateProjectAdmin: (state, action) => ({
             ...state,
-            visibleModalCreateProject: action.payload
+            visibleModalCreateProjectAdmin: action.payload
         }),
-        startCreateProjectAdminAdmin: (state) => ({
+        startCreateProjectAdmin: (state) => ({
             ...state,
-            isLoadingBtn: true
+            isLoadingBtnCreateProjectAdmin: true
         }),
         createProjectAdminSuccess: (state) => ({
             ...state,
-            isLoadingBtn: false
+            isLoadingBtnCreateProjectAdmin: false,
+            visibleModalCreateProjectAdmin: false
         }),
         createProjectAdminFail: (state) => ({
             ...state,
-            isLoadingBtn: false
+            isLoadingBtnCreateProjectAdmin: false
         }),
 
         startUpdateProjectAdmin: (state) => ({
             ...state,
-            isLoadingBtn: true
+            isLoadingBtnUpdateProjectAdmin: true
         }),
         updateProjectAdminSuccess: (state) => ({
             ...state,
-            isLoadingBtn: false
+            isLoadingBtnUpdateProjectAdmin: false,
+            visibleModalUpdateProjectAdmin: false
         }),
         updateProjectAdminFail: (state) => ({
             ...state,
-            isLoadingBtn: false
+            isLoadingBtnUpdateProjectAdmin: false
         }),
 
         startDeleteProjectAdmin: (state) => ({
             ...state,
-            isLoadingBtn: true
+            isLoadingBtnDeleteProjectAdmin: true
         }),
         deleteProjectAdminSuccess: (state) => ({
             ...state,
-            isLoadingBtn: false
+            isLoadingBtnDeleteProjectAdmin: false,
+            visibleModalDeleteProjectAdmin: false
         }),
         deleteProjectAdminFail: (state) => ({
             ...state,
-            isLoadingBtn: false
+            isLoadingBtnDeleteProjectAdmin: false
         }),
 
         setDataProjectAdmin: (state, action) => ({
@@ -176,7 +179,6 @@ export const {
     setDataFilter,
     setDataProjectAdmin,
     setVisibleModal,
-    setErrorCreateOrUpdate,
     setProjectAdminActive,
     setInfoProjectAdmin,
     setErrorInfoProjectAdmin,

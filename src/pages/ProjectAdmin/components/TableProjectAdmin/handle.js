@@ -1,8 +1,7 @@
-import {ACTIVE_STATUS} from '@/utils/constains';
 import Swal from 'sweetalert2';
 import {useDispatch, useSelector} from 'react-redux';
-import {setDataFilter, setErrorInfoProjectAdmin, setInfoProjectAdmin, setProjectAdminActive, setVisibleModalDeleteProjectAdmin, setVisibleModalUpdateProjectAdmin } from '@/states/modules/projectAdmin';
-import { getListProjectAdmins } from '@/api/projectAdmin';
+import {setDataFilter, setErrorInfoProjectAdmin, setInfoProjectAdmin,  setVisibleModalDeleteProjectAdmin, setVisibleModalUpdateProjectAdmin } from '@/states/modules/projectAdmin';
+import { deleteProjectAdmin, getListProjectAdmins } from '@/api/projectAdmin';
 
 export default function Handle() {
     const dispatch = useDispatch();
@@ -10,7 +9,6 @@ export default function Handle() {
 
     const handleShowModalUpdateProjectAdmin = (projectAdmin) => {
         dispatch(setInfoProjectAdmin({...projectAdmin}));
-        dispatch(setProjectAdminActive({...projectAdmin}));
         dispatch(
             setErrorInfoProjectAdmin({
                 _id:'',
@@ -76,7 +74,7 @@ export default function Handle() {
             }
         });
         if (result.isConfirmed) {
-            dispatch(handleDeleteProjectAdminAlert(record._id));
+            dispatch(deleteProjectAdmin(record._id));
         }
     };
 

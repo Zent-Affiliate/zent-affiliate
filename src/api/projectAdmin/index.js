@@ -4,7 +4,7 @@ import {
     deleteProjectAdminFail,
     deleteProjectAdminSuccess,
     getListProjectAdmin, getListProjectAdminFail, getListProjectAdminSuccess,
-    startCreateProjectAdmin, startDeleteProjectAdmin, startGetListAdmins
+    startCreateProjectAdmin, startDeleteProjectAdmin, startGetListAdmins, startUpdateProjectAdmin, updateProjectAdminFail, updateProjectAdminSuccess
 } from "../../states/modules/projectAdmin/index.js";
 
 export const getListProjectAdmins = () => async (dispatch, getState) => {
@@ -46,11 +46,12 @@ export const createProjectAdmin = (data) => async (dispatch, getState) => {
     })
 }
 
-export const updateProjectAdmin = (id, data) => async (dispatch, getState) => {
+export const updateProjectAdmin = (data) => async (dispatch, getState) => {
+    const id = getState().projectAdmin.infoProject._id
     return callApi({
-        method: 'post',
-        apiPath: `projects/update/${id}`,
-        actionTypes: [startUpdateLesson, updateLessonSuccess, updateLessonFail],
+        method: 'put',
+        apiPath: `projects/${id}`,
+        actionTypes: [ startUpdateProjectAdmin, updateProjectAdminSuccess, updateProjectAdminFail],
         variables: data,
         dispatch,
         getState

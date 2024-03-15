@@ -9,9 +9,6 @@ import TableProjectAdmin from "./components/TableProjectAdmin";
 import ModalDefault from "@/components/Modal";
 import ModalCreateProjectAdmin from "./components/CreateModalProjectAdmin";
 import ModalUpdateProjectAdmin from "./components/UpdateModalProjectAdmin";
-import ModalDeleteDefault from "@/components/ModalDelete";
-import { handleDeleteProject } from "@/api/project";
-import { deleteProjectAdmin } from "@/api/projectAdmin";
 
 
 export default function ProjectAdmin(){
@@ -21,7 +18,7 @@ export default function ProjectAdmin(){
     const visibleModalDeleteProjectAdmin = useSelector((state) => state.projectAdmin.visibleModalDeleteProjectAdmin);
     const isLoadingBtnDeleteProjectAdmin = useSelector((state) => state.projectAdmin.isLoadingBtnDeleteProjectAdmin);
     const dataFilter = useSelector((state) => state.projectAdmin.dataFilter);
-    const infoProjectAdmin = useSelector((state)=> state.projectAdmin.infoProjectAdmin);
+    const infoProjectAdmin = useSelector((state)=> state.projectAdmin.infoProject);
     const {
         handleCancelModalCreateProjectAdmin,
         handleCancelModalUpdateProjectAdmin,
@@ -65,20 +62,12 @@ export default function ProjectAdmin(){
                     </ModalDefault>
 
                     <ModalDefault
-                        isModaiOpen={visibleModalUpdateProjectAdmin}
+                        isModalOpen={visibleModalUpdateProjectAdmin}
                         handleCancel={handleCancelModalUpdateProjectAdmin}
                         title="Cập nhật dự án"
                     >
                         <ModalUpdateProjectAdmin/>
                     </ModalDefault>
-
-                    <ModalDeleteDefault
-                        loading={isLoadingBtnDeleteProjectAdmin}
-                        isModaiOpen={visibleModalDeleteProjectAdmin}
-                        handleCancel={handleCancelModalDeleteProjectAdmin}
-                        handleConfirm={()=>dispatch(deleteProjectAdmin(infoProjectAdmin._id))}
-                    >
-                    </ModalDeleteDefault>
                 </div>
             </div>
         </MainLayout>

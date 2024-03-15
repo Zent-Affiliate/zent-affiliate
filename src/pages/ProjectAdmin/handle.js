@@ -16,8 +16,8 @@ import _ from "lodash";
 
 export default function Handle(){
     const dispatch = useDispatch();
-    const infoProjectAdmin = useSelector((state) => state.projectAdmin.infoProjectAdmin);
-    const errorInfoProjectAdmin = useSelector((state) => state.projectAdmin.errorInfoProjectAdmin);
+    const infoProjectAdmin = useSelector((state) => state.projectAdmin.infoProject);
+    const errorInfoProjectAdmin = useSelector((state) => state.projectAdmin.errorInfoProject);
     const dataFilter = useSelector((state) => state.projectAdmin.dataFilter);
     const paginationListProjectAdmins = useSelector((state) => state.project.paginationListProjectAdmins);
 

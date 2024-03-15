@@ -2,7 +2,7 @@ import React from 'react';
 import InlineSVG from 'react-inlinesvg';
 import { useDispatch, useSelector } from 'react-redux';
 import IconWarning from '@/assets/images/icons/light/warning.svg';
-import { Button, Input, Switch, Tooltip } from 'antd';
+import { Button, Input} from 'antd';
 import Handle from '@/pages/ProjectAdmin/handle';
 import { TYPE_SUBMIT } from '@/utils/constains';
 import { setInfoAdmin } from '@/states/modules/admin';
@@ -10,7 +10,7 @@ import { updateProjectAdminSchema} from '../../schema';
 
 function ModalUpdateProjectAdmin() {
     const dispatch = useDispatch();
-    const errorInfoProjectAdmin = useSelector((state) => state.projectAdmin.errorInfoProjectAdmin);
+    const errorInfoProjectAdmin = useSelector((state) => state.projectAdmin.errorInfoProject);
     const isLoadingBtnUpdateProjectAdmin = useSelector((state) => state.projectAdmin.isLoadingBtnUpdateProjectAdmin);
     const infoProjectAdmin = useSelector((state) => state.projectAdmin.infoProject);
     const me = useSelector((state) => state.auth.me);
@@ -32,7 +32,7 @@ function ModalUpdateProjectAdmin() {
                 </div>
                 <Input
                     id='codeUpdateProject'
-                    value={infoProject.code}
+                    value={infoProjectAdmin.code}
                     onChange={(e) => handleChangeInputInfo(e, 'code')}
                     onFocus={() => handleFocus('code')}
                     className={`main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.code ? 'error-input' : ''}`}
@@ -57,7 +57,7 @@ function ModalUpdateProjectAdmin() {
                 </div>
                 <Input
                     id='nameUpdateProject'
-                    value={infoProject.name}
+                    value={infoProjectAdmin.name}
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     onFocus={() => handleFocus('name')}
                     className={`main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.name ? 'error-input' : ''}`}
