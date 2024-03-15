@@ -10,12 +10,12 @@ import {
     deleteProjectAdminFail,
     deleteProjectAdminSuccess,
     getListProjectAdminSuccess,
-    setErrorCreateOrUpdate,
+    setErrorInfoProjectAdmin,
     setVisibleModal,
     updateProjectAdminFail,
     updateProjectAdminSuccess
 } from "./index.js";
-import { getListAdmins, getListProjectAdmins } from "@/api/projectAdmin/index.js";
+import { getListProjectAdmins } from "@/api/projectAdmin/index.js";
 function* loadRouteData() {
     const { app } = yield select();
 
@@ -44,9 +44,9 @@ function* handleActions() {
     });
 
     yield takeLatest(createProjectAdminSuccess, function* () {
+        console.log('ahsjdhasjdhasj')
         const { app, projectAdmin } = yield select();
         getNotification('success', 'Tạo mới dự án thành công');
-        yield put(setVisibleModal(false));
         yield put(getListProjectAdmins(app.location.params.id, {
             ...projectAdmin.dataFilter
         }));
@@ -55,11 +55,11 @@ function* handleActions() {
     yield takeLatest(createProjectAdminFail, function* (action) {
         let statusError = action.payload.status
         if (statusError === 400) {
-            let errors = action.payload.data.errors
-            yield put(setErrorCreateOrUpdate({
-                code: _.get(errors, 'code[0]', ''),
-                name: _.get(errors, 'name[0]', ''),
-                secret_key: _.get(errors, 'secret_key[0]', ''),
+            let errors = action.payload.data.detail
+            yield put(setErrorInfoProjectAdmin({
+                code: _.get(errors, 'code', ''),
+                name: _.get(errors, 'name', ''),
+                secret_key: _.get(errors, 'secret_key', ''),
             }));
         } else if (statusError === 401) {
             getNotification('error', 'Thông tin không hợp lệ.');
@@ -71,7 +71,6 @@ function* handleActions() {
     yield takeLatest(updateProjectAdminSuccess, function* () {
         const { app, projectAdmin } = yield select();
         getNotification('success', 'Cập nhật dự án thành công');
-        yield put(setVisibleModal(false));
         yield put(getListProjectAdmins(app.location.params.id, {
             ...projectAdmin.dataFilter
         }));
@@ -80,15 +79,15 @@ function* handleActions() {
     yield takeLatest(updateProjectAdminFail, function* (action) {
         let statusError = action.payload.status
         if (statusError === 400) {
-            let errors = action.payload.data.errors
-            let errorId = _.get(errors, 'id[0]', '')
+            let errors = action.payload.data.detail
+            let errorId = _.get(errors, 'id', '')
             if (errorId) {
                 getNotification('error', errorId);
             }
-            yield put(setErrorCreateOrUpdate({
-                code: _.get(errors, 'code[0]', ''),
-                name: _.get(errors, 'name[0]', ''),
-                secret_key: _.get(errors, 'secret_key[0]', ''),
+            yield put(setErrorInfoProjectAdmin({
+                code: _.get(errors, 'code', ''),
+                name: _.get(errors, 'name', ''),
+                secret_key: _.get(errors, 'secret_key', ''),
             }));
         } else if (statusError === 401) {
             getNotification('error', 'Thông tin không hợp lệ.');
