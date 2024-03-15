@@ -18,7 +18,7 @@ export const hasPermission = (permissions) => {
     let isPermission = false;
     if (permissions) {
         permissions.forEach(permission => {
-            if (auth.authUser && auth.authUser.permissions && auth.authUser.permissions.includes(permission)) {
+            if (auth.me && auth.me.permissions && auth.me.permissions.includes(permission)) {
                 isPermission = true;
             }
         });

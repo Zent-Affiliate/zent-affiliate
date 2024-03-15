@@ -13,7 +13,7 @@ import {ACTIVE_STATUS} from '@/utils/constains';
 function TableUser() {
     const dataListUsers = useSelector((state) => state.user.users);
     const isLoadingTableUser = useSelector((state) => state.user.isLoadingTableUser);
-    const authUser = useSelector((state) => state.auth.authUser);
+    const me = useSelector((state) => state.auth.me);
     const paginationListUsers = useSelector((state) => state.user.paginationListUsers);
 
     const {
@@ -81,7 +81,7 @@ function TableUser() {
             defaultSortOrder: '',
             width: 120,
             render: (status, record) => {
-                return authUser._id !== record._id &&
+                return me._id !== record._id &&
                     <Tooltip placement='top' title={status === ACTIVE_STATUS.LOCK ? 'Khoá' : 'Kích hoạt'}>
                         <Switch
                             className={`main-switch`}
@@ -120,7 +120,7 @@ function TableUser() {
                         </div>
 
                         {
-                            authUser._id !== record._id &&
+                            me._id !== record._id &&
                             <div
                                 className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] cursor-pointer !fill-[#99A1B7] hover:!fill-blue-60`}
                                 onClick={() => handleDeleteUserAlert(record)}

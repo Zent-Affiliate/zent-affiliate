@@ -21,6 +21,7 @@ function TableDefault(props) {
         scroll
     } = props;
 
+
     return (
         <div className={`${styles.tableDefaultWrap}`}>
             <Table

@@ -16,7 +16,7 @@ function ModalUpdateUser() {
     const errorInfoUser = useSelector((state) => state.user.errorInfoUser);
     const isLoadingBtnUpdateUser = useSelector((state) => state.user.isLoadingBtnUpdateUser);
     const infoUser = useSelector((state) => state.user.infoUser);
-    const authUser = useSelector((state) => state.auth.authUser);
+    const me = useSelector((state) => state.auth.me);
 
     const {
         handleChangeAvatar,
@@ -153,7 +153,7 @@ function ModalUpdateUser() {
             </div>
 
             {
-                authUser._id !== infoUser._id &&
+                me._id !== infoUser._id &&
                 <div className={`input-wrap`}>
                     <div className='label-wrap'>Trạng thái</div>
                     <Switch
