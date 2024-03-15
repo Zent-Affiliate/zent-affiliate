@@ -30,7 +30,6 @@ export default function Project() {
         handleCancelModalUpdateProject,
         handleSearchProject,
         handleEnterSearchProject,
-        handleChangeSelectProject,
         handleShowModalCreateProject
     } = Handle()
     const items = [

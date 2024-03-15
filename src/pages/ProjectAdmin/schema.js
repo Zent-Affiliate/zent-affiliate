@@ -1,5 +1,4 @@
-import {ACTIVE_STATUS, MAX_SIZE_NAME, MAX_STRING_SIZE} from '@/utils/constains';
-import {VALIDATE_NAME_REGEX_RULE, VALIDATE_PASSWORD_REGEX} from '@/utils/helper';
+import {MAX_SIZE_NAME, MAX_STRING_SIZE} from '@/utils/constains';
 import Joi from 'joi';
 
 export const updateProjectAdminSchema = Joi.object({

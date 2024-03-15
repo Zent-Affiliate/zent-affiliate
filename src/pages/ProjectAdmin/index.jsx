@@ -2,7 +2,7 @@ import MainLayout from "@/layouts/MainLayout";
 import { Button, Input } from "antd";
 import React from "react";
 import Handle from "./handle";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import InlineSVG from "react-inlinesvg";
 import SearchIcon from '@/assets/images/icons/duotone/magnifying-glass.svg';
 import TableProjectAdmin from "./components/TableProjectAdmin";
@@ -12,17 +12,12 @@ import ModalUpdateProjectAdmin from "./components/UpdateModalProjectAdmin";
 
 
 export default function ProjectAdmin(){
-    const dispatch = useDispatch();
     const visibleModalCreateProjectAdmin = useSelector((state)=> state.projectAdmin.visibleModalCreateProjectAdmin);
     const visibleModalUpdateProjectAdmin = useSelector((state) => state.projectAdmin.visibleModalUpdateProjectAdmin);
-    const visibleModalDeleteProjectAdmin = useSelector((state) => state.projectAdmin.visibleModalDeleteProjectAdmin);
-    const isLoadingBtnDeleteProjectAdmin = useSelector((state) => state.projectAdmin.isLoadingBtnDeleteProjectAdmin);
     const dataFilter = useSelector((state) => state.projectAdmin.dataFilter);
-    const infoProjectAdmin = useSelector((state)=> state.projectAdmin.infoProject);
     const {
         handleCancelModalCreateProjectAdmin,
         handleCancelModalUpdateProjectAdmin,
-        handleCancelModalDeleteProjectAdmin,
         handleSearchProjectAdmin,
         handleEnterSearchProjectAdmin,
         handleShowModalCreateProjectAdmin
@@ -35,7 +30,7 @@ export default function ProjectAdmin(){
                         <div className={`w-96`}>
                             <Input
                                 value={dataFilter.keySearch}
-                                onKeyDown={(e) => handleEnterSearchProjectAdmin}
+                                onKeyDown={() => handleEnterSearchProjectAdmin}
                                 onChange={(e) => handleSearchProjectAdmin(e.target.value)}
                                 prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                                 className={`main-input`}
