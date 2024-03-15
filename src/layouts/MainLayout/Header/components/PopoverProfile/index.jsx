@@ -15,7 +15,7 @@ function PopoverProfile() {
     const {
         isShowInformation,
         setIsShowInformation,
-        authUser,
+        me,
         handleConfirmLogout,
         handleShowProfile,
         handleResetError,
@@ -25,12 +25,12 @@ function PopoverProfile() {
     const items = [
         {
             key: '1',
-            label: 'Cập nhật thông tin',
+            label: 'Update',
             children: <Information handleResetError={handleResetError} />
         },
         {
             key: '2',
-            label: 'Thay đổi mật khẩu',
+            label: 'Change the password',
             children: <ChangePassword handleResetError={handleResetError} />
         }
     ];
@@ -41,17 +41,17 @@ function PopoverProfile() {
                 <div className={'w-[40px] h-[40px] rounded-[10px] mr-1'}>
                     <img
                         crossOrigin='anonymous'
-                        src={authUser.avatar ? authUser.avatar : ImageUser}
+                        src={me.avatar ? me.avatar : ImageUser}
                         alt='Avatar'
                         className={'w-full h-full rounded-[10px] object-cover'}
                     />
                 </div>
                 <div className={'ml-1'}>
                     <div className={styles.name}>
-                        {authUser.name}
+                        {me.name}
                     </div>
                     <div className={styles.role}>
-                        {authUser.email || 'Chưa cập nhật'}
+                        {me.email || 'Not update'}
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@ function PopoverProfile() {
                         className={`${styles.itemInfoWrap}`}
                     >
                         <div>
-                            <span className={styles.text}>Thông tin cá nhân</span>
+                            <span className={styles.text}>Personal information</span>
                         </div>
                     </li>
                     <li
@@ -70,7 +70,7 @@ function PopoverProfile() {
                         className={styles.itemInfoWrap}
                     >
                         <div>
-                            <span className={styles.text}>Đăng xuất</span>
+                            <span className={styles.text}>Log out</span>
                         </div>
                     </li>
                 </ul>

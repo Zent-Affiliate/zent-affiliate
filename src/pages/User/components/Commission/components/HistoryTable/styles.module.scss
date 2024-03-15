@@ -1,0 +1,7 @@
+.statistics-table-custom {
+    .ant-table-content {
+        @apply min-h-[calc(100vh_-_350px)];
+        @apply hover:overflow-x-auto scroll-smooth ease-linear overflow-x-hidden #{!important};
+        scrollbar-gutter: stable both-edges;
+    }
+}

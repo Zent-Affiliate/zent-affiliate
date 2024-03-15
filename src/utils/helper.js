@@ -1,12 +1,13 @@
 import React from 'react';
 import store from '@/states/configureStore';
-import {notification} from 'antd';
+import { notification } from 'antd';
 import moment from 'moment';
 import CloseIcon from '@/assets/images/icons/light/close.svg';
 import success from '@/assets/images/icons/notification/success_16x16.svg';
 import error from '@/assets/images/icons/notification/error_16x16.svg';
-import warning from '@/assets/images/icons/notification/warning_16x16.svg';
+import warning from '@/assets/images/icons/light/warning.svg';
 import Swal from 'sweetalert2';
+import _ from 'lodash';
 
 export const VALIDATE_EMAIL_REGEX = /^[a-zA-Z0-9][a-zA-Z0-9_.+-]{1,}@[a-z0-9]{1,}(\.[a-z0-9]{1,}){1,2}$/;
 export const VALIDATE_PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,50}$/;
@@ -18,7 +19,7 @@ export const hasPermission = (permissions) => {
     let isPermission = false;
     if (permissions) {
         permissions.forEach(permission => {
-            if (auth.authUser && auth.authUser.permissions && auth.authUser.permissions.includes(permission)) {
+            if (auth.me && auth.me.permissions && auth.me.permissions.includes(permission)) {
                 isPermission = true;
             }
         });
@@ -40,7 +41,7 @@ export const getNotification = (type, content, duration = 3, align = 'top') => {
         closeIcon: (<img src={CloseIcon} alt='' />),
         placement: align,
         duration: duration,
-        style: {fontWeight: 'normal'}
+        style: { fontWeight: 'normal' }
     });
 };
 
@@ -65,17 +66,57 @@ const handleGetTypeNotification = (type) => {
     return typeNotification;
 };
 
-export const handleCheckRoute = (routes, currentRoute, params = {}) => {
-    let keys = Object.keys(params);
-    let param = '';
-    keys.map(key => {
-        param += ('/' + params[key]);
-    });
-    currentRoute = currentRoute.replaceAll(param, '');
+export const getDynamicRoute = (path) => {
+    const {location} = store.getState().app;
+    const params = location?.params || {};
 
-    if (routes && routes.length > 0) {
-        return routes.includes(currentRoute);
+    let pathActive = path;
+    if (_.isString(pathActive) && pathActive && !!pathActive.length) {
+        if (pathActive.startsWith('/')) {
+            pathActive = pathActive.substring(1);
+        }
+        const pathArray = pathActive.split('/');
+
+        const newArray = pathArray.map((item) => {
+            if (item.startsWith(':')) {
+                const pathWithoutColon = item.replace(/:/g, '');
+                return params[pathWithoutColon];
+            }
+            return item;
+        });
+        let pathString = newArray.join('/');
+        if (!pathString.startsWith('/')) {
+            pathString = '/' + pathString;
+        }
+
+        return pathString;
     }
+};
+
+export const isRouteActive = (path) => {
+    const {location} = store.getState().app;
+    const currentPath = location.pathName;
+
+    return getDynamicRoute(path) === currentPath;
+};
+
+export const handleCheckRoute = (routes) => {
+    let isActive = false;
+
+    const handleCheckArr = (index) => {
+        if (index >= routes.length) return;
+
+        if (isRouteActive(routes[index])) {
+            isActive = true;
+            return;
+        } else {
+            return handleCheckArr(++index);
+        }
+    };
+
+    handleCheckArr(0);
+
+    return isActive;
 };
 
 
@@ -129,3 +170,9 @@ export function handleNotification(type, message) {
     const notification = document.querySelector('.swal2-container');
     notification.style.zIndex = 99999;
 }
+
+export const copyToClipboard = (value) => {
+    navigator.clipboard
+        .writeText(value)
+        .then(() => getNotification('success', 'Copied!', 1))
+};

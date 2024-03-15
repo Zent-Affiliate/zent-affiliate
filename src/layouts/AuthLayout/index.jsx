@@ -3,7 +3,7 @@ import './styles.scss';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 import Logo from '@/assets/images/logos/zent.png';
-import Upgrade from '@/assets/images/logos/upgrade.svg';
+import Upgrade from '@/assets/images/logos/credit-card.png';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {goToPageSuccess} from '@/states/modules/app/index.js';

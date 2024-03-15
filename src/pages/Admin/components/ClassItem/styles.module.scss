@@ -1,0 +1,43 @@
+.itemWrap {
+    @apply border-dashed border border-[#dbdfe9];
+
+    &:hover {
+        @apply text-[#5c89fa];
+        .name {
+            @apply text-[#5c89fa];
+        }
+    }
+
+    .name {
+        @apply text-[#8F90A6];
+    }
+
+    @apply flex justify-between items-center px-[20px] py-[5px] rounded-xl mt-5;
+    @apply cursor-pointer;
+}
+
+.activeItem {
+    @apply relative overflow-hidden;
+    @apply border-solid border border-[#dbdfe9];
+    &:after {
+        @apply content-[''] absolute h-full w-1.5 bg-[#1b84ff] right-0 top-0 bottom-0;
+    }
+}
+
+.optionsWrap {
+    @apply bg-[#e0e3e9] p-[2px] w-[20px] flex items-center justify-center rounded-md;
+
+    svg {
+        @apply ml-[0.5px];
+    }
+}
+
+.actionBtn {
+    @apply flex items-center w-full;
+
+    &:hover {
+        svg {
+            fill: #4096ff;
+        }
+    }
+}

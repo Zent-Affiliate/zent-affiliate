@@ -1,0 +1,46 @@
+.rule-card-custom {
+    .ant-card-head {
+        @apply px-[25px] py-[15px];
+    }
+
+    .ant-card-body {
+        @apply relative p-[13px];
+        @apply h-[233px] overflow-y-hidden hover:overflow-y-auto scroll-smooth ease-linear;
+        scrollbar-gutter: stable both-edges;
+    }
+
+    .ant-card:not(.ant-card-bordered) {
+        @apply bg-none shadow-none;
+    }
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+    @apply w-[325px];
+}
+
+.select-custom {
+    .ant-select-selector {
+        .ant-select-selection-search {
+            input {
+                @apply h-[23px] #{!important};
+            }
+
+            @apply h-[23px] #{!important};
+        }
+
+        @apply h-[25px] #{!important};
+    }
+
+    @apply min-h-0 #{!important}
+}
+
+:where(.css-dev-only-do-not-override-1uweeqc).ant-select-single {
+    @apply h-[25px];
+}
+
+.input-custom {
+    .ant-input-number-input-wrap {
+        input {
+            @apply h-[20px]
+        }
+    }
+}

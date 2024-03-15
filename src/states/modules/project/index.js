@@ -12,6 +12,7 @@ const projectSlice = createSlice({
         isLoadingBtnUpdateProject: false,
         isLoadingBtnDeleteProject: false,
         projects: [],
+        projectActive: null,
         dataFilter: {
             keySearch: '',
             perPage: 20,
@@ -28,20 +29,34 @@ const projectSlice = createSlice({
             totalRecord: 0
         },
         infoProject: {
+            code: '',
             name: '',
-            domain: '',
-            server: '',
-            tags: [],
-            status: ''
+            admin_id: '',
+            secret_key: ''
         },
         errorInfoProject: {
+            code: '',
             name: '',
-            domain: '',
-            server: '',
-            tags: ''
-        }
+            admin_id: '',
+            secret_key: ''
+        },
+        recommendKey: '',
+        isLoadingGenerateKey: false
     },
     reducers: {
+        getRecommendKey: (state) => ({
+            ...state,
+            isLoadingGenerateKey: true
+        }),
+        getRecommendKeySuccess: (state, action) => ({
+            ...state,
+            isLoadingGenerateKey: false,
+            recommendKey: action.payload.data
+        }),
+        getRecommendKeyFailure: (state) => ({
+            ...state,
+            isLoadingGenerateKey: false
+        }),
         setVisibleModalUpdateProject: (state, action) => ({
             ...state,
             visibleModalUpdateProject: action.payload
@@ -70,7 +85,7 @@ const projectSlice = createSlice({
             projects: action.payload.data.projects,
             paginationListProjects: {
                 currentPage: action.payload.data.page,
-                perPage: action.payload.data.perPage,
+                perPage: action.payload.data.per_page,
                 totalRecord: action.payload.data.total
             }
         }),
@@ -78,6 +93,10 @@ const projectSlice = createSlice({
             ...state,
             projects: [],
             isLoadingTableProject: false
+        }),
+        setProjectActive: (state, action) => ({
+            ...state,
+            projectActive: action.payload
         }),
         setDataFilter: (state, action) => ({
             ...state,
@@ -151,6 +170,7 @@ export const {
     getListProject,
     getListProjectSuccess,
     getListProjectFailure,
+    setProjectActive,
     setDataFilter,
     setInfoProject,
     setErrorInfoProject,
@@ -163,6 +183,9 @@ export const {
     deleteProject,
     deleteProjectSuccess,
     deleteProjectFail,
-    setListDataProject
+    setListDataProject,
+    getRecommendKey,
+    getRecommendKeySuccess,
+    getRecommendKeyFailure
 } = projectSlice.actions;
 export default projectSlice.reducer;

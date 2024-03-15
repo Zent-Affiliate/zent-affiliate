@@ -1,0 +1,89 @@
+.itemWrapper {
+    .itemDrag {
+        svg {
+            fill: #6f7b88
+        }
+
+        @apply w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] ;
+    }
+
+    .itemDrag:active {
+        @apply cursor-grabbing #{!important};
+    }
+
+    .deleteIcon {
+        svg {
+            fill: #6f7b88
+        }
+
+        @apply hidden w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] cursor-pointer;
+    }
+
+    &:hover {
+        .deleteIcon {
+            &:active {
+                svg {
+                    fill: #ff4646f2;
+                }
+
+                @apply bg-[#ffecec];
+            }
+
+            @apply flex;
+        }
+
+        .editIcon {
+            &:active {
+                svg {
+                    fill: #1c93f3;
+                }
+
+                @apply bg-[#d6ecff];
+            }
+
+            @apply flex;
+        }
+    }
+
+    .editIcon {
+        svg {
+            fill: #6f7b88
+        }
+
+        @apply hidden w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] cursor-pointer;
+    }
+
+    @apply bg-[white] relative select-none;
+}
+
+.actionBtn {
+    .acceptIcon {
+        svg {
+            fill: #00b900
+        }
+
+        &:hover {
+            svg {
+                fill: #049404
+            }
+        }
+
+        @apply cursor-pointer;
+    }
+
+    .cancelIcon {
+        svg {
+            fill: #ff4646f2;
+        }
+
+        &:hover {
+            svg {
+                fill: rgba(213, 41, 41, 0.95)
+            }
+        }
+
+        @apply cursor-pointer;
+    }
+
+    @apply flex justify-center items-center;
+}

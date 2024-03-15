@@ -10,7 +10,7 @@ export default function Handle() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isShowInformation, setIsShowInformation] = useState(false);
-    const authUser = useSelector(state => state.auth.authUser);
+    const me = useSelector(state => state.auth.me);
     const errorInformation = useSelector(state => state.profile.errorInformation);
     const errorChangePassword = useSelector(state => state.profile.errorChangePassword);
 
@@ -68,7 +68,7 @@ export default function Handle() {
     return {
         isShowInformation,
         setIsShowInformation,
-        authUser,
+        me,
         handleConfirmLogout,
         handleShowProfile,
         handleResetError,

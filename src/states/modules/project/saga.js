@@ -1,5 +1,5 @@
 import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
-import {setTitlePage} from '../app';
+import app, {setBreadcrumb, setTitlePage} from '../app';
 import {getListProjects} from '@/api/project';
 import {
     createProjectFail,
@@ -17,7 +17,7 @@ import {
 import {handleNotification} from '@/utils/helper';
 
 function* loadRouteData() {
-    yield put(setTitlePage('Quản lý dự án'));
+    yield put(setTitlePage('My Project'));
     yield put(setDataFilter({
         keySearch: '',
         perPage: 20,
@@ -29,6 +29,16 @@ function* loadRouteData() {
         status: null
     }));
     yield put(getListProjects());
+    yield put(setBreadcrumb([
+        {
+            path: '/',
+            name: 'Home'
+        },
+        {
+            path: '/my-project',
+            name: 'My Project'
+        },
+    ]))
 }
 
 function* handleActions() {
@@ -36,7 +46,7 @@ function* handleActions() {
     yield takeLatest(createProjectSuccess, function* () {
         yield put(getListProjects());
         yield put(setVisibleModalCreateProject(false));
-        handleNotification('success', 'Tạo mới dự án thành công.');
+        handleNotification('success', 'Created a new project successfully.');
     });
 
     yield takeLatest(createProjectFail, function* (action) {
@@ -49,14 +59,14 @@ function* handleActions() {
                 })
             );
         } else {
-            handleNotification('error', 'Tạo mới dự án thất bại.');
+            handleNotification('error', 'Creating a new project failed.');
         }
     });
 
     yield takeLatest(updateProjectSuccess, function* () {
         yield put(getListProjects());
         yield put(setVisibleModalUpdateProject(false));
-        handleNotification('success', 'Cập nhật dự án thành công.');
+        handleNotification('success', 'Project updated successfully.');
     });
 
     yield takeLatest(updateProjectFail, function* (action) {
@@ -69,22 +79,22 @@ function* handleActions() {
                 })
             );
         } else {
-            handleNotification('error', 'Cập nhật dự án thất bại.');
+            handleNotification('error', 'Project update failed.');
         }
     });
 
     yield takeLatest(deleteProjectSuccess, function* () {
-        handleNotification('success', 'Xoá dự án thành công.');
+        handleNotification('success', 'Project deleted successfully.');
         yield put(setVisibleModalDeleteProject(false));
         yield put(getListProjects());
     });
 
     yield takeLatest(deleteProjectFail, function* () {
-        yield call(handleNotification, 'error', 'Xoá dự án thất bại.');
+        yield call(handleNotification, 'error', 'Delete failed project.');
     });
 
 }
 
-export default function* userSaga() {
+export default function* projectSaga() {
     yield all([fork(loadRouteData), fork(handleActions)]);
 }

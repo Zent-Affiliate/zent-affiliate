@@ -1,0 +1,7 @@
+.btnWrap {
+    @apply flex justify-center mt-8;
+}
+
+.plusIconWrap {
+    @apply bg-[#f9f9f9] h-[40px] w-full border-dashed border-[2px] rounded-md flex justify-center items-center cursor-pointer hover:border-[#7fb7f9]
+}

@@ -44,7 +44,7 @@ export default function ModalDeleteDefault(props) {
                         size={'large'}
                         onClick={() => handleCancel()}
                     >
-                        Đóng
+                        Close
                     </Button>
                 </div>
             </div>

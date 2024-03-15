@@ -1,0 +1,67 @@
+.listProjectWrap {
+  padding: 20px 0;
+  overflow-y: auto;
+
+  .listProject {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .projectWrap {
+      .projectTitle {
+        display: flex;
+
+        .projectName {
+          width: calc(100% - 25px);
+          font-weight: 600;
+          font-size: 18px;
+        }
+        .projectAction {
+          width: 25px;
+        }
+      }
+
+  }
+}
+
+.actionBtn {
+  @apply flex items-center w-full;
+
+  &:hover {
+    svg {
+      fill: #4096ff;
+    }
+  }
+}
+
+.optionsWrap {
+  @apply bg-[#e0e3e9] p-[2px] w-[20px] flex items-center justify-center rounded-md;
+
+  svg {
+    @apply ml-[0.5px];
+  }
+}
+
+@media only screen and (max-width: 1200px){
+  .listProjectWrap {
+    .listProject {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+
+@media only screen and (max-width: 840px){
+  .listProjectWrap {
+    .listProject {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media only screen and (max-width: 576px){
+  .listProjectWrap {
+    .listProject {
+      grid-template-columns: 1fr;
+    }
+  }
+}

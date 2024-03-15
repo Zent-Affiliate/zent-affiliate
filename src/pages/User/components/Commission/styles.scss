@@ -1,0 +1,15 @@
+.history-table-custom {
+    .ant-table-body {
+        @apply h-[calc(100vh-590px)] #{!important}
+    }
+}
+
+.card-custom {
+    .ant-card-body {
+        @apply w-[250px] h-[-webkit-fill-available];
+    }
+}
+
+.active-card {
+    @apply bg-[#e5e5e5];
+}

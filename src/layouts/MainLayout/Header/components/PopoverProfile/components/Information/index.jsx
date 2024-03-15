@@ -32,7 +32,7 @@ export default function Information(props) {
                             className={`hidden`}
                             onChange={(file) => handleChangeAvatar(file)}
                         />
-                        <Tooltip title='Chỉnh sửa ảnh đại diện'>
+                        <Tooltip title='Edit profile picture'>
                             <label
                                 className={`w-[30px] h-[30px] bg-white shadow rounded-[50%] flex justify-center items-center absolute z-10 right-[33%] top-[-12px] cursor-pointer !fill-[#99A1B7] hover:!fill-blue-60`}
                                 htmlFor='imageUpload'
@@ -40,7 +40,7 @@ export default function Information(props) {
                                 <InlineSVG src={IconEditAvatar} alt='' className={`w-3.5 h-3.5`} />
                             </label>
                         </Tooltip>
-                        <Tooltip title='Xóa ảnh đại diện'>
+                        <Tooltip title='Delete avatar'>
                             <div
                                 className={`w-[30px] h-[30px] bg-white shadow rounded-[50%] flex justify-center items-center absolute z-10 right-[33%] top-[110px] cursor-pointer !fill-[#99A1B7] hover:!fill-blue-60`}
                                 onClick={handleChangeInputAvatar}
@@ -69,13 +69,13 @@ export default function Information(props) {
                 </div>
                 <div className='label-wrap'>
                     <label htmlFor='name' className={'required'}>
-                        Họ và tên
+                        Name
                     </label>
                 </div>
                 <Input
                     id={'name'}
                     className={`main-input ${errorInformation && errorInformation.name.length > 0 ? 'error-input' : ''}`}
-                    placeholder={'Nhập họ và tên'}
+                    placeholder={'Name'}
                     value={dataInformation.name}
                     onChange={(e) => handleChangeInput(e, 'name')}
                     onFocus={() => handleFocus('name')}
@@ -119,13 +119,13 @@ export default function Information(props) {
             <div className={'input-wrap'}>
                 <div className='label-wrap'>
                     <label htmlFor='phone'>
-                        Số điện thoại
+                        Phone
                     </label>
                 </div>
                 <Input
                     id={'phone'}
                     className={`main-input ${errorInformation && errorInformation.phone.length > 0 ? 'error-input' : ''}`}
-                    placeholder={'Nhập số điện thoại'}
+                    placeholder={'Phone'}
                     value={dataInformation.phone}
                     onChange={(e) => handleChangeInput(e, 'phone')}
                     onFocus={() => handleFocus('phone')}
@@ -149,7 +149,7 @@ export default function Information(props) {
                     block
                     onClick={() => handleConfirmUpdateInformation()}
                 >
-                    Cập nhật
+                    Update
                 </Button>
             </div>
         </div>

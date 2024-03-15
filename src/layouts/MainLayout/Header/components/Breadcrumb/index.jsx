@@ -9,10 +9,6 @@ function Breadcrumb() {
 
     const handleRenderItemBreadCrumb = (index, item) => {
         switch (index) {
-            case 0:
-                return (
-                    <><Link to={'/'}><span className={`${styles.text}`}>Trang chủ</span></Link> - </>
-                );
             case breadcrumb.length - 1:
                 return (
                     <span>{item.name}</span>

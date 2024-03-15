@@ -2,7 +2,6 @@ import React from 'react';
 import './styles.scss';
 import AuthLayout from '@/layouts/AuthLayout';
 import {Button, Flex, Input} from 'antd';
-import styles from './styles.module.scss';
 import IconWarning from '@/assets/images/icons/light/warning.svg';
 import InlineSVG from 'react-inlinesvg';
 import Handle from './handle.js';
@@ -15,11 +14,12 @@ function Login() {
         isLoadingBtnLogin,
         handleChangeInput,
         handleFocus,
-        handleConfirmLogin
+        handleConfirmLogin,
+        handleEnterAdmin
     } = Handle();
 
     return (
-        <AuthLayout title={'Đăng nhập'} description={'Hệ thống giám sát máy chủ'}>
+        <AuthLayout title={'Sign In'} description={'Zent Affiliate Management System'}>
             <div className={'input-wrap'}>
                 <Input
                     className={`base-input ${errorLogin && errorLogin.email.length > 0 ? 'error-input' : ''}`}
@@ -27,41 +27,37 @@ function Login() {
                     value={datFormLogin.email}
                     onChange={(e) => handleChangeInput(e, 'email')}
                     onFocus={(e) => handleFocus(e, 'email')}
+                    onKeyDown={(e) => handleEnterAdmin(e)}
                 />
                 {
                     errorLogin && errorLogin.email.length > 0 &&
                     <span className={`error`}>
-              <div className={`icon`}>
-                <InlineSVG src={IconWarning} width={14} height={14} />
-              </div>
+                        <div className={`icon`}>
+                            <InlineSVG src={IconWarning} width={14} height={14} />
+                        </div>
                         {errorLogin.email}
-            </span>
+                    </span>
                 }
             </div>
 
             <div className={'input-wrap mt-5'}>
                 <Input.Password
                     className={`base-input !pt-[9px] !pb-[9px] ${errorLogin && errorLogin.password.length > 0 ? 'error-input' : ''}`}
-                    placeholder={'Mật khẩu'}
+                    placeholder={'Password'}
                     value={datFormLogin.password}
                     onChange={(e) => handleChangeInput(e, 'password')}
                     onFocus={(e) => handleFocus(e, 'password')}
+                    onKeyDown={(e) => handleEnterAdmin(e)}
                 />
                 {
                     errorLogin && errorLogin.password.length > 0 &&
                     <span className={'error'}>
-              <div className={'icon'}>
-                <InlineSVG src={IconWarning} width={14} height={14} />
-              </div>
+                        <div className={'icon'}>
+                            <InlineSVG src={IconWarning} width={14} height={14} />
+                        </div>
                         {errorLogin.password}
-            </span>
+                    </span>
                 }
-            </div>
-
-            <div className={styles.forgot}>
-        <span onClick={() => navigate('/forgot-password')}>
-          Quên mật khẩu?
-        </span>
             </div>
 
             <Flex vertical gap='small'>
@@ -73,7 +69,7 @@ function Login() {
                     className={`main-btn-primary`}
                     block
                 >
-                    Đăng nhập
+                    Log In
                 </Button>
             </Flex>
         </AuthLayout>

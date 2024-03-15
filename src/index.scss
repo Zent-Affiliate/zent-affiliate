@@ -135,6 +135,12 @@
         }
     }
 
+    .ant-input-number-input-wrap {
+        input {
+            @apply w-[95%]
+        }
+    }
+
     @apply bg-gray-95 border-gray-95 text-black-20 py-[5px] px-5 rounded-[0.425rem] text-sm outline-none font-medium
 }
 
@@ -148,6 +154,12 @@
 
             @apply bg-white text-gray-65 #{!important}
         }
+
+        tr {
+            &:first-child {
+                padding-left: 25px;
+            }
+        }
     }
 
     .ant-table-cell {
@@ -159,7 +171,22 @@
     }
 
     .ant-table-body {
-        @apply h-[calc(100vh-420px)]
+        &::-webkit-scrollbar {
+            @apply h-[5px];
+            @apply w-[5px];
+        }
+
+        &::-webkit-scrollbar-track {
+            @apply bg-[#d9dbe2];
+            @apply rounded-lg;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            @apply bg-[#bec3cd];
+            @apply rounded-lg;
+        }
+
+        @apply h-[calc(100vh-405px)]
     }
 }
 
@@ -190,7 +217,7 @@
 
 /* Button */
 .ant-btn {
-    @apply border-none shadow-none #{!important};
+    @apply border-none shadow-none  ;
 }
 
 .main-btn-primary {

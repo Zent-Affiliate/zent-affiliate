@@ -9,26 +9,26 @@ import Joi from 'joi';
 const changePasswordValidateSchema = Joi.object({
     password: Joi.string()
         .required()
-        .label('Mật khẩu hiện tại'),
+        .label('Current password'),
     newPassword: Joi.string()
         .required()
         .min(8)
         .max(255)
         .regex(VALIDATE_PASSWORD_REGEX)
-        .label('Mật khẩu mới')
+        .label('A new password')
         .custom((value, helpers) => {
             return helpers.prefs.context.data.password !== value ?
                 value :
-                helpers.message('Mật khẩu mới không được trùng khớp với mật khẩu hiện tại.');
+                helpers.message('The new password must not match the current password.');
         })
-        .messages({'string.pattern.base': '{{#label}} phải bao gồm chữ thường, chữ hoa, số và ký tự đặc biệt.'}),
+        .messages({'string.pattern.base': '{{#label}} must include lowercase letters, uppercase letters, numbers and special characters.'}),
     confirmPassword: Joi.string()
         .required()
-        .label('Mật khẩu xác nhận')
+        .label('Password')
         .custom((value, helpers) => {
             return helpers.prefs.context.data.newPassword === value ?
                 value :
-                helpers.message('Mật khẩu xác nhận không trùng khớp.');
+                helpers.message('Confirmation password does not match.');
         })
 });
 
