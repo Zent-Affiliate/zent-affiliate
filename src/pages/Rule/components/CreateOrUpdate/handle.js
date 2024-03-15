@@ -1,26 +1,33 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {RULE_CONFIG} from '@/utils/constants.js';
 import store from '@/states/configureStore.js';
-import {setRule} from '@/states/modules/rule/index.js';
+import {initialState, setErrorCreateOrUpdate, setRule} from '@/states/modules/rule/index.js';
 import _ from 'lodash';
+import {validate} from '@/utils/validates/index.js';
+import {createOrUpdateRuleSchema} from '@/pages/Rule/schema.js';
+import {requestCreateRule, requestUpdateRule} from '@/api/rule/index.js';
 
 export default function Handle() {
     const rule = useSelector(state => state.rule.rule);
     const errorCreateOrUpdate = useSelector(state => state.rule.errorCreateOrUpdate);
+    const isLoadingBtnCreateRule = useSelector(state => state.rule.isLoadingBtnCreateRule);
+    const isLoadingBtnUpdateRule = useSelector(state => state.rule.isLoadingBtnUpdateRule);
     const dispatch = useDispatch();
     const typeSelection = [
         {
-            label: 'Percent (%)',
+            label: 'Phần trăm',
             value: RULE_CONFIG.PERCENT
         },
         {
-            label: 'Permanent (VNĐ)',
+            label: 'Cố định',
             value: RULE_CONFIG.FIXED
         }
     ];
 
     const onChangeForm = (value, type, index) => {
         const rule = store.getState().rule.rule;
+        dispatch(setErrorCreateOrUpdate(initialState.errorCreateOrUpdate));
+
         let data = _.cloneDeep(rule);
         if (type === 'value') {
             data['configs'][index]['value'] = value;
@@ -32,6 +39,7 @@ export default function Handle() {
     };
 
     const handleChangeSelectRuleType = (value, index) => {
+        dispatch(setErrorCreateOrUpdate(initialState.errorCreateOrUpdate));
         const rule = store.getState().rule.rule;
         let data = _.cloneDeep(rule);
         data['configs'][index]['type'] = value;
@@ -40,6 +48,7 @@ export default function Handle() {
     };
 
     const handleAddLevel = () => {
+        dispatch(setErrorCreateOrUpdate(initialState.errorCreateOrUpdate));
         const rule = store.getState().rule.rule;
         const newRuleConfig = {
             value: null,
@@ -56,6 +65,7 @@ export default function Handle() {
     };
 
     const handleRemoveLevel = (indexToRemove) => {
+        dispatch(setErrorCreateOrUpdate(initialState.errorCreateOrUpdate));
         const rule = store.getState().rule.rule;
         dispatch(setRule({
             ...rule,
@@ -67,15 +77,38 @@ export default function Handle() {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     };
 
+    const handleSubmitForm = (isCreate) => {
+        const rule = store.getState().rule.rule;
+
+        validate(createOrUpdateRuleSchema, rule, {
+            onSuccess: () => {
+                if (isCreate) {
+                    dispatch(requestCreateRule(rule));
+                } else {
+                    dispatch(requestUpdateRule(rule._id, _.omit(rule, '_id')));
+                }
+            },
+            onError: (err) => {
+                dispatch(setErrorCreateOrUpdate({
+                    ...errorCreateOrUpdate,
+                    ...err
+                }));
+            }
+        });
+    };
+
     return {
         rule,
         errorCreateOrUpdate,
         typeSelection,
+        isLoadingBtnCreateRule,
+        isLoadingBtnUpdateRule,
 
         onChangeForm,
         handleChangeSelectRuleType,
         handleAddLevel,
         handleRemoveLevel,
-        formatNumber
+        formatNumber,
+        handleSubmitForm
     };
 }

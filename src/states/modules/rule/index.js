@@ -1,13 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {RULE_CONFIG} from '@/utils/constants.js';
 
-const initialState = {
+export const initialState = {
     rule: {
         code: '',
         name: '',
         configs: [
             {
-                level: 0,
                 type: RULE_CONFIG.PERCENT,
                 value: null
             }
@@ -16,21 +15,30 @@ const initialState = {
     errorCreateOrUpdate: {
         code: '',
         name: '',
-        configs: []
+        configs: ''
     }
 };
 
 const ruleSlice = createSlice({
     name: 'rule',
     initialState: {
+        dataFilter: {
+            keySearch: '',
+            perPage: 20,
+            page: 1,
+            sort_order: 'desc',
+            column: 'created_at'
+        },
         isLoadingGetRule: false,
         isLoadingBtnCreateRule: false,
         isLoadingBtnUpdateRule: false,
         isLoadingBtnDeleteRule: false,
+        isLoadingBtnDeleteConfig: false,
 
         isCreateRule: false,
         visibleModalCreateOrUpdate: false,
         visibleModalDelete: false,
+        visibleConfirmDelete: false,
 
         rule: '',
         errorCreateOrUpdate: {
@@ -39,217 +47,14 @@ const ruleSlice = createSlice({
             configs: []
         },
 
-        rules: [
-            {
-                _id: '1',
-                code: 'asdasd',
-                name: 'Adasdq',
-                configs: [
-                    {
-                        _id: '11',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 3
-                    },
-                    {
-                        _id: '12',
-                        value: 15,
-                        type: RULE_CONFIG.PERCENT,
-                        level: 1
-                    },
-                    {
-                        _id: '13',
-                        value: 111111111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 2
-                    }
+        rules: [],
+        paginationListRules: {
+            totalRecord: '',
+            currentPage: '',
+            perPage: ''
+        },
 
-                ]
-            },
-            {
-                _id: '2',
-                code: 'asdasd',
-                name: 'Adasdq',
-                configs: [
-                    {
-                        _id: '21',
-                        value: 111111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 3
-                    },
-                    {
-                        _id: '22',
-                        value: 15,
-                        type: RULE_CONFIG.PERCENT,
-                        level: 1
-                    },
-                    {
-                        _id: '23',
-                        value: 111111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 2
-                    }
-
-                ]
-            },
-            {
-                _id: '3',
-                code: 'asdasd',
-                name: 'Adasdq',
-                configs: [
-                    {
-                        _id: '31',
-                        value: 1111111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 3
-                    }
-
-                ]
-            },
-            {
-                _id: '4',
-                code: 'asdasd',
-                name: 'Adasdq',
-                configs: [
-                    {
-                        _id: '41',
-                        value: 111111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 3
-                    },
-                    {
-                        _id: '42',
-                        value: 15,
-                        type: RULE_CONFIG.PERCENT,
-                        level: 1
-                    },
-                    {
-                        _id: '43',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 2
-                    }
-
-                ]
-            },
-            {
-                _id: '5',
-                code: 'asdasd',
-                name: 'Adasdq',
-                configs: [
-                    {
-                        _id: '51',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 3
-                    },
-                    {
-                        _id: '52',
-                        value: 15,
-                        type: RULE_CONFIG.PERCENT,
-                        level: 1
-                    },
-                    {
-                        _id: '53',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 2
-                    }
-
-                ]
-            },
-            {
-                _id: '6',
-                code: 'asdasd',
-                name: 'Adasdq',
-                configs: [
-                    {
-                        _id: '61',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 3
-                    }
-
-                ]
-            },
-            {
-                _id: '7',
-                code: 'asdasd',
-                name: 'Adasdq',
-                configs: [
-                    {
-                        _id: '71',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 3
-                    },
-                    {
-                        _id: '72',
-                        value: 15,
-                        type: RULE_CONFIG.PERCENT,
-                        level: 1
-                    },
-                    {
-                        _id: '73',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 2
-                    }
-
-                ]
-            },
-            {
-                _id: '8',
-                code: 'asdasd',
-                name: 'Adasdq',
-                configs: [
-                    {
-                        _id: '81',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 3
-                    },
-                    {
-                        _id: '82',
-                        value: 15,
-                        type: RULE_CONFIG.PERCENT,
-                        level: 1
-                    },
-                    {
-                        _id: '83',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 2
-                    },
-                    {
-                        _id: '84',
-                        value: 15,
-                        type: RULE_CONFIG.PERCENT,
-                        level: 1
-                    },
-                    {
-                        _id: '85',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 2
-                    },
-                    {
-                        _id: '86',
-                        value: 15,
-                        type: RULE_CONFIG.PERCENT,
-                        level: 1
-                    },
-                    {
-                        _id: '87',
-                        value: 111,
-                        type: RULE_CONFIG.FIXED,
-                        level: 2
-                    }
-                ]
-            }
-        ],
-        dataFilter: {},
-        paginationListRules: {}
+        configIndex: null
     },
     reducers: {
         setIsCreateRule: (state, action) => ({
@@ -283,13 +88,70 @@ const ruleSlice = createSlice({
         getRulesSuccessfully: (state, action) => ({
             ...state,
             isLoadingGetRule: false,
-            rules: action.payload
+            rules: action.payload.data.rules,
+            paginationListRules: {
+                totalRecord: action.payload.data.total,
+                currentPage: action.payload.data.page,
+                perPage: action.payload.data.per_page
+            }
         }),
         getRulesFail: (state) => ({
             ...state,
             isLoadingGetRule: false,
             rules: []
         }),
+        createRule: (state) => ({
+            ...state,
+            isLoadingBtnCreateRule: true
+        }),
+        createRuleSuccessfully: (state) => ({
+            ...state,
+            isLoadingBtnCreateRule: false
+        }),
+        createRuleFail: (state) => ({
+            ...state,
+            isLoadingBtnCreateRule: false
+        }),
+        updateRule: (state) => ({
+            ...state,
+            isLoadingBtnUpdateRule: true,
+            isLoadingBtnDeleteConfig: true
+        }),
+        updateRuleSuccessfully: (state) => ({
+            ...state,
+            isLoadingBtnUpdateRule: false,
+            isLoadingBtnDeleteConfig: false
+        }),
+        updateRuleFail: (state) => ({
+            ...state,
+            isLoadingBtnUpdateRule: false,
+            isLoadingBtnDeleteConfig: false
+        }),
+        deleteRule: (state) => ({
+            ...state,
+            isLoadingBtnDeleteRule: true
+        }),
+        deleteRuleSuccessfully: (state) => ({
+            ...state,
+            isLoadingBtnDeleteRule: false
+        }),
+        deleteRuleFail: (state) => ({
+            ...state,
+            isLoadingBtnDeleteRule: false
+        }),
+        setVisibleConfirmDelete: (state, action) => ({
+            ...state,
+            visibleConfirmDelete: action.payload
+        }),
+        setConfigIndex: (state, action) => ({
+            ...state,
+            configIndex: action.payload
+        }),
+        setDataFilter: (state, action) => ({
+            ...state,
+            dataFilter: action.payload
+        }),
+
         resetState: (state) => ({
             ...state,
             rule: initialState.rule,
@@ -303,6 +165,17 @@ export const {
     setIsCreateRule,
     setVisibleModalCreateOrUpdate, setVisibleModalDelete,
     setRule, setRulesList,
+    createRule, createRuleSuccessfully, createRuleFail,
+    updateRule,
+    updateRuleSuccessfully,
+    updateRuleFail,
+    deleteRule,
+    deleteRuleSuccessfully,
+    deleteRuleFail,
+    setErrorCreateOrUpdate,
+    setVisibleConfirmDelete,
+    setConfigIndex,
+    setDataFilter,
     resetState
 } = ruleSlice.actions;
 

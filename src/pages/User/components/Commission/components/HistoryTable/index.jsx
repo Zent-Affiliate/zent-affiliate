@@ -6,19 +6,22 @@ import '../../styles.scss';
 function HistoryTable() {
     const {
         paginationListHistories,
-        columns
+        columns,
+        histories,
+        handleChangePage,
+        isLoadingListHistories
     } = Handle();
 
     return (
         <div>
             <TableDefault
-                // loading={isLoadingTableUser}
+                loading={isLoadingListHistories}
                 // onChange={handleChangeTableUser}
-                // dataSource={dataListUsers}
+                dataSource={histories}
                 pagination={paginationListHistories}
                 columns={columns}
                 rowKey={(record) => record._id}
-                // handleSelectPagination={(e) => handleChangePaginationUser(e)}
+                handleSelectPagination={(e) => handleChangePage(e)}
                 extraClassName={'history-table-custom'}
             />
         </div>

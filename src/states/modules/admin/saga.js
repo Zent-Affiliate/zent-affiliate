@@ -47,13 +47,13 @@ function* loadRouteData() {
 function* handleActions() {
     yield takeLatest(changeStatusAdminSuccess, function* () {
         yield put(getListAdmins());
-        handleNotification('success', 'Status change successful.');
+        handleNotification('success', 'Status change successfully.');
     });
 
     yield takeLatest(createAdminSuccess, function* () {
         yield put(getListAdmins());
         yield put(setVisibleModalCreateAdmin(false));
-        handleNotification('success', 'Create new admin success.');
+        handleNotification('success', 'Create admin successfully.');
     });
 
     yield takeLatest(createAdminFail, function* (action) {
@@ -66,7 +66,7 @@ function* handleActions() {
                 })
             );
         } else {
-            handleNotification('error', 'Create new admin unsuccessful.');
+            handleNotification('error', 'Create new admin fail.');
         }
     });
 

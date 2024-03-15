@@ -15,7 +15,7 @@ export const VALIDATE_PHONE_REGEX_RULE = /^(0[235789])[0-9]{8}$/;
 export const VALIDATE_NAME_REGEX_RULE = /^[\p{L} ]*$/u;
 
 export const hasPermission = (permissions) => {
-    let { auth } = store.getState();
+    let {auth} = store.getState();
     let isPermission = false;
     if (permissions) {
         permissions.forEach(permission => {
@@ -67,7 +67,7 @@ const handleGetTypeNotification = (type) => {
 };
 
 export const getDynamicRoute = (path) => {
-    const { location } = store.getState().app;
+    const {location} = store.getState().app;
     const params = location?.params || {};
 
     let pathActive = path;
@@ -94,7 +94,7 @@ export const getDynamicRoute = (path) => {
 };
 
 export const isRouteActive = (path) => {
-    const { location } = store.getState().app;
+    const {location} = store.getState().app;
     const currentPath = location.pathName;
 
     return getDynamicRoute(path) === currentPath;

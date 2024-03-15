@@ -1,7 +1,7 @@
 import {ACTIVE_STATUS} from '@/utils/constants';
 import Swal from 'sweetalert2';
 import {useDispatch, useSelector} from 'react-redux';
-import { setDataFilter,setErrorInfoProject, setInfoProject, setProjectActive, setVisibleModalCreateProject, 
+import { setDataFilter,setErrorInfoProject, setInfoProject, setProjectActive, setVisibleModalCreateProject,
     setVisibleModalDeleteProject, setVisibleModalUpdateProject } from '@/states/modules/project';
 import { getListProjects , handleDeleteProject} from '@/api/project';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ export default function Handle() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const dataFilter = useSelector((state) => state.project.dataFilter);
+    const me = useSelector(state => state.auth.me);
 
     const handleShowModalUpdateProject = (project) => {
         dispatch(setInfoProject({...project}));
@@ -70,7 +71,7 @@ export default function Handle() {
             showCancelButton: true,
             buttonsStyling: false,
             cancelButtonText: 'Close',
-            confirmButtonText: 'Xóa',
+            confirmButtonText: 'Delete',
             customClass: {
                 popup: '!w-[416px] !h-[296px] !px-11 !important',
                 confirmButton: 'hover:!bg-[#D81A48] p-2.5 px-7 rounded-lg !bg-[#F8285A] !text-white !font-semibold !outline-none mx-[5px] !mt-[-60px]',
@@ -83,8 +84,12 @@ export default function Handle() {
     };
 
     const redirectToProject = (project_id) => {
-        navigate(`/my-project-detail/${project_id}/users`)
-    }
+        if (me?.permissions) {
+            navigate(`/my-project-detail/${project_id}`);
+        } else {
+            navigate(`/my-project-detail/${project_id}/users`);
+        }
+    };
 
     return {
         handleShowModalUpdateProject,

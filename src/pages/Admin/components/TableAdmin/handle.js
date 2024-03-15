@@ -214,7 +214,7 @@ export default function Handle() {
             showCancelButton: true,
             buttonsStyling: false,
             cancelButtonText: 'Close',
-            confirmButtonText: 'Xóa',
+            confirmButtonText: 'Delete',
             customClass: {
                 popup: '!w-[416px] !h-[296px] !px-11 !important',
                 confirmButton: 'hover:!bg-[#D81A48] p-2.5 px-7 rounded-lg !bg-[#F8285A] !text-white !font-semibold !outline-none mx-[5px] !mt-[-60px]',

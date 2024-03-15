@@ -8,7 +8,6 @@ import commissionReducer from './modules/commission/index.js';
 import adminReducer from './modules/admin/index.js';
 import projectAdmin from './modules/projectAdmin/index.js';
 import projectDetail from './modules/projectDetail/index.js';
-import secretKey from './modules/secretKey/index.js';
 
 const rootReducer = {
     app: appReducer,
@@ -21,7 +20,6 @@ const rootReducer = {
     commission: commissionReducer,
     projectAdmin: projectAdmin,
     projectDetail: projectDetail,
-    secretkey: secretKey
 };
 
 export default rootReducer;

@@ -24,7 +24,6 @@ export default function Handle(){
     const errorInfoProject = useSelector((state) => state.project.errorInfoProject);
     const dataFilter = useSelector((state) => state.project.dataFilter);
     const paginationListProjects = useSelector((state) => state.project.paginationListProjects);
-    // const infoSecretKey = useSelector((state) => state.secretKey.infoSecretKey)
     const handleCancelModalCreateProject = () =>{
         dispatch(
             setErrorInfoProject({
@@ -44,7 +43,7 @@ export default function Handle(){
             })
         );
         dispatch(setVisibleModalCreateProject(false));
-        
+
     };
 
     const handleGetKey = () => {

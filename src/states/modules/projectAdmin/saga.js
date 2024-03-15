@@ -2,7 +2,7 @@ import {
     all, fork, put, select, takeLatest, call
 } from "redux-saga/effects";
 import { setBreadcrumb, setTitlePage } from "../app/index.js";
-import { getNotification } from "../../../utils/helper.js";
+import { getNotification } from '@/utils/helper.js';
 import _ from "lodash";
 import {
     createProjectAdminFail,

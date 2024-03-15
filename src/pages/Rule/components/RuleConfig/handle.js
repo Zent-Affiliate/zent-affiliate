@@ -1,16 +1,16 @@
-import {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
     resetState,
     setIsCreateRule,
     setRule,
-    setRulesList,
+    setRulesList, setVisibleConfirmDelete,
     setVisibleModalCreateOrUpdate,
     setVisibleModalDelete
 } from '@/states/modules/rule/index.js';
 import {arrayMove} from '@dnd-kit/sortable';
 import store from '@/states/configureStore.js';
 import _ from 'lodash';
+import {requestUpdateRule} from '@/api/rule/index.js';
 
 export default function Handle() {
     const dispatch = useDispatch();
@@ -33,6 +33,7 @@ export default function Handle() {
                 };
 
                 dispatch(setRulesList(cloneRules));
+                dispatch(requestUpdateRule(rule._id, cloneRules[ruleIndex]));
             }
         }
     };

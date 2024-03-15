@@ -4,7 +4,7 @@
             fill: #6f7b88
         }
 
-        @apply w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] absolute right-4 ;
+        @apply w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] ;
     }
 
     .itemDrag:active {
@@ -16,7 +16,7 @@
             fill: #6f7b88
         }
 
-        @apply hidden w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] absolute right-10 cursor-pointer;
+        @apply hidden w-[25px] h-[35px] rounded-[5px] flex items-center justify-center hover:bg-[#0000000d] cursor-pointer;
     }
 
     &:hover {

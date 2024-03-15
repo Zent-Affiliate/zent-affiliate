@@ -4,7 +4,7 @@ import {isRouteActive} from '@/utils/helper.js';
 
 function* loadRouteData() {
     yield put(setTitlePage('Compensation configuration'));
-    const location = yield select(state => state.app.location)
+    const location = yield select(state => state.app.location);
 
     if (isRouteActive('/my-project-detail/:project_id/rule-config')) {
         yield put(setTitlePage(`Compensation configuration`));
@@ -16,7 +16,7 @@ function* loadRouteData() {
             {
                 path: `/my-project-detail/${location.params.project_id}/rule-config`,
                 name: 'Compensation configuration'
-            },
+            }
         ]));
     } else {
         yield put(setTitlePage(`Project Management`));

@@ -1,15 +1,16 @@
-import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {setConfigIndex, setRule, setVisibleConfirmDelete} from '@/states/modules/rule/index.js';
 
 export default function Handle() {
-    const [visibleConfirmDelete, setVisibleConfirmDelete] = useState(false);
+    const dispatch = useDispatch();
 
-    const handleOpenConfirmDeleteConfig = () => {
-        setVisibleConfirmDelete(true);
+    const handleOpenConfirmDeleteConfig = (rule, index) => {
+        dispatch(setRule(rule))
+        dispatch(setConfigIndex(index))
+        dispatch(setVisibleConfirmDelete(true));
     };
 
     return {
-        visibleConfirmDelete,
-
         handleOpenConfirmDeleteConfig
     };
 }

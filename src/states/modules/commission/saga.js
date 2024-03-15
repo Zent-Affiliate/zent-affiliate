@@ -1,28 +1,31 @@
 import {all, fork, put, select} from 'redux-saga/effects';
 import {setBreadcrumb, setTitlePage} from '../app';
 import {isRouteActive} from '@/utils/helper.js';
+import { requestGetListUserByRelationship } from '@/api/users';
 
 function* loadRouteData() {
     const location = yield select(state => state.app.location)
+
+    yield put(requestGetListUserByRelationship())
 
     if (isRouteActive('/my-project-detail/:project_id/users/:id')) {
         yield put(setTitlePage('Danh sách khách hàng'));
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
-                name: 'My Project'
+                name: 'Dự án của tôi'
             },
             {
                 path: `/my-project-detail/${location.params.project_id}/users`,
-                name: 'List of customers'
+                name: 'Danh sách khách hàng'
             },
             {
                 path: '/my-project-detail/${location.params.project_id}/users/:id',
-                name: 'Transaction history'
+                name: 'Lịch sử giao dịch'
             }
         ]));
     } else {
-        yield put(setTitlePage(`Project management`));
+        yield put(setTitlePage(`Quản lý dự án`));
         yield put(setBreadcrumb([
             {
                 path: '/admin-management',

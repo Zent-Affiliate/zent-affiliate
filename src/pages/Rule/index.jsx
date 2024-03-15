@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import {Button, Col, Input, Pagination, Row} from 'antd';
+import {Button, Col, Empty, Input, Pagination, Row} from 'antd';
 import Handle from '@/pages/Rule/handle.js';
 import InlineSVG from 'react-inlinesvg';
 import SearchIcon from '@/assets/images/icons/duotone/magnifying-glass.svg';
@@ -11,22 +11,30 @@ import ModalDefault from '@/components/Modal/index.jsx';
 import {setVisibleModalCreateOrUpdate, setVisibleModalDelete} from '@/states/modules/rule/index.js';
 import ModalDeleteDefault from '@/components/ModalDelete/index.jsx';
 import MainLayout from '@/layouts/MainLayout/index.jsx';
+import {requestDeleteRule, requestUpdateRule} from '@/api/rule/index.js';
 
 function Rule() {
     const {
         rule,
         rules,
         isCreateRule,
-        isLoadingGetRule,
         isLoadingBtnDeleteRule,
         visibleModalCreateOrUpdate,
         visibleModalDelete,
         isMyProjectDetail,
+        isLoadingBtnDeleteConfig,
+        visibleConfirmDelete,
+        configIndex,
+        dataFilter,
+        paginationListRules,
 
         handleShowModalCreateRule,
+        handleCancelDeleteConfig,
+        handleEnterSearchRule,
         handleSearchRule,
-        handleDragEnd
+        handleSelectPagination
     } = Handle();
+
     const dispatch = useDispatch();
 
     const content = <div>
@@ -36,9 +44,9 @@ function Rule() {
                 <div className={`flex justify-between mb-2.5`}>
                     <div className={`w-96`}>
                         <Input
-                            // value={dataFilter.keySearch}
-                            // onKeyDown={(e) => handleEnterSearchUser(e)}
-                            // onChange={(e) => handleSearchUser(e.target.value)}
+                            value={dataFilter.keySearch}
+                            onKeyDown={(e) => handleEnterSearchRule(e)}
+                            onChange={(e) => handleSearchRule(e.target.value)}
                             prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                             className={`main-input`}
                             placeholder='Search by code or convention name'
@@ -55,20 +63,36 @@ function Rule() {
 
                 <div
                     className={`${styles.ruleListWrap} 
-                        ${isMyProjectDetail ? 'max-h-[calc(100vh_-_390px)]' : 'max-h-[calc(100vh_-_460px)]'} main-select`}>
-                    <Row gutter={[26, 24]}>
-                        {
-                            rules.map(rule => (
-                                <Col key={rule._id} className='gutter-row' span={6}>
-                                    <RuleConfig record={rule} />
-                                </Col>
-                            ))
-                        }
-                    </Row>
+                        ${isMyProjectDetail ? 'h-[calc(100vh_-_390px)]' : 'h-[calc(100vh_-_455px)]'} main-select`}>
+                    {
+                        rules?.length > 0 ?
+                            <Row gutter={[28, 28]}>
+                                {
+                                    rules?.map(rule => (
+                                        <Col key={rule._id} className='gutter-row' span={6}>
+                                            <RuleConfig record={rule} />
+                                        </Col>
+                                    ))
+                                }
+                            </Row>
+                            :
+                            <div className={'h-[calc(100vh_-_500px)] flex justify-center items-center'}>
+                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                            </div>
+                    }
                 </div>
-                <Pagination
-                    className={'absolute right-10'}
-                />
+
+                {
+                    rules?.length > 0 ?
+                        <Pagination
+                            className={'absolute right-10'}
+                            current={paginationListRules.currentPage}
+                            total={22}
+                            pageSize={paginationListRules.perPage}
+                            onChange={(e) => handleSelectPagination(e)}
+                            showSizeChanger={false}
+                        /> : ''
+                }
             </div>
         </div>
 
@@ -87,13 +111,30 @@ function Rule() {
             loading={isLoadingBtnDeleteRule}
             isModalOpen={visibleModalDelete}
             handleCancel={() => dispatch(setVisibleModalDelete(false))}
-            // handleConfirm={() => dispatch(handleDeleteRule(rule._id))}
+            handleConfirm={() => dispatch(requestDeleteRule(rule._id))}
             content={
                 <div>
                     Are you sure you want to remove the convention <strong>{rule.name}</strong> ?
                 </div>
             }
-            contentBtn='Xóa'
+            contentBtn='Delete'
+        />
+
+        <ModalDeleteDefault
+            loading={isLoadingBtnDeleteConfig}
+            isModalOpen={visibleConfirmDelete}
+            handleCancel={handleCancelDeleteConfig}
+            handleConfirm={() => dispatch(requestUpdateRule(rule._id, {
+                name: rule.name,
+                code: rule.code,
+                configs: rule.configs.filter((_, index) => index !== configIndex)
+            }))}
+            contentBtn='Delete'
+            content={
+                <div>
+                    Are you sure to delete this level?
+                </div>
+            }
         />
     </div>;
 

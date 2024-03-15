@@ -34,7 +34,7 @@ function ModalCreateAdmin() {
                     onFocus={() => handleFocus('name')}
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     className={`main-input ${errorInfoAdmin && errorInfoAdmin.name ? 'error-input' : ''}`}
-                    placeholder={'Admin'}
+                    placeholder={'Enter name'}
                 />
                 {
                     errorInfoAdmin && errorInfoAdmin.name &&
@@ -59,7 +59,7 @@ function ModalCreateAdmin() {
                     onFocus={() => handleFocus('email')}
                     onChange={(e) => handleChangeInputInfo(e, 'email')}
                     className={`main-input ${errorInfoAdmin && errorInfoAdmin.email ? 'error-input' : ''}`}
-                    placeholder={'Email'}
+                    placeholder={'Enter email'}
                 />
                 {
                     errorInfoAdmin && errorInfoAdmin.email &&
@@ -84,7 +84,7 @@ function ModalCreateAdmin() {
                     onFocus={() => handleFocus('password')}
                     onChange={(e) => handleChangeInputInfo(e, 'password')}
                     className={`main-input ${errorInfoAdmin && errorInfoAdmin.password ? 'error-input' : ''}`}
-                    placeholder={'Password'}
+                    placeholder={'Enter password'}
                 />
                 {
                     errorInfoAdmin && errorInfoAdmin.password &&

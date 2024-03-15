@@ -32,7 +32,7 @@ function User() {
                         onChange={(e) => handleSearchUser(e.target.value)}
                         prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                         className={`main-input`}
-                        placeholder='Search by customer name'
+                        placeholder='Enter search...'
                     />
                 </div>
             </div>
@@ -42,7 +42,7 @@ function User() {
                 <Select
                     className={`absolute bottom-0 border-[1px] !rounded-[6px] w-[140px]`}
                     value={paginationListUsers.perPage}
-                    options={selectLimit.map((value) => ({value, label: `Quantity    ${value}`}))}
+                    options={selectLimit.map((value) => ({value, label: `Hiển thị ${value}`}))}
                     onChange={(e) => handleChangeSelectUser(e)}
                 />
             </div>
