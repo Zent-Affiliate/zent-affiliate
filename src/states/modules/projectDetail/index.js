@@ -4,7 +4,7 @@ const projectDetailSlice = createSlice({
     name: 'projectDetail',
     initialState:{
         project: {},
-        isLoadingProjectDetail: false
+        isLoadingProjectDetail: false,
     },
 
     reducers:{
@@ -24,6 +24,8 @@ const projectDetailSlice = createSlice({
     }
 })
 
-export const {getProjectDetail, getProjectDetailSuccess, getProjectDetailFail} = projectDetailSlice.actions
+export const {
+    getProjectDetail, getProjectDetailSuccess, getProjectDetailFail,
+} = projectDetailSlice.actions
 
 export default projectDetailSlice.reducer

@@ -22,6 +22,7 @@ import {requestGetListUser} from '@/api/users/index.js';
 function* loadRouteData() {
     const {app} = yield select();
     yield put(requestGetProjectDetail());
+    yield put(requestGetListUser())
     yield put(requestGetListUser());
     yield put(requestGetListRules());
 
