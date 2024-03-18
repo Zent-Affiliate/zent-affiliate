@@ -1,15 +1,17 @@
 import {all, fork, put, select, takeLatest} from 'redux-saga/effects';
 import {setBreadcrumb, setTitlePage} from '../app';
 import {isRouteActive} from '@/utils/helper';
-import {requestGetProjectDetail} from '@/api/projectDetail';
+import {requestGetListUser} from '@/api/users';
 import {getProjectDetailSuccess} from '.';
+import { requestGetProjectDetail } from '@/api/projectDetail';
 
 function* loadRouteData() {
     const {app} = yield select();
     yield put(requestGetProjectDetail());
+    yield put(requestGetListUser())
 
     if (isRouteActive('my-project-detail/:project_id')) {
-        yield put(setTitlePage(`Dự án`));
+        yield put(setTitlePage(`Project`));
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
@@ -31,7 +33,7 @@ function* handleActions() {
     yield takeLatest(getProjectDetailSuccess, function* (action) {
         const project = action.payload.data;
         if (isRouteActive('my-project-detail/:project_id')) {
-            yield put(setTitlePage(`Dự án - ${project.name}`));
+            yield put(setTitlePage(`Project - ${project.name}`));
             yield put(setBreadcrumb([
                 {
                     path: '/my-project',
@@ -43,7 +45,7 @@ function* handleActions() {
                 }
             ]));
         } else {
-            yield put(setTitlePage(`Quản lý dự án - ${project.name}`));
+            yield put(setTitlePage(`Project - ${project.name}`));
             yield put(setBreadcrumb([
                 {
                     path: '/admin-management',
@@ -51,7 +53,7 @@ function* handleActions() {
                 },
                 {
                     path: `/${project.admin._id}/projects`,
-                    name: 'Danh sách dự án'
+                    name: 'List project'
                 },
                 {
                     path: `/project-detail/${project._id}`,

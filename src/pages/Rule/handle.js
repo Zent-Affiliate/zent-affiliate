@@ -1,7 +1,7 @@
 import './styles.scss';
 import {useDispatch, useSelector} from 'react-redux';
 import {setDataFilter} from '@/states/modules/user';
-import {getListUsers} from '@/api/users';
+import {requestGetListUser} from '@/api/users';
 import {validate} from '@/utils/validates';
 import {TYPE_SUBMIT} from '@/utils/constants.js';
 import {
@@ -67,19 +67,19 @@ export default function Handle() {
     const handleSearchRule = (value) => {
         dispatch(setDataFilter({...dataFilter, keySearch: value}));
         if (!value) {
-            dispatch(getListUsers());
+            dispatch(requestGetListUser());
         }
     };
 
     const handleEnterSearchUser = (event) => {
         if (event.key === 'Enter') {
-            dispatch(getListUsers());
+            dispatch(requestGetListUser());
         }
     };
 
     const handleChangeSelectUser = (perPage) => {
         dispatch(setDataFilter({...paginationListUsers, perPage, page: 1}));
-        dispatch(getListUsers());
+        dispatch(requestGetListUser());
     };
 
     // const handleChangeInputInfo = (valueInput, type) => {

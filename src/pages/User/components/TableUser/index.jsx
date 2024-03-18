@@ -11,6 +11,7 @@ function TableUser() {
     // const dataListUsers = useSelector((state) => state.user.users);
     const isLoadingTableUser = useSelector((state) => state.user.isLoadingTableUser);
     const paginationListUsers = useSelector((state) => state.user.paginationListUsers);
+    const dataListUsers = useSelector(state=>state.user.users)
 
     const {
         handleChangeTableUser,
@@ -18,84 +19,10 @@ function TableUser() {
         handleOpenCommission
     } = Handle();
 
-    const dataListUsers = [
-        {
-            _id: '12312',
-            name: 'Nguyen Minh Tuan',
-            project_user_id: '11',
-            project_id: '1',
-            referral_code: 'MGT012',
-            referrer_id: '111',
-            created_at: 1709868545
-        },
-        {
-            _id: '55',
-            name: 'Nguyen Minh Tuan',
-            project_user_id: '11',
-            project_id: '1',
-            referral_code: 'MGT012',
-            referrer_id: '111',
-            created_at: 1709868545
-        },
-        {
-            _id: '44',
-            name: 'Nguyen Minh Tuan',
-            project_user_id: '11',
-            project_id: '1',
-            referral_code: 'MGT013',
-            referrer_id: '111',
-            created_at: 1709868545
-        },
-        {
-            _id: '33',
-            name: 'Nguyen Minh Tuan',
-            project_user_id: '11',
-            project_id: '1',
-            referral_code: 'MSAD012',
-            referrer_id: '111',
-            created_at: 1709868545
-        },
-        {
-            _id: '22',
-            name: 'Nguyen Minh Tuan',
-            project_user_id: '11',
-            project_id: '1',
-            referral_code: 'ADA012',
-            referrer_id: '111',
-            created_at: 1709868545
-        },
-        {
-            _id: '11',
-            name: 'Nguyen Minh Tuan',
-            project_user_id: '11',
-            project_id: '1',
-            referral_code: 'MADT032',
-            referrer_id: '111',
-            created_at: 1709868545
-        },
-        {
-            _id: '11',
-            name: 'Nguyen Minh Tuan',
-            project_user_id: '11',
-            project_id: '1',
-            referral_code: 'MADT032',
-            referrer_id: '111',
-            created_at: 1709868545
-        },
-        {
-            _id: '11',
-            name: 'Nguyen Minh Tuan',
-            project_user_id: '11',
-            project_id: '1',
-            referral_code: 'MADT032',
-            referrer_id: '111',
-            created_at: 1709868545
-        }
-    ];
 
     const columns = [
         {
-            title: 'Họ và tên',
+            title: 'Name',
             dataIndex: 'name',
             key: 'name',
             width: 250,
@@ -104,7 +31,7 @@ function TableUser() {
             defaultSortOrder: '',
             render: (text, record) => {
                 return (
-                    <div className={`ml-[10px] font-semibold`}>
+                    <div className={`font-semibold`}>
                         <div
                             className={`mb-[4px] mt-[4px] text-black-content`}>
                             <Tooltip title={'Nhấn để xem lịch sử giao dịch'}><span
@@ -116,7 +43,7 @@ function TableUser() {
             }
         },
         {
-            title: 'Mã giới thiệu',
+            title: 'Referral code',
             dataIndex: 'referral_code',
             key: 'referral_code',
             width: 200,
@@ -128,11 +55,22 @@ function TableUser() {
                     <div className={`text-black-subContent`}>
                         {record.referral_code}
                     </div> :
-                    <i className={`text-black-subContent`}>Chưa có</i>;
+                    <i className={`text-black-subContent`}>updating</i>;
             }
         },
         {
-            title: 'Ngày tạo',
+            title: 'Amount',
+            dataIndex: 'total',
+            key: 'total',
+            width: 200,
+            showSorterTooltip: false,
+            defaultSortOrder: '',
+            render: (text) => {
+                return <span>{text}</span>
+            }
+        },
+        {
+            title: 'Created at',
             dataIndex: 'created_at',
             key: 'created_at',
             width: 200,
@@ -140,9 +78,9 @@ function TableUser() {
             showSorterTooltip: false,
             defaultSortOrder: '',
             render: (text) => {
-                return moment.unix(text).format('DD-MM-YYYY');
+                return moment(text).format('DD-MM-YYYY');
             }
-        }
+        },
     ];
 
     return (

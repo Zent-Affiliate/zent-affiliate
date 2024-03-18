@@ -1,9 +1,10 @@
 import callApi from '@/api/callApi';
 import {getListUser, getListUserFailure, getListUserSuccess} from '@/states/modules/user';
 
-export const getListUsers = () => async (dispatch, getState) => {
+export const requestGetListUser = () => async (dispatch, getState) => {
+    const id = getState().app.location.params.project_id;
     const dataFilter = getState().user.dataFilter;
-    let path = `users?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;
+    let path = `users/${id}?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;
 
     if (dataFilter.keySearch) {
         path += `&q=${dataFilter.keySearch}`;

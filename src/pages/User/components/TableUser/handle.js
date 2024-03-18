@@ -1,4 +1,4 @@
-import {getListUsers} from '@/api/users';
+import {requestGetListUser} from '@/api/users';
 import {setDataFilter} from '@/states/modules/user';
 import {useDispatch, useSelector} from 'react-redux';
 import {goToPage} from '@/states/modules/app/index.js';
@@ -19,7 +19,7 @@ export default function Handle() {
                 column
             })
         );
-        dispatch(getListUsers());
+        dispatch(requestGetListUser());
     };
 
     const handleChangePaginationUser = (event) => {
@@ -29,7 +29,7 @@ export default function Handle() {
                 page: event
             })
         );
-        dispatch(getListUsers());
+        dispatch(requestGetListUser());
     };
 
     const handleOpenCommission = (userId) => {

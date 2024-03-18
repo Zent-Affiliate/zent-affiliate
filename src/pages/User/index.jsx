@@ -32,7 +32,7 @@ function User() {
                         onChange={(e) => handleSearchUser(e.target.value)}
                         prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                         className={`main-input`}
-                        placeholder='Tìm kiếm theo tên khách hàng'
+                        placeholder='Enter search...'
                     />
                 </div>
             </div>

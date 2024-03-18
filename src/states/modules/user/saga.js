@@ -1,6 +1,6 @@
 import {all, fork, put, select} from 'redux-saga/effects';
 import {setBreadcrumb, setTitlePage} from '../app';
-import {getListUsers} from '@/api/users';
+import {requestGetListUser} from '@/api/users';
 import {setDataFilter} from '.';
 import {isRouteActive} from '@/utils/helper.js';
 
@@ -12,11 +12,11 @@ function* loadRouteData() {
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
-                name: 'Dự án của tôi'
+                name: 'Project'
             },
             {
                 path: `/my-project-detail/${location.params.project_id}/users`,
-                name: 'Danh sách khách hàng'
+                name: 'List project of user'
             }
         ]));
     } else {
@@ -35,7 +35,7 @@ function* loadRouteData() {
         sort_order: null,
         column: null
     }));
-    yield put(getListUsers());
+    yield put(requestGetListUser());
 }
 
 function* handleActions() {
