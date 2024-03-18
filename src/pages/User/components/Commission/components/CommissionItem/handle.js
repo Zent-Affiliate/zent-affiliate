@@ -1,21 +1,16 @@
-import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {setActiveCommission} from '@/states/modules/commission/index.js';
+import {setActiveCommission, setListHistories} from '@/states/modules/commission/index.js';
 import _ from 'lodash';
+import { requestGetListHistory } from '@/api/commissions';
 
 export default function Handle() {
     const dispatch = useDispatch();
     const activeCommission = useSelector(state => state.commission.activeCommission);
-    const commissions = useSelector(state => state.commission.commissions);
-
-    useEffect(() => {
-        if (commissions?.length > 0 && _.isEmpty(activeCommission)) {
-            dispatch(setActiveCommission(commissions[0]));
-        }
-    }, []);
 
     const handleActiveCommission = (commission) => {
+        dispatch(setListHistories([]))
         dispatch(setActiveCommission(commission));
+        dispatch(requestGetListHistory());
     };
 
     return {

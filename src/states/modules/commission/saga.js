@@ -1,9 +1,12 @@
 import {all, fork, put, select} from 'redux-saga/effects';
 import {setBreadcrumb, setTitlePage} from '../app';
 import {isRouteActive} from '@/utils/helper.js';
+import { requestGetListUserByRelationship } from '@/api/users';
 
 function* loadRouteData() {
     const location = yield select(state => state.app.location)
+
+    yield put(requestGetListUserByRelationship())
 
     if (isRouteActive('/my-project-detail/:project_id/users/:id')) {
         yield put(setTitlePage('Danh sách khách hàng'));

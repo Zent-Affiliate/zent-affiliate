@@ -3,6 +3,7 @@ import {setDataFilter} from '@/states/modules/user';
 import {useDispatch, useSelector} from 'react-redux';
 import {goToPage} from '@/states/modules/app/index.js';
 import {isRouteActive} from '@/utils/helper.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function Handle() {
     const dispatch = useDispatch();
@@ -33,10 +34,8 @@ export default function Handle() {
     };
 
     const handleOpenCommission = (userId) => {
-        window.open(`/${isRouteActive('/my-project-detail/:project_id/users') ? 'my-' : ''}project-detail/${location.params.project_id}/users/${userId}`, '_blank');
-        // dispatch(goToPage({
-        //     path: `/${isRouteActive('/my-project-detail/:project_id/users') ? 'my-' : ''}project-detail/${location.params.project_id}/users/${userId}`
-        // }));
+        dispatch(goToPage({path: `/${isRouteActive('/my-project-detail/:project_id/users') ? 'my-' : ''}project-detail/${location.params.project_id}/users/${userId}`}))
+     
     };
 
     return {
