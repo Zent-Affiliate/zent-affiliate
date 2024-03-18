@@ -1,61 +1,43 @@
-import {
-  MAX_DOMAIN_STRING_SIZE,
-  MAX_NAME_PROJECT_STRING_SIZE,
-  VALIDATE_DOMAIN_REGEX,
-  VALIDATE_NAME_PROJECT_REGEX,
-} from "@/utils/constains";
-
-import Joi from "joi";
-
-export const createProjectSchema = Joi.object({
-  name: Joi.string()
-    .trim()
-    .max(MAX_NAME_PROJECT_STRING_SIZE)
-    .required()
-    .regex(VALIDATE_NAME_PROJECT_REGEX)
-    .label("Tên dự án"),
-  domain: Joi.string()
-    .trim()
-    .max(MAX_DOMAIN_STRING_SIZE)
-    .required()
-    .regex(VALIDATE_DOMAIN_REGEX)
-    .label("Link dự án"),
-  server: Joi.string()
-    .trim()
-    .required()
-    .label("Máy chủ"),
-  tags: Joi.array()
-    .items(
-      Joi.string()
-        .trim()
-        .label("Nhãn dự án")
-    )
-    .label("Nhãn dự án"),
-});
+import {ACTIVE_STATUS, MAX_SIZE_NAME, MAX_STRING_SIZE} from '@/utils/constants';
+import {VALIDATE_NAME_REGEX_RULE, VALIDATE_PASSWORD_REGEX} from '@/utils/helper';
+import Joi from 'joi';
 
 export const updateProjectSchema = Joi.object({
-  _id: Joi.any(),
-  name: Joi.string()
-    .trim()
-    .max(MAX_NAME_PROJECT_STRING_SIZE)
-    .required()
-    .regex(VALIDATE_NAME_PROJECT_REGEX)
-    .label("Tên dự án"),
-  domain: Joi.string()
-    .trim()
-    .max(MAX_DOMAIN_STRING_SIZE)
-    .required()
-    .regex(VALIDATE_DOMAIN_REGEX)
-    .label("Link dự án"),
-  server: Joi.string()
-    .trim()
-    .required()
-    .label("Máy chủ"),
-  tags: Joi.array()
-    .items(
-      Joi.string()
+    code: Joi.string()
         .trim()
-        .label("Nhãn dự án")
-    )
-    .label("Nhãn dự án"),
+        .min(8)
+        .max(MAX_SIZE_NAME)
+        .required()
+        .label('Code'),
+    name: Joi.string()
+        .trim()
+        .max(MAX_STRING_SIZE)
+        .required()
+        .label('Name of Project'),
+    secret_key: Joi.string()
+        .trim()
+        .min(16)
+        .max(MAX_STRING_SIZE)
+        .required()
+        .label('Secret key')
+});
+
+export const createProjectSchema = Joi.object({
+    code: Joi.string()
+        .trim()
+        .min(8)
+        .max(MAX_SIZE_NAME)
+        .required()
+        .label('Code'),
+    name: Joi.string()
+        .trim()
+        .max(MAX_STRING_SIZE)
+        .required()
+        .label('Name of Project'),
+    secret_key: Joi.string()
+        .trim()
+        .min(16)
+        .max(MAX_STRING_SIZE)
+        .required()
+        .label('Secret key')
 });

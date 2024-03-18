@@ -1,0 +1,17 @@
+.optionsWrap {
+    @apply bg-[#e0e3e9] p-[2px] w-[20px] flex items-center justify-center rounded-md;
+
+    svg {
+        @apply ml-[0.5px];
+    }
+}
+
+.actionBtn {
+    @apply flex items-center w-full;
+
+    &:hover {
+        svg {
+            fill: #4096ff;
+        }
+    }
+}

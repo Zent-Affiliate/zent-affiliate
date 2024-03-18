@@ -1,110 +1,86 @@
-import callApi from '@/api/callApi'
-import _ from 'lodash'
-import {
-  createProject,
-  createProjectFail,
-  createProjectSuccess,
-  deleteProject,
-  deleteProjectFail,
-  deleteProjectSuccess,
-  getListProject,
-  getListProjectFailure,
-  getListProjectSuccess,
-  updateProject,
-  updateProjectFail,
-  updateProjectSuccess,
-} from '@/states/modules/project'
-import { PROJECT_STATUS } from '@/utils/constains'
+import { createProject, createProjectFail, createProjectSuccess,
+     deleteProjectFail, deleteProjectSuccess, deleteProject,
+     getListProject, updateProject, updateProjectFail, 
+     updateProjectSuccess, 
+     getListProjectFailure,
+     getListProjectSuccess} from "@/states/modules/project";
+import callApi from "../callApi";
+
+import _ from "lodash";
+
+export const getListProjects = () => async(dispatch, getState) => {
+    const dataFilter = getState().project.dataFilter;
+    let path = `projects?q=&page=${dataFilter.page}&per_page=${dataFilter.perPage}`;
+    if (dataFilter.keySearch) {
+        path += `&q=${dataFilter.keySearch}`;
+    }
+
+    if (dataFilter.sort_order) {
+        path += `&sort_order=${dataFilter.sort_order}&field=${dataFilter.column}`;
+    }
+
+    return callApi({
+        method: 'get',
+        apiPath: path,
+        variables: {},
+        actionTypes: [
+            getListProject,
+            getListProjectSuccess,
+            getListProjectFailure,
+        ],
+        dispatch,
+        getState
+    })
+}
 
 export const handleCreateProject = (data) => async (dispatch, getState) => {
-  return callApi({
-    method: 'post',
-    apiPath: `projects`,
-    actionTypes: [
-      createProject,
-      createProjectSuccess,
-      createProjectFail
-    ],
-    variables: {...data},
-    dispatch,
-    getState,
-  })
-}
 
-export const handleUpdateProject = (id, data) => async (dispatch, getState) => {
-  let dataProject = _.cloneDeep(data)
-  delete dataProject?._id
-  return callApi({
-    method: 'put',
-    apiPath: `projects/${id}`,
-    actionTypes: [
-      updateProject,
-      updateProjectSuccess,
-      updateProjectFail
-    ],
-    variables: {...data},
-    dispatch,
-    getState,
-  })
-}
-
-export const getListProjects = () => async (dispatch, getState) => {
-  const dataFilter = getState().project.dataFilter
-  const params = new URLSearchParams();
-
-  params.append('perPage', dataFilter.perPage);
-  params.append('page', dataFilter.page);
-  
-  if (dataFilter.keySearch) {
-    params.append('q', dataFilter.keySearch);
-  }
-  
-  if (dataFilter.sortOrder && dataFilter.field) {
-    params.append('sortOrder', dataFilter.sortOrder);
-    params.append('field', dataFilter.field);
-  }
-  
-  if (dataFilter.server) {
-    params.append('server', dataFilter.server);
-  }
-  
-  if (dataFilter.tags) {
-    dataFilter.tags.forEach((tag) => {
-      params.append('tags', tag);
+    return callApi({
+        method: 'post',
+        apiPath: 'projects',
+        actionTypes: [
+            createProject,
+            createProjectSuccess,
+            createProjectFail
+        ],
+        variables: {...data},
+        dispatch,
+        getState
     });
-  }
+};
 
-  if (dataFilter.status === PROJECT_STATUS.STOPPING || dataFilter.status === PROJECT_STATUS.RUNNING) {
-    params.append('status', dataFilter.status);
-  }
+export const handleUpdateProject = (data) => async (dispatch, getState) => {
 
-  const path = `projects?${params.toString()}`;
+    let dataProject = _.cloneDeep(data);
+    delete dataProject?._id;
 
-  return callApi({
-    method: 'get',
-    apiPath: path,
-    actionTypes: [
-      getListProject,
-      getListProjectSuccess,
-      getListProjectFailure
-    ],
-    variables: {},
-    dispatch,
-    getState,
-  })
-}
+    const id = getState().project.projectActive._id;
+
+    return callApi({
+        method: 'put',
+        apiPath: `projects/${id}`,
+        actionTypes: [
+            updateProject,
+            updateProjectSuccess,
+            updateProjectFail
+        ],
+        variables: {...dataProject},
+        dispatch,
+        getState,
+    });
+};
 
 export const handleDeleteProject = (id) => async (dispatch, getState) => {
-  return callApi({
-    method: 'delete',
-    apiPath: `projects/${id}`,
-    actionTypes: [
-      deleteProject,
-      deleteProjectSuccess,
-      deleteProjectFail
-    ],
-    variables: {},
-    dispatch,
-    getState,
-  })
-}
+    return callApi({
+        method: 'delete',
+        apiPath: `projects/${id}`,
+        actionTypes: [
+            deleteProject,
+            deleteProjectSuccess,
+            deleteProjectFail
+        ],
+        variables: {},
+        dispatch,
+        getState
+    });
+};

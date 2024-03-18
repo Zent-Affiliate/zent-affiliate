@@ -1,9 +1,9 @@
-import {useSelector} from "react-redux";
+import {useSelector} from 'react-redux';
 
 export default function Handle() {
-  const authUser = useSelector(state => state.auth.authUser);
-  
-  return {
-    authUser,
-  }
+    const me = useSelector(state => state.auth.me);
+
+    return {
+        me
+    };
 }

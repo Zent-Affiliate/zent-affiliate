@@ -1,13 +1,13 @@
 .drawerInformation {
-  .ant-drawer-header {
-    @apply border-none pb-0;
-  }
+    .ant-drawer-header {
+        @apply border-none pb-0;
+    }
 
-  .ant-drawer-header-title {
-    @apply flex-row-reverse
-  }
+    .ant-drawer-header-title {
+        @apply flex-row-reverse
+    }
 
-  .ant-drawer-body {
-    @apply pt-0
-  }
+    .ant-drawer-body {
+        @apply pt-0
+    }
 }
