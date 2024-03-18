@@ -4,7 +4,7 @@ import {isRouteActive} from '@/utils/helper.js';
 
 function* loadRouteData() {
     yield put(setTitlePage('Cấu hình trả thưởng'));
-    const location = yield select(state => state.app.location)
+    const location = yield select(state => state.app.location);
 
     if (isRouteActive('/my-project-detail/:project_id/rule-config')) {
         yield put(setTitlePage(`Cấu hình trả thưởng`));
@@ -16,7 +16,7 @@ function* loadRouteData() {
             {
                 path: `/my-project-detail/${location.params.project_id}/rule-config`,
                 name: 'Cấu hình trả thưởng'
-            },
+            }
         ]));
     } else {
         yield put(setTitlePage(`Quản lý dự án`));

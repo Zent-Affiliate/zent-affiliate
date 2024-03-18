@@ -1,21 +1,26 @@
-import {MAX_SIZE_NAME} from '@/utils/constants.js';
-import {VALIDATE_NAME_REGEX_RULE} from '@/utils/helper';
+import {MAX_SIZE_NAME, MAX_STRING_SIZE} from '@/utils/constants.js';
 import Joi from 'joi';
 
-export const createRuleSchema = Joi.object({
+export const createOrUpdateRuleSchema = Joi.object({
     name: Joi.string()
         .trim()
-        .max(MAX_SIZE_NAME)
-        .pattern(VALIDATE_NAME_REGEX_RULE)
+        .max(MAX_STRING_SIZE)
         .required()
-        .label('Họ và tên')
-});
-export const updateRuleSchema = Joi.object({
-    name: Joi.string()
-        .trim()
-        .max(MAX_SIZE_NAME)
-        .pattern(VALIDATE_NAME_REGEX_RULE)
+        .label('Name'),
+    code: Joi.string().trim().min(8).max(MAX_STRING_SIZE).required().label('Code'),
+    configs: Joi.array()
         .required()
-        .label('Họ và tên')
-
+        .label('configs')
+        .min(1)
+        .items(
+            Joi.object().keys({
+                value: Joi.number()
+                    .min(0)
+                    .integer()
+                    .options({convert: false})
+                    .strict()
+                    .required()
+                    .label('Value')
+            })
+        )
 });

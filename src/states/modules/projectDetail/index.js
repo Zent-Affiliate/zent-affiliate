@@ -4,7 +4,9 @@ const projectDetailSlice = createSlice({
     name: 'projectDetail',
     initialState:{
         project: {},
-        isLoadingProjectDetail: false
+        isLoadingProjectDetail: false,
+
+
     },
 
     reducers:{

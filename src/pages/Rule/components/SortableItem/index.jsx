@@ -12,8 +12,6 @@ import {CSS} from '@dnd-kit/utilities';
 function SortableItem(props) {
     const {formatNumber} = HandleCreate();
     const {
-        visibleConfirmDelete,
-
         handleOpenConfirmDeleteConfig
     } = Handle();
 
@@ -23,7 +21,7 @@ function SortableItem(props) {
         setNodeRef,
         transform,
         transition,
-        isDragging,
+        isDragging
     } = useSortable({id: props.item});
 
     const style = transform ? {
@@ -37,14 +35,14 @@ function SortableItem(props) {
     return (
         <div ref={setNodeRef} style={style} {...attributes}
              className={`${styles.itemWrapper} !cursor-default`}>
-            <div className={`relative border-2 rounded-md p-3 mb-3 flex items-center justify-start 
-                    ${isDragging ? 'opacity-60' : ''}`}
+            <div className={`relative border-2 rounded-md flex items-center justify-start text-[13px] pr-[50px] py-2 pl-2
+                    ${isDragging ? 'opacity-60' : ''} ${props.index !== (props.length - 1) ? 'mb-3' : ''}`}
             >
-                <div className={'ml-3 w-8/12'}>
+                <div className={'ml-3 w-[170px]'}>
                     <div className={'flex justify-between'}>
                         <span>
                             <span className={'font-semibold'}>Giá trị: </span>
-                            <span>{formatNumber(item.value)}{item.type === RULE_CONFIG.PERCENT ? '%' : ' ₫'}</span>
+                            <span>{formatNumber(item.value)}</span>
                         </span>
                     </div>
                     <div>
@@ -53,11 +51,17 @@ function SortableItem(props) {
                     </div>
                 </div>
 
-                <div className={styles.deleteIcon} onClick={handleOpenConfirmDeleteConfig}>
-                    <InlineSVG src={DeleteIcon} width={13} height={13} />
-                </div>
-                <div {...listeners} className={`${styles.itemDrag} !cursor-grab`}>
-                    <InlineSVG src={DragIcon} width={14} height={14} />
+                <div className={'flex absolute right-2'}>
+                    {
+                        props.rule.configs?.length > 1 ?
+                            <div className={styles.deleteIcon}
+                                 onClick={() => handleOpenConfirmDeleteConfig(props.rule, props.index)}>
+                                <InlineSVG src={DeleteIcon} width={13} height={13} />
+                            </div> : ''
+                    }
+                    <div {...listeners} className={`${styles.itemDrag} !cursor-grab`}>
+                        <InlineSVG src={DragIcon} width={14} height={14} />
+                    </div>
                 </div>
             </div>
         </div>

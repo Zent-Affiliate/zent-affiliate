@@ -83,7 +83,7 @@ export default function Handle() {
     };
 
     const redirectToProject = (project_id) => {
-        navigate(`/my-project-detail/${project_id}/users`)
+        navigate(`/my-project-detail/${project_id}`)
     }
 
     return {

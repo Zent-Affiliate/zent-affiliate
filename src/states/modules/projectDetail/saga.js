@@ -1,12 +1,27 @@
 import {all, fork, put, select, takeLatest} from 'redux-saga/effects';
 import {setBreadcrumb, setTitlePage} from '../app';
-import {isRouteActive} from '@/utils/helper';
+import {handleNotification, isRouteActive} from '@/utils/helper';
 import {requestGetProjectDetail} from '@/api/projectDetail';
 import {getProjectDetailSuccess} from '.';
+import {requestGetListRules} from '@/api/rule/index.js';
+import {
+    createRuleFail,
+    createRuleSuccessfully,
+    deleteRuleFail,
+    deleteRuleSuccessfully,
+    setErrorCreateOrUpdate,
+    setVisibleConfirmDelete,
+    setVisibleModalCreateOrUpdate,
+    setVisibleModalDelete,
+    updateRuleFail,
+    updateRuleSuccessfully
+} from '@/states/modules/rule/index.js';
+import _ from 'lodash';
 
 function* loadRouteData() {
     const {app} = yield select();
     yield put(requestGetProjectDetail());
+    yield put(requestGetListRules());
 
     if (isRouteActive('my-project-detail/:project_id')) {
         yield put(setTitlePage(`Dự án`));
@@ -60,6 +75,54 @@ function* handleActions() {
             ]));
         }
     });
+
+    yield takeLatest(createRuleSuccessfully, function* () {
+        handleNotification('success', 'Create rule successfully');
+        yield put(requestGetListRules());
+        yield put(setVisibleModalCreateOrUpdate(false));
+    });
+
+    yield takeLatest(createRuleFail, function* (action) {
+        let statusError = action.payload.status;
+        if (statusError === 400) {
+            let errors = action.payload.data.detail;
+            yield put(setErrorCreateOrUpdate({
+                code: _.get(errors, 'code', '')
+            }));
+        } else {
+            handleNotification('error', 'Có lỗi xảy ra, vui lòng thử lại sau.');
+        }
+    });
+
+    yield takeLatest(updateRuleSuccessfully, function* () {
+        handleNotification('success', 'Update rule successfully');
+        yield put(requestGetListRules());
+        yield put(setVisibleModalCreateOrUpdate(false));
+        yield put(setVisibleConfirmDelete(false));
+    });
+
+    yield takeLatest(updateRuleFail, function* (action) {
+        let statusError = action.payload.status;
+        if (statusError === 400) {
+            let errors = action.payload.data.detail;
+            yield put(setErrorCreateOrUpdate({
+                code: _.get(errors, 'code', '')
+            }));
+        } else {
+            handleNotification('error', 'Có lỗi xảy ra, vui lòng thử lại sau.');
+        }
+    });
+
+    yield takeLatest(deleteRuleSuccessfully, function* () {
+        handleNotification('success', 'Delete rule successfully');
+        yield put(requestGetListRules());
+        yield put(setVisibleModalDelete(false));
+    });
+
+    yield takeLatest(deleteRuleFail, function () {
+        handleNotification('error', 'Có lỗi xảy ra, vui lòng thử lại sau.');
+    });
+
 }
 
 export default function* projectDetailSaga() {

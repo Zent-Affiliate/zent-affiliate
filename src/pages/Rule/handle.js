@@ -1,16 +1,15 @@
 import './styles.scss';
 import {useDispatch, useSelector} from 'react-redux';
-import {setDataFilter} from '@/states/modules/user';
-import {getListUsers} from '@/api/users';
-import {validate} from '@/utils/validates';
-import {TYPE_SUBMIT} from '@/utils/constants.js';
+import {setDataFilter} from '@/states/modules/rule';
 import {
     resetState,
     setIsCreateRule,
+    setVisibleConfirmDelete,
     setVisibleModalCreateOrUpdate,
     setVisibleModalDelete
 } from '@/states/modules/rule/index.js';
 import {isRouteActive} from '@/utils/helper.js';
+import {requestGetListRules} from '@/api/rule/index.js';
 
 export default function Handle() {
     const dispatch = useDispatch();
@@ -23,32 +22,12 @@ export default function Handle() {
     const isLoadingGetRule = useSelector(state => state.rule.isLoadingGetRule);
     const isLoadingBtnDeleteRule = useSelector(state => state.rule.isLoadingBtnDeleteRule);
     const dataFilter = useSelector((state) => state.rule.dataFilter);
-    const paginationListUsers = useSelector((state) => state.rule.paginationListRules);
+    const paginationListRules = useSelector((state) => state.rule.paginationListRules);
+    const isLoadingBtnDeleteConfig = useSelector(state => state.rule.isLoadingBtnDeleteConfig);
+    const visibleConfirmDelete = useSelector(state => state.rule.visibleConfirmDelete);
+    const configIndex = useSelector(state => state.rule.configIndex);
 
-    const isMyProjectDetail = isRouteActive('/my-project-detail/:project_id/rule-config')
-
-    const handleCancelModalCreateUser = () => {
-        // dispatch(
-        //     setErrorInfoUser({
-        //         name: '',
-        //         email: '',
-        //         phone: '',
-        //         avatar: '',
-        //         avatarUrl: '',
-        //         password: ''
-        //     })
-        // );
-        // dispatch(
-        //     setInfoUser({
-        //         name: '',
-        //         email: '',
-        //         phone: '',
-        //         avatar: '',
-        //         password: ''
-        //     })
-        // );
-        // dispatch(setVisibleModalCreateUser(false));
-    };
+    const isMyProjectDetail = isRouteActive('/my-project-detail/:project_id/rule-config');
 
     const handleShowModalCreateRule = () => {
         dispatch(resetState());
@@ -67,58 +46,33 @@ export default function Handle() {
     const handleSearchRule = (value) => {
         dispatch(setDataFilter({...dataFilter, keySearch: value}));
         if (!value) {
-            dispatch(getListUsers());
+            dispatch(requestGetListRules());
         }
     };
 
-    const handleEnterSearchUser = (event) => {
+    const handleEnterSearchRule = (event) => {
         if (event.key === 'Enter') {
-            dispatch(getListUsers());
+            dispatch(requestGetListRules());
         }
     };
 
-    const handleChangeSelectUser = (perPage) => {
-        dispatch(setDataFilter({...paginationListUsers, perPage, page: 1}));
-        dispatch(getListUsers());
+    const handleChangeSelectRule = (perPage) => {
+        dispatch(setDataFilter({...paginationListRules, perPage, page: 1}));
+        dispatch(requestGetListRules());
     };
 
-    // const handleChangeInputInfo = (valueInput, type) => {
-    //     let value = valueInput.target.value;
-    //     let data = _.cloneDeep(infoUser);
-    //     let dataError = _.cloneDeep(errorInfoUser);
-    //     data[type] = value;
-    //     dataError[type] = '';
-    //     dispatch(setInfoUser(data));
-    //     dispatch(setErrorInfoUser(dataError));
-    // };
+    const handleCancelDeleteConfig = () => {
+        dispatch(setVisibleConfirmDelete(false));
+    };
 
-    // const handleFocus = (type) => {
-    //     let dataError = _.cloneDeep(errorInfoUser);
-    //     dataError[type] = '';
-    //     dispatch(setErrorInfoUser(dataError));
-    // };
-
-    const handleSubmit = (type, scheme, dataUser) => {
-        // if (type === TYPE_SUBMIT.CREATE) {
-        //     validate(scheme, dataUser, {
-        //         onSuccess: (data) => dispatch(handleCreateUser(data)),
-        //         onError: (error) => dispatch(setErrorInfoUser(error))
-        //     });
-        // }
-        //
-        // if (type === TYPE_SUBMIT.UPDATE) {
-        //     validate(scheme, dataUser, {
-        //         onSuccess: (data) => dispatch(handleUpdateUser(data._id, data)),
-        //         onError: (error) => dispatch(setErrorInfoUser(error))
-        //     });
-        // }
-        //
-        // if (type === TYPE_SUBMIT.CHANGE_PASSWORD) {
-        //     validate(scheme, dataUser, {
-        //         onSuccess: (data) => dispatch(handleChangePassUser(data._id, data)),
-        //         onError: (error) => dispatch(setErrorDataChangePassUser(error))
-        //     });
-        // }
+    const handleSelectPagination = (event) => {
+        dispatch(
+            setDataFilter({
+                ...dataFilter,
+                page: event
+            })
+        );
+        dispatch(requestGetListRules());
     };
 
     return {
@@ -131,16 +85,19 @@ export default function Handle() {
         visibleModalCreateOrUpdate,
         visibleModalDelete,
         isMyProjectDetail,
+        isLoadingBtnDeleteConfig,
+        visibleConfirmDelete,
+        configIndex,
+        dataFilter,
+        paginationListRules,
 
-        handleCancelModalCreateUser,
         handleCancelModalUpdateUser,
         handleCancelModalDeleteRule,
         handleSearchRule,
-        handleEnterSearchUser,
-        handleChangeSelectUser,
+        handleEnterSearchRule,
         handleShowModalCreateRule,
-        handleSubmit
-        // handleChangeInputInfo,
-        // handleFocus,
+        handleCancelDeleteConfig,
+        handleChangeSelectRule,
+        handleSelectPagination
     };
 }
