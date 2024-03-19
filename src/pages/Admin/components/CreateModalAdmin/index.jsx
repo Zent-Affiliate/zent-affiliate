@@ -34,7 +34,7 @@ function ModalCreateAdmin() {
                     onFocus={() => handleFocus('name')}
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     className={`main-input ${errorInfoAdmin && errorInfoAdmin.name ? 'error-input' : ''}`}
-                    placeholder={'Enter the admin name'}
+                    placeholder={'Admin'}
                 />
                 {
                     errorInfoAdmin && errorInfoAdmin.name &&
@@ -59,7 +59,7 @@ function ModalCreateAdmin() {
                     onFocus={() => handleFocus('email')}
                     onChange={(e) => handleChangeInputInfo(e, 'email')}
                     className={`main-input ${errorInfoAdmin && errorInfoAdmin.email ? 'error-input' : ''}`}
-                    placeholder={'Enter email'}
+                    placeholder={'Email'}
                 />
                 {
                     errorInfoAdmin && errorInfoAdmin.email &&
@@ -84,7 +84,7 @@ function ModalCreateAdmin() {
                     onFocus={() => handleFocus('password')}
                     onChange={(e) => handleChangeInputInfo(e, 'password')}
                     className={`main-input ${errorInfoAdmin && errorInfoAdmin.password ? 'error-input' : ''}`}
-                    placeholder={'Enter password'}
+                    placeholder={'Password'}
                 />
                 {
                     errorInfoAdmin && errorInfoAdmin.password &&
@@ -103,7 +103,7 @@ function ModalCreateAdmin() {
                     size={'large'}
                     onClick={handleCancelModalCreateAdmin}
                 >
-                    Đóng
+                    Close
                 </Button>
                 <Button
                     loading={isLoadingBtnCreateAdmin}
@@ -111,7 +111,7 @@ function ModalCreateAdmin() {
                     size={'large'}
                     onClick={() => handleSubmit( TYPE_SUBMIT.CREATE ,createAdminSchema, infoAdmin)}
                 >
-                    Tạo mới
+                    Create
                 </Button>
             </div>
         </div>

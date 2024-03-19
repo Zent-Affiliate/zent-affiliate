@@ -64,12 +64,12 @@ export default function Handle() {
     const handleDeleteProjectAlert = async (record) => {
         const result = await Swal.fire({
             title: `<p class="text-base !mt-[-74px] !overflow-visible !font-normal">
-        Bạn có chắn chắn muốn xóa dự án <strong>${record.name}</strong> không?
+            Are you sure you want to delete the project?<strong>${record.name}</strong>?
       </p>`,
             icon: 'warning',
             showCancelButton: true,
             buttonsStyling: false,
-            cancelButtonText: 'Đóng',
+            cancelButtonText: 'Close',
             confirmButtonText: 'Xóa',
             customClass: {
                 popup: '!w-[416px] !h-[296px] !px-11 !important',

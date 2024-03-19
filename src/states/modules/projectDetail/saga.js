@@ -9,7 +9,7 @@ function* loadRouteData() {
     yield put(requestGetProjectDetail());
 
     if (isRouteActive('my-project-detail/:project_id')) {
-        yield put(setTitlePage(`Dự án`));
+        yield put(setTitlePage(`Project`));
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
@@ -17,7 +17,7 @@ function* loadRouteData() {
             }
         ]));
     } else {
-        yield put(setTitlePage(`Quản lý dự án `));
+        yield put(setTitlePage(`Project Management `));
         yield put(setBreadcrumb([
             {
                 path: '/admin-management',
@@ -31,7 +31,7 @@ function* handleActions() {
     yield takeLatest(getProjectDetailSuccess, function* (action) {
         const project = action.payload.data;
         if (isRouteActive('my-project-detail/:project_id')) {
-            yield put(setTitlePage(`Dự án - ${project.name}`));
+            yield put(setTitlePage(`Project - ${project.name}`));
             yield put(setBreadcrumb([
                 {
                     path: '/my-project',
@@ -43,7 +43,7 @@ function* handleActions() {
                 }
             ]));
         } else {
-            yield put(setTitlePage(`Quản lý dự án - ${project.name}`));
+            yield put(setTitlePage(`Project Management - ${project.name}`));
             yield put(setBreadcrumb([
                 {
                     path: '/admin-management',
@@ -51,7 +51,7 @@ function* handleActions() {
                 },
                 {
                     path: `/${project.admin._id}/projects`,
-                    name: 'Danh sách dự án'
+                    name: 'List of Project'
                 },
                 {
                     path: `/project-detail/${project._id}`,

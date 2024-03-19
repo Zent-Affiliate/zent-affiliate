@@ -8,7 +8,7 @@ export const createRuleSchema = Joi.object({
         .max(MAX_SIZE_NAME)
         .pattern(VALIDATE_NAME_REGEX_RULE)
         .required()
-        .label('Họ và tên')
+        .label('Name')
 });
 export const updateRuleSchema = Joi.object({
     name: Joi.string()
@@ -16,6 +16,6 @@ export const updateRuleSchema = Joi.object({
         .max(MAX_SIZE_NAME)
         .pattern(VALIDATE_NAME_REGEX_RULE)
         .required()
-        .label('Họ và tên')
+        .label('Name')
 
 });

@@ -47,13 +47,13 @@ function* loadRouteData() {
 function* handleActions() {
     yield takeLatest(changeStatusAdminSuccess, function* () {
         yield put(getListAdmins());
-        handleNotification('success', 'Thay đổi trạng thái thành công.');
+        handleNotification('success', 'Status change successful.');
     });
 
     yield takeLatest(createAdminSuccess, function* () {
         yield put(getListAdmins());
         yield put(setVisibleModalCreateAdmin(false));
-        handleNotification('success', 'Tạo mới người quản trị viên thành công.');
+        handleNotification('success', 'Create new admin success.');
     });
 
     yield takeLatest(createAdminFail, function* (action) {
@@ -66,14 +66,14 @@ function* handleActions() {
                 })
             );
         } else {
-            handleNotification('error', 'Tạo mới người quản trị viên thất bại.');
+            handleNotification('error', 'Create new admin unsuccessful.');
         }
     });
 
     yield takeLatest(updateAdminSuccess, function* () {
         yield put(getListAdmins());
         yield put(setVisibleModalUpdateAdmin(false));
-        handleNotification('success', 'Cập nhật người quản trị viên thành công.');
+        handleNotification('success', 'Update admin success..');
     });
 
     yield takeLatest(updateAdminFail, function* (action) {
@@ -86,7 +86,7 @@ function* handleActions() {
                 })
             );
         } else {
-            handleNotification('error', 'Cập nhật người quản trị viên thất bại.');
+            handleNotification('error', 'Update new admin unsuccessful.');
         }
     });
 

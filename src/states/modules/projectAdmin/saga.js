@@ -20,7 +20,7 @@ function* loadRouteData() {
     const { app } = yield select();
 
     yield put(getListProjectAdmins())
-    yield put(setTitlePage('Danh sách dự án'));
+    yield put(setTitlePage('List of Project'));
     yield put(setBreadcrumb([
         {
             path: '/',
@@ -32,7 +32,7 @@ function* loadRouteData() {
         },
         {
             path: `/${app.location.params.admin_id}/projects`,
-            name: 'Danh sách dự án'
+            name: 'List of Project'
         },
     ]))
 }
@@ -40,12 +40,12 @@ function* loadRouteData() {
 function* handleActions() {
     yield takeLatest(getListProjectAdminSuccess, function* () {
         const { projectAdmin } = yield select();
-        yield put(setTitlePage(`Danh sách dự án - ${projectAdmin.admin.name}`));
+        yield put(setTitlePage(`List of Project - ${projectAdmin.admin.name}`));
     });
 
     yield takeLatest(createProjectAdminSuccess, function* () {
         const { app, projectAdmin } = yield select();
-        getNotification('success', 'Tạo mới dự án thành công');
+        getNotification('success', 'Created a new project successfully');
         yield put(getListProjectAdmins(app.location.params.id, {
             ...projectAdmin.dataFilter
         }));
@@ -61,15 +61,15 @@ function* handleActions() {
                 secret_key: _.get(errors, 'secret_key', ''),
             }));
         } else if (statusError === 401) {
-            getNotification('error', 'Thông tin không hợp lệ.');
+            getNotification('error', 'Invalid information.');
         } else {
-            getNotification('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
+            getNotification('error', 'An error occurred, please try again later!');
         }
     });
 
     yield takeLatest(updateProjectAdminSuccess, function* () {
         const { app, projectAdmin } = yield select();
-        getNotification('success', 'Cập nhật dự án thành công');
+        getNotification('success', 'Project updated successfully');
         yield put(getListProjectAdmins(app.location.params.id, {
             ...projectAdmin.dataFilter
         }));
@@ -89,14 +89,14 @@ function* handleActions() {
                 secret_key: _.get(errors, 'secret_key', ''),
             }));
         } else if (statusError === 401) {
-            getNotification('error', 'Thông tin không hợp lệ.');
+            getNotification('error', 'Invalid information.');
         } else {
-            getNotification('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
+            getNotification('error', 'An error occurred, please try again later!');
         }
     });
 
     yield takeLatest(deleteProjectAdminSuccess, function* () {
-        getNotification('success', 'Xóa buổi học thành công');
+        getNotification('success', 'Successfully deleted class session');
         const { app, projectAdmin } = yield select();
         yield put(getListProjectAdmins(app.location.params.id, {
             ...projectAdmin.dataFilter
@@ -107,9 +107,9 @@ function* handleActions() {
         let statusError = action.payload.status
         if (statusError === 401 || statusError === 400) {
             let errorId = _.get(action.payload.data.errors, 'id[0]', '')
-            yield call(getNotification, 'error', (errorId ? errorId : 'Thông tin không hợp lệ.'));
+            yield call(getNotification, 'error', (errorId ? errorId : 'Invalid information.'));
         } else {
-            yield call(getNotification, 'error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
+            yield call(getNotification, 'error', 'An error occurred, please try again later!');
         }
     });
 }

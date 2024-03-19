@@ -7,8 +7,8 @@ import {
     startCreateProjectAdmin, startDeleteProjectAdmin, startGetListAdmins, startUpdateProjectAdmin, updateProjectAdminFail, updateProjectAdminSuccess
 } from "../../states/modules/projectAdmin/index.js";
 
-export const getListProjectAdmins = () => async (dispatch, getState) => {
-    const id = getState().app.location.params.admin_id;
+export const getListProjectAdmins = (admin_id) => async (dispatch, getState) => {
+    const id = admin_id || getState().app.location.params.admin_id;
     const { dataFilter } = getState().projectAdmin;
     let path = `projects/${id}?page=${dataFilter.page}&per_page=${dataFilter.perPage}`
 

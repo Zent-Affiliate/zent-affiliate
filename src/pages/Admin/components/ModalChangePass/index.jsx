@@ -83,7 +83,7 @@ function ModalChangePassAdmin() {
                     size={'large'}
                     onClick={handleCancelModalChangePass}
                 >
-                    Đóng
+                    Close
                 </Button>
                 <Button
                     loading={isLoadingBtnChangePassWordAdmin}
@@ -91,7 +91,7 @@ function ModalChangePassAdmin() {
                     size={'large'}
                     onClick={() => handleSubmit('', passwordAdminSchema, dataChangePassAdmin)}
                 >
-                    Cập nhật
+                    Update
                 </Button>
             </div>
         </div>

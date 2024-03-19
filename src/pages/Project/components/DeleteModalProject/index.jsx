@@ -3,7 +3,7 @@ import React from 'react';
 function ModalDeleteProject({content}) {
     return (
         <div>
-            Bạn có chắn chắn muốn xóa dự án <strong>{content}</strong> không?
+           Are you sure you want to delete the project? <strong>{content}</strong> ?
         </div>
     );
 }

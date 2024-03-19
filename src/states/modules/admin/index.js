@@ -9,6 +9,7 @@ const initialState= {
     isLoadingBtnUpdateAdmin: false,
     isLoadingBtnDeleteAdmin: false,
     isLoadingBtnChangePassWordAdmin: false,
+    activeClass: null,
     infoAdmin: {
         name: '',
         email: '',
@@ -45,6 +46,10 @@ const adminSlice = createSlice({
     name: 'admin',
     initialState,
     reducers:{
+        setActiveClass: (state, action) => ({
+            ...state,
+            activeClass: action.payload
+        }),
         setVisibleModalCreateAdmin: (state, action) => ({
             ...state,
             visibleModalCreateAdmin: action.payload
@@ -224,6 +229,7 @@ export const {
     changePassWordAdmin,
     changePassWordAdminSuccess,
     changePassWordAdminFail,
-    refreshRouteAdmin
+    refreshRouteAdmin,
+    setActiveClass
 } = adminSlice.actions;
 export default adminSlice.reducer;

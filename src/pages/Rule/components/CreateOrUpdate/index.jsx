@@ -31,13 +31,13 @@ function CreateOrUpdate(props) {
         <>
             <div className={`input-wrap !mb-[15px]`}>
                 <div className={'label-wrap'}>
-                    Tên quy ước <span className={'required'}></span>
+                Convention name <span className={'required'}></span>
                 </div>
                 <Input
                     className={`main-input`}
                     value={rule.name}
                     onChange={(e) => onChangeForm(e.target.value, 'name')}
-                    placeholder={'Nhập tên quy ước'}
+                    placeholder={'Enter the convention name'}
                 />
                 {
                     errorCreateOrUpdate && errorCreateOrUpdate.name.length > 0 ?
@@ -51,13 +51,13 @@ function CreateOrUpdate(props) {
             </div>
             <div className={`input-wrap !mb-[15px]`}>
                 <div className={'label-wrap'}>
-                    Mã quy ước <span className={'required'}></span>
+                Convention code <span className={'required'}></span>
                 </div>
                 <Input
                     className={`main-input`}
                     value={rule.code}
                     onChange={(e) => onChangeForm(e.target.value, 'code')}
-                    placeholder={'Nhập mã quy ước'}
+                    placeholder={'Enter the convention code'}
                 />
                 {
                     errorCreateOrUpdate && errorCreateOrUpdate.code.length > 0 ?
@@ -73,11 +73,11 @@ function CreateOrUpdate(props) {
             <div className={'pr-3'}>
                 <div className={`input-wrap !mb-[15px]`}>
                     <div className={'label-wrap flex justify-between items-center'}>
-                        <div>Kiểu tính toán và giá trị<span className={'required'}></span></div>
+                        <div>Calculation type and value<span className={'required'}></span></div>
                         <div className={'flex justify-between items-center cursor-pointer hover:text-[#4096ff]'}>
                             {/*<InlineSVG src={PlusIcon} width={11} height={11} className={'opacity-[0.5]'} />*/}
-                            <div className={'text-[12px] hover:text-[#4096ff]'} onClick={handleAddLevel}>&nbsp;Thêm
-                                cấp độ
+                            <div className={'text-[12px] hover:text-[#4096ff]'} onClick={handleAddLevel}>&nbsp;Add
+                                level
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ function CreateOrUpdate(props) {
                                     <div className={'flex items-center'}>
                                         <p className={'w-10 mr-2'}>Lv {index + 1}</p>
                                         <Select
-                                            placeholder='Chọn kiểu tính toán'
+                                            placeholder='Select calculation type'
                                             className={`main-select w-[170px]`}
                                             value={config.type}
                                             options={typeSelection.map((item) => ({
@@ -105,7 +105,7 @@ function CreateOrUpdate(props) {
                                         defaultValue={null}
                                         value={config.value}
                                         onChange={(e) => onChangeForm(e, 'value', index)}
-                                        placeholder={'Giá trị'}
+                                        placeholder={'Value'}
                                         suffix={<div>{config.type === RULE_CONFIG.PERCENT ? '%' : 'VNĐ'}</div>}
                                         min={0}
                                         max={9999999999999}
@@ -133,13 +133,13 @@ function CreateOrUpdate(props) {
                         onClick={() => dispatch(setVisibleModalCreateOrUpdate(false))}
                         className={`ant-btn-close mr-2`}
                         size={'large'}>
-                        Đóng
+                        Close
                     </Button>
                     <Button
                         // loading={isLoadingBtn}
                         // onClick={() => handleSubmitForm(isCreateLesson)}
                         className={`main-btn-primary`} type={'primary'} size={'large'}>
-                        {isCreateRule ? 'Tạo mới' : 'Cập nhật'}
+                        {isCreateRule ? 'Create' : 'Update'}
                     </Button>
                 </div>
             </div>

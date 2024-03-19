@@ -1,6 +1,6 @@
 import React from 'react';
 import store from '@/states/configureStore';
-import {notification} from 'antd';
+import { notification } from 'antd';
 import moment from 'moment';
 import CloseIcon from '@/assets/images/icons/light/close.svg';
 import success from '@/assets/images/icons/notification/success_16x16.svg';
@@ -15,7 +15,7 @@ export const VALIDATE_PHONE_REGEX_RULE = /^(0[235789])[0-9]{8}$/;
 export const VALIDATE_NAME_REGEX_RULE = /^[\p{L} ]*$/u;
 
 export const hasPermission = (permissions) => {
-    let {auth} = store.getState();
+    let { auth } = store.getState();
     let isPermission = false;
     if (permissions) {
         permissions.forEach(permission => {
@@ -41,7 +41,7 @@ export const getNotification = (type, content, duration = 3, align = 'top') => {
         closeIcon: (<img src={CloseIcon} alt='' />),
         placement: align,
         duration: duration,
-        style: {fontWeight: 'normal'}
+        style: { fontWeight: 'normal' }
     });
 };
 
@@ -67,7 +67,7 @@ const handleGetTypeNotification = (type) => {
 };
 
 export const getDynamicRoute = (path) => {
-    const {location} = store.getState().app;
+    const { location } = store.getState().app;
     const params = location?.params || {};
 
     let pathActive = path;
@@ -94,7 +94,7 @@ export const getDynamicRoute = (path) => {
 };
 
 export const isRouteActive = (path) => {
-    const {location} = store.getState().app;
+    const { location } = store.getState().app;
     const currentPath = location.pathName;
 
     return getDynamicRoute(path) === currentPath;
@@ -171,3 +171,8 @@ export function handleNotification(type, message) {
     notification.style.zIndex = 99999;
 }
 
+export const copyToClipboard = (value) => {
+    navigator.clipboard
+        .writeText(value)
+        .then(() => getNotification('success', 'Copied!', 1))
+};

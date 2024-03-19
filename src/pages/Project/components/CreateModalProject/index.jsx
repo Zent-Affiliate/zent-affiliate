@@ -6,20 +6,27 @@ import { Button, Input, Tooltip } from 'antd';
 import Handle from '@/pages/Project/handle';
 import { TYPE_SUBMIT } from '@/utils/constants';
 import { createProjectSchema } from '../../schema';
-
+import { copyToClipboard } from '@/utils/helper';
+import IconKeySkeleton from '@/assets/images/icons/duotone/key-skeleton.svg'
+import { getSecretKey } from '@/api/secretKey';
 function ModalCreateProject() {
     const dispatch = useDispatch();
     const errorInfoProject = useSelector((state) => state.project.errorInfoProject);
     const isLoadingBtnCreateProject = useSelector((state) => state.project.isLoadingBtnCreateProject);
     const infoProject = useSelector((state) => state.project.infoProject);
 
+    const errorInfoSecretKey = useSelector((state) => state.secretkey.errorInfoSecretKey);
+    const infoSecretKey = useSelector(state => state.secretkey.secretKey)
+    
     const {
         handleChangeInputInfo,
         handleFocus,
         handleCancelModalCreateProject,
-        handleSubmit
+        handleSubmit,
+        handleGetKey,
     } = Handle();
 
+    
     return (
         <div>
             <div className={`input-wrap`}>
@@ -80,15 +87,24 @@ function ModalCreateProject() {
                 </div>
                 <Input
                     id='secret_key'
-                    value={infoProject.secret_key}
+                    value={console.log(infoSecretKey ? infoSecretKey : '')}
                     onFocus={() => handleFocus('secret_key')}
                     onChange={(e) => handleChangeInputInfo(e, 'secret_key')}
-                    className={`main-input ${errorInfoProject && errorInfoProject.secret_key ? 'error-input' : ''}`}
+                    className={`main-input ${errorInfoSecretKey && errorInfoSecretKey.secret_key ? 'error-input' : ''}`}
                     placeholder={'Enter the secret key'}
-                />
+/>
+
                 {
-                    errorInfoProject && errorInfoProject.secret_key
+                    errorInfoSecretKey && errorInfoSecretKey.secret_key
                 }
+                <div className='flex'>
+                    <Button 
+                    icon={<InlineSVG src={IconKeySkeleton} width={12 } />} 
+                    className='border border-solid mt-[5px] mr-[5px] flex items-center' onClick={() => handleGetKey() }>Autogenerate Secret Key</Button>
+
+                    <Button className='border border-solid mt-[5px]' disabled = {!infoProject.secret_key} 
+                    onClick={()=>{copyToClipboard(infoProject.secret_key)}}>Copy</Button>
+                </div>
             </div>
 
             <div className={`flex justify-center mt-8`}>
@@ -97,7 +113,7 @@ function ModalCreateProject() {
                     size={'large'}
                     onClick={handleCancelModalCreateProject}
                 >
-                    Đóng
+                    Close
                 </Button>
                 <Button
                     loading={isLoadingBtnCreateProject}
@@ -105,7 +121,7 @@ function ModalCreateProject() {
                     size={'large'}
                     onClick={() => handleSubmit(TYPE_SUBMIT.CREATE, createProjectSchema, infoProject)}
                 >
-                    Tạo mới
+                    Create
                 </Button>
             </div>
         </div>

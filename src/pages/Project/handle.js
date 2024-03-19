@@ -14,6 +14,8 @@ import { validate } from "@/utils/validates";
 import _ from "lodash";
 import {useEffect} from 'react';
 import {setBreadcrumb} from '@/states/modules/app/index.js';
+import { getSecretKey } from "@/api/secretKey";
+import { setErrorInfoSecretKey, setInfoSecretKey } from "@/states/modules/secretKey";
 
 
 export default function Handle(){
@@ -22,7 +24,7 @@ export default function Handle(){
     const errorInfoProject = useSelector((state) => state.project.errorInfoProject);
     const dataFilter = useSelector((state) => state.project.dataFilter);
     const paginationListProjects = useSelector((state) => state.project.paginationListProjects);
-
+    // const infoSecretKey = useSelector((state) => state.secretKey.infoSecretKey)
     const handleCancelModalCreateProject = () =>{
         dispatch(
             setErrorInfoProject({
@@ -42,6 +44,11 @@ export default function Handle(){
             })
         );
         dispatch(setVisibleModalCreateProject(false));
+        
+    };
+
+    const handleGetKey = () => {
+        dispatch(getSecretKey());
     };
 
     const handleShowModalCreateProject = () => {
@@ -125,6 +132,7 @@ export default function Handle(){
         handleChangeSelectProject,
         handleChangeInputInfo,
         handleFocus,
-        handleSubmit
+        handleSubmit,
+        handleGetKey
     }
 } 

@@ -4,17 +4,18 @@ import InlineSVG from 'react-inlinesvg';
 import IconEditTable from '@/assets/images/icons/duotone/pencil.svg';
 import IconDeleteTable from '@/assets/images/icons/duotone/trash-can.svg';
 import IconChangePass from '@/assets/images/icons/duotone/lock.svg';
-import {Avatar, Switch, Tooltip} from 'antd';
+import { Avatar, Switch, Tooltip } from 'antd';
 import Handle from './handle';
-import {useSelector} from 'react-redux';
-import {ACTIVE_STATUS} from '@/utils/constants';
+import { useSelector } from 'react-redux';
+import { ACTIVE_STATUS } from '@/utils/constants';
+import HiddenString from '@/components/HiddenString';
+
 
 function TableProject() {
     const dataListProjects = useSelector((state) => state.project.projects);
     const isLoadingTableProject = useSelector((state) => state.project.isLoadingTableProject);
     const me = useSelector((state) => state.auth.me);
     const paginationListProjects = useSelector((state) => state.project.paginationListProjects);
-
     const {
         handleShowModalUpdateProject,
         handleChangeTableProject,
@@ -35,8 +36,8 @@ function TableProject() {
             render: (text, record) => {
                 return (
                     <div className={`flex`}>
-                        <div className={`ml-[10px] font-medium`}>
-                            <div className={`mb-[4px] mt-[4px] text-black-content cursor-pointer`} onClick={()=>redirectToProject(record._id)}>{text}</div>
+                        <div className={`font-medium`}>
+                            <div className={`mb-[4px] mt-[4px] text-black-content cursor-pointer`} onClick={() => redirectToProject(record._id)}>{text}</div>
                         </div>
                     </div>
                 );
@@ -50,10 +51,10 @@ function TableProject() {
             sorter: (a, b) => a.age - b.age,
             showSorterTooltip: false,
             defaultSortOrder: '',
-            render: (text, record) => {
+            render: (text) => {
                 return (
                     <div className={`flex`}>
-                        <div className={`ml-[10px] font-medium`}>
+                        <div className={`font-medium`}>
                             <div className={`mb-[4px] mt-[4px] text-black-content`}>{text}</div>
                         </div>
                     </div>
@@ -68,11 +69,13 @@ function TableProject() {
             sorter: (a, b) => a.age - b.age,
             showSorterTooltip: false,
             defaultSortOrder: '',
-            render: (text, record) => {
+            render: (text) => {
                 return (
                     <div className={`flex`}>
-                        <div className={`ml-[10px] font-medium`}>
-                            <div className={`mb-[4px] mt-[4px] text-black-content`}>{text}</div>
+                        <div className={`font-medium w-full`}>
+                            <HiddenString
+                                value={text}
+                            />
                         </div>
                     </div>
                 );
@@ -92,7 +95,7 @@ function TableProject() {
                             className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] mr-2 cursor-pointer !fill-[#99A1B7] hover:!fill-blue-55`}
                             onClick={() => handleShowModalUpdateProject(record)}
                         >
-                            <Tooltip title='Cập nhật thông tin'>
+                            <Tooltip title=' Update information'>
                                 <InlineSVG src={IconEditTable} className={`w-[16px] h-[16px] `} alt='' />
                             </Tooltip>
                         </div>
@@ -103,7 +106,7 @@ function TableProject() {
                                 className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] cursor-pointer !fill-[#99A1B7] hover:!fill-blue-60`}
                                 onClick={() => handleDeleteProjectAlert(record)}
                             >
-                                <Tooltip title='Xóa thông tin'>
+                                <Tooltip title='Delete information'>
                                     <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt='' />
                                 </Tooltip>
                             </div>

@@ -3,23 +3,23 @@ import {all, fork, put, select} from 'redux-saga/effects';
 import {isRouteActive} from '@/utils/helper.js';
 
 function* loadRouteData() {
-    yield put(setTitlePage('Cấu hình trả thưởng'));
+    yield put(setTitlePage('Compensation configuration'));
     const location = yield select(state => state.app.location)
 
     if (isRouteActive('/my-project-detail/:project_id/rule-config')) {
-        yield put(setTitlePage(`Cấu hình trả thưởng`));
+        yield put(setTitlePage(`Compensation configuration`));
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
-                name: 'Dự án của tôi'
+                name: 'My project'
             },
             {
                 path: `/my-project-detail/${location.params.project_id}/rule-config`,
-                name: 'Cấu hình trả thưởng'
+                name: 'Compensation configuration'
             },
         ]));
     } else {
-        yield put(setTitlePage(`Quản lý dự án`));
+        yield put(setTitlePage(`Project Management`));
         yield put(setBreadcrumb([
             {
                 path: '/admin-management',

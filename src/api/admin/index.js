@@ -117,22 +117,22 @@ export const handleUpdateAdmin = (id, data) => async (dispatch, getState) => {
 //     });
 // };
 
-// export const handleChangePassAdmin = (id, data) => async (dispatch, getState) => {
-//     return callApi({
-//         method: 'patch',
-//         apiPath: `admins/reset-password/${id}`,
-//         actionTypes: [
-//             changePassWordAdmin,
-//             changePassWordAdminSuccess,
-//             changePassWordAdminFail
-//         ],
-//         variables: {
-//             ...data
-//         },
-//         dispatch,
-//         getState
-//     });
-// };
+export const handleChangePassAdmin = (id, data) => async (dispatch, getState) => {
+    return callApi({
+        method: 'patch',
+        apiPath: `admins/reset-password/${id}`,
+        actionTypes: [
+            changePassWordAdmin,
+            changePassWordAdminSuccess,
+            changePassWordAdminFail
+        ],
+        variables: {
+            ...data
+        },
+        dispatch,
+        getState
+    });
+};
 
 export const handleDeleteAdmin = (id) => async (dispatch, getState) => {
     return callApi({
@@ -148,3 +148,6 @@ export const handleDeleteAdmin = (id) => async (dispatch, getState) => {
         getState
     });
 };
+
+
+

@@ -28,7 +28,7 @@ function ModalUpdateAdmin() {
             <div className={`input-wrap`}>
                 <div className='label-wrap'>
                     <label htmlFor='nameUpdateAdmin' className={`required`}>
-                        Họ và tên
+                        Name
                     </label>
                 </div>
                 <Input
@@ -37,7 +37,7 @@ function ModalUpdateAdmin() {
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     onFocus={() => handleFocus('name')}
                     className={`main-input ${errorInfoAdmin && errorInfoAdmin.name ? 'error-input' : ''}`}
-                    placeholder={'Nhập họ và tên'}
+                    placeholder={'Nhập Name'}
                 />
                 {
                     errorInfoAdmin && errorInfoAdmin.name &&
@@ -106,7 +106,7 @@ function ModalUpdateAdmin() {
                     size={'large'}
                     onClick={handleCancelModalUpdateAdmin}
                 >
-                    Đóng
+                    Close
                 </Button>
                 <Button
                     loading={isLoadingBtnUpdateAdmin}
@@ -114,7 +114,7 @@ function ModalUpdateAdmin() {
                     size={'large'}
                     onClick={() => handleSubmit(TYPE_SUBMIT.UPDATE , updateAdminSchema, infoAdmin)}
                 >
-                    Cập nhật
+                    Update
                 </Button>
             </div>
         </div>

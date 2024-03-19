@@ -18,7 +18,7 @@ function* loadRouteData() {
 
 function* handleActions() {
     yield takeLatest(startRequestUpdateInformationSuccess, function* () {
-        handleNotification('success', 'Cập nhật thông tin thành công.');
+        handleNotification('success', 'Successfully updated.');
         yield put(getMe());
     });
 
@@ -34,14 +34,14 @@ function* handleActions() {
             }));
         } else if (statusError === 401) {
             const message = action.payload.data.message;
-            handleNotification('error', (message ? message : 'Thông tin không hợp lệ.'));
+            handleNotification('error', (message ? message : 'Invalid information.'));
         } else {
-            handleNotification('error', 'Có lỗi xảy ra, vui lòng thử lại sau.');
+            handleNotification('error', 'An error occurred, please try again later.');
         }
     });
 
     yield takeLatest(requestChangePasswordSuccess, function* () {
-        handleNotification('success', 'Thay đổi mật khẩu thành công.');
+        handleNotification('success', 'Password changed successfully.');
         yield put(setDataChangePassword({
             currentPassword: '',
             password: '',
@@ -68,10 +68,10 @@ function* handleActions() {
                     confirmPassword: _.get(errors, 'confirm_password', '')
                 }));
             } else {
-                handleNotification('error', (message ? message : 'Thông tin không hợp lệ.'));
+                handleNotification('error', (message ? message : 'Invalid information.'));
             }
         } else {
-            handleNotification('error', 'Có lỗi xảy ra, vui lòng thử lại sau.');
+            handleNotification('error', 'An error occurred, please try again later.');
         }
     });
 }

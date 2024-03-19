@@ -1,20 +1,50 @@
 import TableDefault from '@/components/Table';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import InlineSVG from 'react-inlinesvg';
 import IconEditTable from '@/assets/images/icons/duotone/pencil.svg';
 import IconDeleteTable from '@/assets/images/icons/duotone/trash-can.svg';
 import IconChangePass from '@/assets/images/icons/duotone/lock.svg';
-import {Avatar, Switch, Tooltip} from 'antd';
+import { Button, Card, Col, Empty, Input, Row, Tooltip } from 'antd';
 import Handle from './handle';
-import {useSelector} from 'react-redux';
-import {ACTIVE_STATUS} from '@/utils/constants';
-
+import { useSelector } from 'react-redux';
+import ClassItem from '../ClassItem';
+import './styles.module.scss'
+import TableProjectAdmin from '@/pages/Admin/components/TableAdmin/ProjectAdmin/components/TableProjectAdmin/index';
+import ModalCreateProjectAdmin from './ProjectAdmin/components/CreateModalProjectAdmin';
+import ModalDefault from '@/components/Modal';
+import ModalUpdateProjectAdmin from './ProjectAdmin/components/UpdateModalProjectAdmin';
+import SearchIcon from '@/assets/images/icons/duotone/magnifying-glass.svg';
 function TableAdmin() {
     const dataListAdmins = useSelector((state) => state.admin.admins);
     const isLoadingTableAdmin = useSelector((state) => state.admin.isLoadingTableAdmin);
     const me = useSelector((state) => state.auth.me);
     const paginationListAdmins = useSelector((state) => state.admin.paginationListAdmins);
+    const activeClass = useSelector(state => state.admin.activeClass);
+    const visibleModalCreateProjectAdmin = useSelector((state) => state.projectAdmin.visibleModalCreateProjectAdmin);
+    const visibleModalUpdateProjectAdmin = useSelector((state) => state.projectAdmin.visibleModalUpdateProjectAdmin);
+    const visibleModalDeleteProjectAdmin = useSelector((state) => state.projectAdmin.visibleModalDeleteProjectAdmin);
+    const isLoadingBtnDeleteProjectAdmin = useSelector((state) => state.projectAdmin.isLoadingBtnDeleteProjectAdmin);
+    const infoProjectAdmin = useSelector((state) => state.projectAdmin.infoProject);
+    const bodyRef = useRef();
+    const cardRef = useRef();
+    useEffect(() => {
+        if (bodyRef?.current) {
+            bodyRef.current?.parentElement.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
+        }
 
+        dataListAdmins.forEach((item, index) => {
+            if (cardRef?.current?.lastChild && item._id === activeClass._id) {
+                cardRef.current.lastChild.scrollTo({
+                    top: cardRef.current.lastChild?.children?.[index]?.offsetTop || 0,
+                    behavior: 'smooth'
+                });
+            }
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeClass, isLoadingTableAdmin])
     const {
         handleShowModalUpdateAdmin,
         handleShowModalChangePassAdmin,
@@ -22,7 +52,25 @@ function TableAdmin() {
         handleDeleteAdminAlert,
         handleChangePaginationAdmin,
         redirectProjectAdmins,
+        handleClick,
+        dataFilter,
+        handleSearchProjectAdmin,
+        handleShowModalCreateProjectAdmin,
+        handleCancelModalCreateProjectAdmin,
+        handleCancelModalUpdateProjectAdmin,
+        handleCancelModalDeleteProjectAdmin,
+        handleEnterSearchProjectAdmin,
+        handleChangeSelectProjectAdmin,
+        handleChangeInputInfo,
+        handleFocus,
+        handleSubmit,
+        handleShowModalCreateAdmin,
+        handleCancelModalUpdateAdmin,
+        handleCancelModalChangePass,
+        handleCancelModalDeleteAdmin
     } = Handle();
+
+
 
     const columns = [
         {
@@ -37,7 +85,7 @@ function TableAdmin() {
                 return (
                     <div className={`flex`}>
                         <div className={`ml-[10px] font-medium`}>
-                            <div onClick={()=>redirectProjectAdmins(record._id)} className={`mb-[4px] mt-[4px] text-black-content cursor-pointer`}>{text}</div>
+                            <div onClick={() => redirectProjectAdmins(record._id)} className={`mb-[4px] mt-[4px] text-black-content cursor-pointer`}>{text}</div>
                         </div>
                     </div>
                 );
@@ -61,6 +109,25 @@ function TableAdmin() {
                 );
             }
         },
+
+        {
+            title: 'Quantity',
+            dataIndex: 'projectCount',
+            key: 'projectCount',
+            width: 250,
+            sorter: (a, b) => a.age - b.age,
+            showSorterTooltip: false,
+            defaultSortOrder: '',
+            render: (text, record) => {
+                return (
+                    <div className={`flex`}>
+                        <div className={`ml-[10px] font-medium`}>
+                            <div className={`mb-[4px] mt-[4px] text-black-content`}>{text ? text + ' Project' : '0'}</div>
+                        </div>
+                    </div>
+                );
+            }
+        },
         {
             title: 'Hoạt động',
             dataIndex: 'actions',
@@ -75,7 +142,7 @@ function TableAdmin() {
                             className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] mr-2 cursor-pointer !fill-[#99A1B7] hover:!fill-blue-55`}
                             onClick={() => handleShowModalUpdateAdmin(record)}
                         >
-                            <Tooltip title='Cập nhật thông tin'>
+                            <Tooltip title='Update information '>
                                 <InlineSVG src={IconEditTable} className={`w-[16px] h-[16px] `} alt='' />
                             </Tooltip>
                         </div>
@@ -84,7 +151,7 @@ function TableAdmin() {
                             className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] mr-2 cursor-pointer !fill-[#99A1B7] hover:!fill-blue-55`}
                             onClick={() => handleShowModalChangePassAdmin(record)}
                         >
-                            <Tooltip title='Đổi mật khẩu'>
+                            <Tooltip title='Change password'>
                                 <InlineSVG src={IconChangePass} className={`w-[16px] h-[16px]`} alt='' />
                             </Tooltip>
                         </div>
@@ -95,7 +162,7 @@ function TableAdmin() {
                                 className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] cursor-pointer !fill-[#99A1B7] hover:!fill-blue-60`}
                                 onClick={() => handleDeleteAdminAlert(record)}
                             >
-                                <Tooltip title='Xóa thông tin'>
+                                <Tooltip title='Delete information'>
                                     <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt='' />
                                 </Tooltip>
                             </div>
@@ -107,17 +174,82 @@ function TableAdmin() {
     ];
 
     return (
-        <div>
-            <TableDefault
-                loading={isLoadingTableAdmin}
-                onChange={handleChangeTableAdmin}
-                dataSource={dataListAdmins}
-                pagination={paginationListAdmins}
-                columns={columns}
-                rowKey={(record) => record._id}
-                handleSelectPagination={(e) => handleChangePaginationAdmin(e)}
-            />
-        </div>
+        <Row gutter={16}>
+            <Col span={6}>
+                <div className={'w-full h-[calc(100vh-74px)] overflow-y-auto bg-[#fcfcfc]'}>
+
+                    <Card
+                        loading={isLoadingTableAdmin}
+                        onChange={handleChangeTableAdmin}
+                        pagination={paginationListAdmins}
+                        className="list-class-in-dashboard"
+                        rowKey={(record) => record._id}
+                        handleSelectPagination={(e) => handleChangePaginationAdmin(e)}
+                        title={<div>
+                            {<div>
+                                <div className={'my-5 text-center'}>List of Admin</div>
+                                <div className={'mb-3.5 w-full '}>
+                                    <div className={'flex items-center justify-center w-full'}>
+                                        <Button
+                                            className={`flex items-center ant-btn-primary h-full`}
+                                            onClick={handleShowModalCreateAdmin}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>}
+                        </div>}
+                    >
+                        {dataListAdmins?.length === 0 ?
+                            <div className={'h-full flex justify-center items-center'}><Empty
+                                image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Không có dữ liệu'} /></div> :
+                            dataListAdmins?.map(record => (
+                                <ClassItem record={record} key={record._id} onClick={() => handleClick(record._id)} />
+                            ))}
+                    </Card>
+                </div>
+            </Col>
+            <Col span={18}>
+                <div className={`relative main-select`}>
+                    <div className={`flex justify-between mb-2.5`}>
+                        <div className={`w-96`}>
+                            <Input
+                                value={dataFilter.keySearch}
+                                onKeyDown={(e) => handleEnterSearchProjectAdmin}
+                                onChange={(e) => handleSearchProjectAdmin(e.target.value)}
+                                prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
+                                className={`main-input`}
+                                placeholder='Search by project name or code'
+                            />
+                        </div>
+                        <div>
+                            <Button className={`flex items-center ant-btn-primary h-full`}
+                                onClick={handleShowModalCreateProjectAdmin}
+                            >
+                                Create
+                            </Button>
+                        </div>
+                    </div>
+                    <TableProjectAdmin />
+                </div>
+                <ModalDefault
+                    isModalOpen={visibleModalCreateProjectAdmin}
+                    handleCancel={handleCancelModalCreateProjectAdmin}
+                    title='Create new project'
+                >
+                    <ModalCreateProjectAdmin />
+                </ModalDefault>
+
+                <ModalDefault
+                    isModalOpen={visibleModalUpdateProjectAdmin}
+                    handleCancel={handleCancelModalUpdateProjectAdmin}
+                    title="Update the project"
+                >
+                    <ModalUpdateProjectAdmin />
+                </ModalDefault>
+            </Col>
+        </Row>
     );
 }
 

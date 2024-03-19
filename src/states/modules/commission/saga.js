@@ -10,19 +10,19 @@ function* loadRouteData() {
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
-                name: 'Dự án của tôi'
+                name: 'My Project'
             },
             {
                 path: `/my-project-detail/${location.params.project_id}/users`,
-                name: 'Danh sách khách hàng'
+                name: 'List of customers'
             },
             {
                 path: '/my-project-detail/${location.params.project_id}/users/:id',
-                name: 'Lịch sử giao dịch'
+                name: 'Transaction history'
             }
         ]));
     } else {
-        yield put(setTitlePage(`Quản lý dự án`));
+        yield put(setTitlePage(`Project management`));
         yield put(setBreadcrumb([
             {
                 path: '/admin-management',

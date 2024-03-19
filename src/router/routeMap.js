@@ -33,14 +33,14 @@ export const routeMap = [
         permissions: [PERMISSIONS.SUPER.SUPER_ADMIN]
     },
     {
-        label: 'Danh sách khách hàng',
+        label: 'List of customers',
         icon: (<InlineSVG src={UsersIcon} />),
         path: '/my-project-detail/:project_id/users',
         routeActive: ['/my-project-detail/:project_id/users', '/my-project-detail/:project_id/users/:id'],
         exceptPermissions: [PERMISSIONS.SUPER.SUPER_ADMIN]
     },
     {
-        label: 'Cấu hình trả thưởng',
+        label: 'Compensation configuration',
         icon: (<InlineSVG src={RewardIcon} alt='' />),
         path: '/my-project-detail/:project_id/rule-config',
         routeActive: ['/my-project-detail/:project_id/rule-config'],

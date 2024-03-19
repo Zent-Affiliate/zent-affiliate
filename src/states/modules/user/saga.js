@@ -12,7 +12,7 @@ function* loadRouteData() {
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
-                name: 'Dự án của tôi'
+                name: 'My Project'
             },
             {
                 path: `/my-project-detail/${location.params.project_id}/users`,

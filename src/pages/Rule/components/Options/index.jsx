@@ -24,13 +24,13 @@ function Options(props) {
                 <div className={`btn-edit mb-1`} onClick={props.handleOnClickUpdate}>
                     <Button className={styles.actionBtn}>
                         <InlineSVG src={Edit} width={14} height={14} className={'mr-2'} />
-                        Cập nhật
+                        Update
                     </Button>
                 </div>
                 <div className={`btn-delete`} onClick={props.handleOnClickDelete}>
                     <Button className={styles.actionBtn}>
                         <InlineSVG src={Delete} width={14} height={14} className={'mr-2'} />
-                        Xóa
+                        Close
                     </Button>
                 </div>
             </>

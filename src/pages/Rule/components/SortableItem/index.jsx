@@ -43,13 +43,13 @@ function SortableItem(props) {
                 <div className={'ml-3 w-8/12'}>
                     <div className={'flex justify-between'}>
                         <span>
-                            <span className={'font-semibold'}>Giá trị: </span>
+                            <span className={'font-semibold'}>Value: </span>
                             <span>{formatNumber(item.value)}{item.type === RULE_CONFIG.PERCENT ? '%' : ' ₫'}</span>
                         </span>
                     </div>
                     <div>
-                        <span className={'font-semibold'}>Kiểu tính toán: </span>
-                        <span>{item.type === RULE_CONFIG.PERCENT ? 'Phần trăm' : 'Cố định'}</span>
+                        <span className={'font-semibold'}>Calculation type: </span>
+                        <span>{item.type === RULE_CONFIG.PERCENT ? 'Percent' : 'Permanent'}</span>
                     </div>
                 </div>
 

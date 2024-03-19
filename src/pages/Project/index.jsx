@@ -72,7 +72,7 @@ export default function Project() {
                                 onChange={(e) => handleSearchProject(e.target.value)}
                                 prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                                 className={`main-input`}
-                                placeholder='Tìm kiếm theo tên , mã code của dự án'
+                                placeholder='Search by project name or code'
                             />
                         </div>
                         <div>
@@ -80,7 +80,7 @@ export default function Project() {
                             className={`flex items-center ant-btn-primary h-full`}
                             onClick={handleShowModalCreateProject}
                             >
-                                Tạo mới
+                                Create  
                             </Button>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ export default function Project() {
                     <ModalDefault
                         isModalOpen={visitableModelCreateProject}
                         handleCancel = {handleCancelModalCreateProject}
-                        title='Tạo mới dự án'
+                        title='Create new project'
                     >
                         <ModalCreateProject/>
                     </ModalDefault>
@@ -98,7 +98,7 @@ export default function Project() {
                     <ModalDefault
                          isModalOpen={visibleModalUpdateProject}
                          handleCancel = {handleCancelModalUpdateProject}
-                         title='Cập nhật dự án'
+                         title='Update the project'
                     >
                         <ModalUpdateProject/>
                     </ModalDefault>
@@ -108,7 +108,7 @@ export default function Project() {
                         isModalOpen={visibleModalDeleteProject}
                         handleCancel={handleCancelModalDeleteProject}
                         handleConfirm={() => dispatch(handleDeleteProject(infoProject._id))}
-                        contentBtn='Xóa'
+                        contentBtn='Delete'
                     >
                     </ModalDeleteDefault>
                 </div>
@@ -126,7 +126,7 @@ export default function Project() {
                                 onChange={(e) => handleSearchProject(e.target.value)}
                                 prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                                 className={`main-input`}
-                                placeholder='Tìm kiếm theo tên , mã code của dự án'
+                                placeholder='Search for name or code of project'
                             />
                         </div>
                         <div>
@@ -138,7 +138,7 @@ export default function Project() {
                                 placement="bottom"
                                 
                             >
-                                <Button type="primary">Dự án</Button>
+                                <Button type="primary">Project</Button>
                             </Dropdown>
                             </Space>
                         </div>
@@ -147,7 +147,7 @@ export default function Project() {
                             className={`flex items-center ant-btn-primary h-full`}
                             onClick={handleShowModalCreateProject}
                             >
-                                Tạo mới
+                                Create
                             </Button>
                         </div>
                     </div>
@@ -157,7 +157,7 @@ export default function Project() {
                     <ModalDefault
                         isModalOpen={visitableModelCreateProject}
                         handleCancel = {handleCancelModalCreateProject}
-                        title='Tạo mới dự án'
+                        title='Create new project'
                     >
                         <ModalCreateProject/>
                     </ModalDefault>
@@ -165,7 +165,7 @@ export default function Project() {
                     <ModalDefault
                          isModalOpen={visibleModalUpdateProject}
                          handleCancel = {handleCancelModalUpdateProject}
-                         title='Cập nhật dự án'
+                         title='Update the project'
                     >
                         <ModalUpdateProject/>
                     </ModalDefault>
@@ -175,7 +175,7 @@ export default function Project() {
                         isModalOpen={visibleModalDeleteProject}
                         handleCancel={handleCancelModalDeleteProject}
                         handleConfirm={() => dispatch(handleDeleteProject(infoProject._id))}
-                        contentBtn='Xóa'
+                        contentBtn='Delete'
                     >
                     </ModalDeleteDefault>
                 </div>

@@ -14,10 +14,10 @@ export default function ProductDetail() {
         hasPermission(['super_admin']) ?
         <MainLayout>
             <Tabs defaultActiveKey="1">
-                <Tab tab="Quản lý user" key="1">
+                <Tab tab="User Management" key="1">
                     <User/>
                 </Tab>
-                <Tab tab="Cấu hình trả thưởng" key="3">
+                <Tab tab="Compensation configuration" key="3">
                     <Rule/>
                 </Tab>
             </Tabs>

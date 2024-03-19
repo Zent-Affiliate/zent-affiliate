@@ -48,7 +48,7 @@ const TitleInformation = (props) => {
                                 <a href={`tel:${me?.phone}`} className={'ml-1'}>
                                     {me.phone}
                                 </a> :
-                                <span className='italic ml-1'>Đang cập nhật</span>
+                                <span className='italic ml-1'>Updating</span>
                         }
                     </div>
                 </Col>

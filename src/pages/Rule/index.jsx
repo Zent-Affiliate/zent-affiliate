@@ -41,14 +41,14 @@ function Rule() {
                             // onChange={(e) => handleSearchUser(e.target.value)}
                             prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                             className={`main-input`}
-                            placeholder='Tìm kiếm theo mã, tên quy ước'
+                            placeholder='Search by code or convention name'
                         />
                     </div>
 
                     <div>
                         <Button className={`flex items-center ant-btn-primary h-full`}
                                 onClick={handleShowModalCreateRule}>
-                            Tạo mới
+                            Create
                         </Button>
                     </div>
                 </div>
@@ -76,7 +76,7 @@ function Rule() {
             isModalOpen={visibleModalCreateOrUpdate}
             handleOk={() => dispatch(setVisibleModalCreateOrUpdate(!visibleModalCreateOrUpdate))}
             handleCancel={() => dispatch(setVisibleModalCreateOrUpdate(false))}
-            title={isCreateRule ? 'Tạo mới quy ước' : 'Cập nhật quy ước'}
+            title={isCreateRule ? 'Create convention' : 'Update convention'}
         >
             <CreateOrUpdate
                 isCreateRule={isCreateRule}
@@ -90,7 +90,7 @@ function Rule() {
             // handleConfirm={() => dispatch(handleDeleteRule(rule._id))}
             content={
                 <div>
-                    Bạn có chắn chắn muốn xóa quy ước <strong>{rule.name}</strong> không?
+                    Are you sure you want to remove the convention <strong>{rule.name}</strong> ?
                 </div>
             }
             contentBtn='Xóa'

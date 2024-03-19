@@ -2,17 +2,152 @@ import {ACTIVE_STATUS} from '@/utils/constants';
 import Swal from 'sweetalert2';
 import {useDispatch, useSelector} from 'react-redux';
 import { setDataChangePassAdmin, setDataFilter, setErrorDataChangePassAdmin, setErrorInfoAdmin, 
-    setInfoAdmin, setVisibleModalChangePass, setVisibleModalDeleteAdmin,
+    setInfoAdmin, setVisibleModalChangePass, setVisibleModalCreateAdmin, setVisibleModalDeleteAdmin,
     setVisibleModalUpdateAdmin
 } from '@/states/modules/admin';
 import { getListAdmins, handleDeleteAdmin } from '@/api/admin';
 import { useNavigate } from 'react-router-dom';
+import { createProjectAdmin, getListProjectAdmins, updateProjectAdmin } from '@/api/projectAdmin';
+import { setErrorInfoProjectAdmin, setInfoProjectAdmin, setVisibleModalCreateProjectAdmin, setVisibleModalDeleteProjectAdmin, setVisibleModalUpdateProjectAdmin } from '@/states/modules/projectAdmin';
 
 export default function Handle() {
-    const dispatch = useDispatch();
     const navigate = useNavigate()
     const dataFilter = useSelector((state) => state.admin.dataFilter);
+    const dispatch = useDispatch();
+    const errorInfoProjectAdmin = useSelector((state) => state.projectAdmin.errorInfoProject);
+    const visibleModalCreateProjectAdmin = useSelector((state)=> state.projectAdmin.visibleModalCreateProjectAdmin);
+    const visibleModalUpdateProjectAdmin = useSelector((state) => state.projectAdmin.visibleModalUpdateProjectAdmin);
+    const visibleModalDeleteProjectAdmin = useSelector((state) => state.projectAdmin.visibleModalDeleteProjectAdmin);
+    const isLoadingBtnDeleteProjectAdmin = useSelector((state) => state.projectAdmin.isLoadingBtnDeleteProjectAdmin);
+    const infoProjectAdmin = useSelector((state)=> state.projectAdmin.infoProject);
+    const handleShowModalCreateAdmin = () => {
+        dispatch(
+            setInfoAdmin({
+                name: '',
+                email: '',
+                password: ''
+            })
+        );
+        dispatch(setVisibleModalCreateAdmin(true))
+    };
 
+    const handleCancelModalUpdateAdmin = () => {
+        dispatch(setVisibleModalUpdateAdmin(false))
+    }
+
+    const handleCancelModalDeleteAdmin = () => {
+        dispatch(setVisibleModalDeleteAdmin(false));
+    };
+
+    const handleCancelModalChangePass = () => {
+        dispatch(
+            setDataChangePassAdmin({
+                new_password: '',
+                confirm_password: ''
+            })
+        );
+        dispatch(
+            setErrorDataChangePassAdmin({
+                new_password: '',
+                confirm_password: ''
+            })
+        );
+        dispatch(setVisibleModalChangePass(false));
+    };
+    const handleCancelModalCreateProjectAdmin = () =>{
+        dispatch(
+            setErrorInfoProjectAdmin({
+                _id: '',
+                code: '',
+                name: '',
+                admin_id: '',
+                secret_key: ''
+            })
+        );
+
+        dispatch(
+            setErrorInfoProjectAdmin({
+                id: '',
+                code: '',
+                name: '',
+                admin_id: '',
+                secret_key: ''
+            })
+        );
+        dispatch(setVisibleModalCreateProjectAdmin(false));
+    };
+
+    const handleShowModalCreateProjectAdmin = () => {
+        dispatch(
+            setInfoProjectAdmin({
+                _id: '',
+                code: '',
+                name: '',
+                admin_id: '',
+                secret_key: ''
+            })
+        );
+        dispatch(setVisibleModalCreateProjectAdmin(true))
+    };
+
+    const handleCancelModalUpdateProjectAdmin = () => {
+        dispatch(setProjectAdminActive(null))
+        dispatch(setVisibleModalUpdateProjectAdmin(false))
+    }
+
+    const handleCancelModalDeleteProjectAdmin = () => {
+        dispatch(setVisibleModalDeleteProjectAdmin(false));
+    };
+
+    const handleSearchProjectAdmin = (value) => {
+        dispatch(setDataFilter({ ...dataFilter, keySearch: value }));
+        if (!value) {
+            dispatch(getListProjectAdmins());
+        }
+    };
+
+    const handleEnterSearchProjectAdmin = (event) => {
+        if (event.key === 'Enter') {
+            dispatch(getListProjectAdmins());
+        }
+    };
+
+    const handleChangeSelectProjectAdmin = (perPage) => {
+        dispatch(setDataFilter({ perPage, page: 1 }));
+        dispatch(getListProjectAdmins());
+    };
+
+    const handleChangeInputInfo = (valueInput, type) => {
+        let value = valueInput.target.value;
+        let data = _.cloneDeep(infoProjectAdmin);
+        let dataError = _.cloneDeep(errorInfoProjectAdmin);
+        data[type] = value;
+        dataError[type] = '';
+        dispatch(setInfoProjectAdmin(data));
+        dispatch(setErrorInfoProjectAdmin(dataError));
+    };
+
+    const handleFocus = (type) => {
+        let dataError = _.cloneDeep(errorInfoProjectAdmin);
+        dataError[type] = '';
+        dispatch(setErrorInfoProjectAdmin(dataError));
+    };
+
+    const handleSubmit = (type, scheme, dataProject) => {
+        if (type === TYPE_SUBMIT.CREATE) {
+            validate(scheme, dataProject, {
+                onSuccess: (data) => dispatch(createProjectAdmin(data)),
+                onError: (error) => dispatch(setErrorInfoProjectAdmin(error))
+            });
+        }
+
+        if (type === TYPE_SUBMIT.UPDATE) {
+            validate(scheme, dataProject, {
+                onSuccess: (data) => dispatch(updateProjectAdmin( data)),
+                onError: (error) => dispatch(setErrorInfoProjectAdmin(error))
+            });
+        }
+    };
     const handleShowModalUpdateAdmin = (admin) => {
         dispatch(setInfoAdmin({...admin}));
         dispatch(
@@ -78,7 +213,7 @@ export default function Handle() {
             icon: 'warning',
             showCancelButton: true,
             buttonsStyling: false,
-            cancelButtonText: 'Đóng',
+            cancelButtonText: 'Close',
             confirmButtonText: 'Xóa',
             customClass: {
                 popup: '!w-[416px] !h-[296px] !px-11 !important',
@@ -95,6 +230,10 @@ export default function Handle() {
         navigate(`/${admin_id}/projects`)
     }
 
+    const handleClick = (admin_id) =>{
+        dispatch(getListProjectAdmins(admin_id));
+    }
+
     return {
         handleShowModalUpdateAdmin,
         handleShowModalChangePassAdmin,
@@ -102,6 +241,22 @@ export default function Handle() {
         handleChangeTableAdmin,
         handleDeleteAdminAlert,
         redirectProjectAdmins,
-        handleChangePaginationAdmin
+        handleChangePaginationAdmin,
+        handleClick,
+        dataFilter,
+        handleSearchProjectAdmin,
+        handleShowModalCreateProjectAdmin,
+        handleCancelModalCreateProjectAdmin,
+        handleCancelModalUpdateProjectAdmin,
+        handleCancelModalDeleteProjectAdmin,
+        handleEnterSearchProjectAdmin,
+        handleChangeSelectProjectAdmin,
+        handleChangeInputInfo,
+        handleFocus,
+        handleSubmit,
+        handleShowModalCreateAdmin,
+        handleCancelModalUpdateAdmin,
+        handleCancelModalChangePass,
+        handleCancelModalDeleteAdmin
     };
 }

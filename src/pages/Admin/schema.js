@@ -8,7 +8,7 @@ export const updateAdminSchema = Joi.object({
         .max(MAX_SIZE_NAME)
         .pattern(VALIDATE_NAME_REGEX_RULE)
         .required()
-        .label('Họ và tên'),
+        .label('Name'),
     email: Joi.string()
         .trim()
         .max(MAX_STRING_SIZE)
@@ -18,8 +18,8 @@ export const updateAdminSchema = Joi.object({
     _id: Joi.any(),
     status: Joi.number()
         .valid(...Object.values(ACTIVE_STATUS))
-        .label('Trạng thái')
-        .messages({'any.only': 'Trạng thái không hợp lệ.'})
+        .label('Status')
+        .messages({'any.only': 'Invalid status.'})
 });
 
 export const createAdminSchema = Joi.object({
@@ -28,7 +28,7 @@ export const createAdminSchema = Joi.object({
         .max(MAX_SIZE_NAME)
         .pattern(VALIDATE_NAME_REGEX_RULE)
         .required()
-        .label('Name of Admin'),
+        .label('Name'),
     email: Joi.string()
         .trim()
         .max(MAX_STRING_SIZE)
@@ -43,7 +43,7 @@ export const createAdminSchema = Joi.object({
         .label('Password')
         .messages({
             'string.pattern.base':
-                'Mật khẩu phải bao gồm chữ thường, chữ hoa, số và ký tự đặc biệt.'
+                'Password must include lowercase letters, uppercase letters, numbers and special characters.'
         }),
     avatar: Joi.any()
 });
@@ -55,23 +55,23 @@ export const passwordAdminSchema = Joi.object({
         .pattern(VALIDATE_PASSWORD_REGEX)
         .required()
         .max(MAX_STRING_SIZE)
-        .label('Mật khẩu mới')
+        .label('New password')
         .messages({
             'string.pattern.base':
-                'Mật khẩu phải bao gồm chữ thường, chữ hoa, số và ký tự đặc biệt.'
+                'Password must include lowercase letters, uppercase letters, numbers and special characters.'
         }),
     confirm_password: Joi.string()
         .required()
         .valid(Joi.ref('new_password'))
-        .label('Mật khẩu xác nhận')
+        .label('Confirm password')
         .messages({
-            'any.only': 'Mật khẩu xác nhận không trùng khớp.'
+            'any.only': 'Confirmation password does not match.'
         })
 });
 
 export const changeStatus = Joi.object({
     status: Joi.number()
         .valid(...Object.values(ACTIVE_STATUS))
-        .label('Trạng thái')
-        .messages({'any.only': 'Trạng thái không hợp lệ.'})
+        .label('Status')
+        .messages({'any.only': 'Invalid status.'})
 });

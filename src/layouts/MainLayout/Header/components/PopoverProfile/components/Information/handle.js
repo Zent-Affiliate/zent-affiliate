@@ -14,7 +14,7 @@ const updateProfileValidateSchema = Joi.object({
         .trim()
         .max(255)
         .required()
-        .label('Họ và tên'),
+        .label('Name'),
     email: Joi.string()
         .trim()
         .lowercase()
@@ -26,7 +26,7 @@ const updateProfileValidateSchema = Joi.object({
         .trim()
         .allow('', null)
         .pattern(VALIDATE_PHONE_REGEX_RULE)
-        .label('Số điện thoại'),
+        .label('Phone'),
     avatar: Joi.any()
 });
 
@@ -95,9 +95,9 @@ export default function Handle(props) {
             let currentFile = file.target.files[0];
             let fileUrl = URL.createObjectURL(file.target.files[0]);
             if (currentFile.size / 1024 / 1024 > 2.048) {
-                dataError = 'Kích thước ảnh không vượt quá 2MB.';
+                dataError = 'Image size must not exceed 2MB.';
             } else if (!TYPE_FILE.includes(currentFile.type)) {
-                dataError = 'Ảnh đại diện chỉ được hỗ trợ kiểu jpg, jpeg, png, svg, webp.';
+                dataError = 'Avatar images are only supported as jpg, jpeg, png, svg, webp file types.';
             }
 
             if (dataError) {

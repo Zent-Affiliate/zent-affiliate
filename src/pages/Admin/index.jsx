@@ -55,17 +55,17 @@ export default function Admins(){
                                 onChange={(e) => handleSearchAdmin(e.target.value)}
                                 prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                                 className={`main-input`}
-                                placeholder='Tìm kiếm theo tên, email người quản trị viên'
+                                placeholder='Search by admin name or email'
                             />
                         </div>
 
                         <div>
-                            <Button 
+                            {/* <Button 
                             className={`flex items-center ant-btn-primary h-full`}
                             onClick={handleShowModalCreateAdmin}
                             >
-                                Tạo mới
-                            </Button>
+                                Create
+                            </Button> */}
                         </div>
                     </div>
 
@@ -81,7 +81,7 @@ export default function Admins(){
                     <ModalDefault
                         isModalOpen={visibleModalCreateAdmin}
                         handleCancel = {handleCancelModalCreateAdmin}
-                        title='Tạo mới người quản trị'
+                        title='Create new admin'
                     >
                         <ModalCreateAdmin/>
                     </ModalDefault>
@@ -89,7 +89,7 @@ export default function Admins(){
                     <ModalDefault
                         isModalOpen={visibleModalUpdateAdmin}
                         handleCancel = {handleCancelModalUpdateAdmin}
-                        title='Cập nhật thông tin'
+                        title='Update information'
                     >
                         <ModalUpdateAdmin/>
                     </ModalDefault>
@@ -97,7 +97,7 @@ export default function Admins(){
                     <ModalDefault 
                         isModalOpen={visibleModalChangePass}
                         handleCancel = {handleCancelModalChangePass}
-                        title='Đổi mật khẩu'
+                        title='Change new password'
                         >
                         <ModalChangePassAdmin/>
                     </ModalDefault>
@@ -107,7 +107,7 @@ export default function Admins(){
                         isModalOpen={visibleModalDeleteAdmin}
                         handleCancel={handleCancelModalDeleteAdmin}
                         handleConfirm={() => dispatch(handleDeleteAdmin(infoAdmin._id))}
-                        contentBtn='Xóa'
+                        contentBtn='Delete'
                     >
                     </ModalDeleteDefault>
                 </div>

@@ -95,7 +95,7 @@ function TableUser() {
 
     const columns = [
         {
-            title: 'Họ và tên',
+            title: 'Name',
             dataIndex: 'name',
             key: 'name',
             width: 250,
