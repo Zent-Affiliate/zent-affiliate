@@ -45,20 +45,8 @@ export default function Admins(){
     return(
         // hasPermission(['super_admin']) ?
         <MainLayout>
-            <div className={`bg-white rounded-lg border shadow-sm`}>
-                <div className={`py-8 px-8`}>
+                <div className={`px-8`}>
                     <div className={`flex justify-between mb-2.5`}>
-                        <div className={`w-96`}>
-                            <Input
-                                value={dataFilter.keySearch}
-                                onKeyDown={(e) => handleEnterSearchAdmin(e)}
-                                onChange={(e) => handleSearchAdmin(e.target.value)}
-                                prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
-                                className={`main-input`}
-                                placeholder='Search by admin name or email'
-                            />
-                        </div>
-
                         <div>
                             {/* <Button 
                             className={`flex items-center ant-btn-primary h-full`}
@@ -89,7 +77,7 @@ export default function Admins(){
                     <ModalDefault
                         isModalOpen={visibleModalUpdateAdmin}
                         handleCancel = {handleCancelModalUpdateAdmin}
-                        title='Update information'
+                        title='Update'
                     >
                         <ModalUpdateAdmin/>
                     </ModalDefault>
@@ -111,7 +99,6 @@ export default function Admins(){
                     >
                     </ModalDeleteDefault>
                 </div>
-            </div>
         </MainLayout>
         // :
         // <HeaderOnly>

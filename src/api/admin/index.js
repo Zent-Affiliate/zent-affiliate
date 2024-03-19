@@ -1,11 +1,5 @@
 import callApi from '@/api/callApi';
 import {
-    changePassWordAdmin,
-    changePassWordAdminFail,
-    changePassWordAdminSuccess,
-    changeStatusAdmin,
-    changeStatusAdminFail,
-    changeStatusAdminSuccess,
     createAdmin,
     createAdminFail,
     createAdminSuccess,
@@ -27,7 +21,7 @@ import _ from 'lodash';
 export const getListAdmins = () => async (dispatch, getState) => {
     const dataFilter = getState().admin.dataFilter;
     let path = `admins?page=${dataFilter.page}&per_page=${dataFilter.perPage}`;
-    
+
     if (dataFilter.keySearch) {
         path += `&q=${dataFilter.keySearch}`;
     }
@@ -95,40 +89,6 @@ export const handleUpdateAdmin = (id, data) => async (dispatch, getState) => {
             updateAdminFail
         ],
         variables: {...dataAdmin},
-        dispatch,
-        getState,
-    });
-};
-
-// export const handleChangeStatusAdmin = (id, data) => async (dispatch, getState) => {
-//     return callApi({
-//         method: 'put',
-//         apiPath: `admins/update-status/${id}`,
-//         actionTypes: [
-//             changeStatusAdmin,
-//             changeStatusAdminSuccess,
-//             changeStatusAdminFail
-//         ],
-//         variables: {
-//             status: data
-//         },
-//         dispatch,
-//         getState
-//     });
-// };
-
-export const handleChangePassAdmin = (id, data) => async (dispatch, getState) => {
-    return callApi({
-        method: 'patch',
-        apiPath: `admins/reset-password/${id}`,
-        actionTypes: [
-            changePassWordAdmin,
-            changePassWordAdminSuccess,
-            changePassWordAdminFail
-        ],
-        variables: {
-            ...data
-        },
         dispatch,
         getState
     });

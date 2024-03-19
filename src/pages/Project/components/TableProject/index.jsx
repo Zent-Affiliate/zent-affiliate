@@ -1,12 +1,12 @@
 import React from 'react';
-import {Skeleton} from 'antd';
+import {Empty, Skeleton} from 'antd';
 import Handle from './handle';
 import {useSelector} from 'react-redux';
 import styles from './styles.module.scss';
 import CardProject from '@/pages/Project/components/CardProject/index.jsx';
 
 function TableProject(props) {
-    const { isSuperAdmin } = props;
+    const {isSuperAdmin} = props;
     const dataListProjects = useSelector((state) => state.project.projects);
     const isLoadingTableProject = useSelector((state) => state.project.isLoadingTableProject);
     // const paginationListProjects = useSelector((state) => state.project.paginationListProjects);
@@ -15,42 +15,35 @@ function TableProject(props) {
         handleShowModalUpdateProject,
         handleDeleteProjectAlert,
         // handleChangePaginationProject,
-        redirectToProject,
+        redirectToProject
     } = Handle();
 
     return (
         <div>
-            <div className={`${isSuperAdmin?'h-[66vh]':'h-[80vh]'} ${styles.listProjectWrap}`}>
-            {
-                isLoadingTableProject?
-                    <Skeleton loading={true} active></Skeleton> :
-                    <div className={`${styles.listProject} gap-2.5`}>
-                        {
-                            dataListProjects.map((project) => {
-                                return <CardProject
-                                  key={project._id}
-                                  project={project}
-                                  handleShowModalUpdateProject={(pr) => handleShowModalUpdateProject(pr)}
-                                  handleDeleteProjectAlert={(pr) =>handleDeleteProjectAlert(pr)}
-                                  redirectToProject={(pr) =>redirectToProject(pr)}
-                                />
-                          })
-                        }
-                    </div>
+            {(dataListProjects && dataListProjects?.length > 0) ?
+                <div className={`${isSuperAdmin ? 'h-[66vh]' : 'h-[80vh]'} ${styles.listProjectWrap}`}>
+                    {
+                        isLoadingTableProject ?
+                            <Skeleton loading={true} active></Skeleton> :
+                            <div className={`${styles.listProject} gap-2.5`}>
+                                {
+                                    dataListProjects?.map((project) => {
+                                        return <CardProject
+                                            key={project._id}
+                                            project={project}
+                                            handleShowModalUpdateProject={(pr) => handleShowModalUpdateProject(pr)}
+                                            handleDeleteProjectAlert={(pr) => handleDeleteProjectAlert(pr)}
+                                            redirectToProject={(pr) => redirectToProject(pr)}
+                                        />;
+                                    })
+                                }
+                            </div>
+                    }
+                </div>
+                : <div className={'h-[calc(100vh_-_220px)] flex justify-center items-center'}>
+                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'No data'} />
+                </div>
             }
-            </div>
-            {/*{*/}
-            {/*    paginationListProjects ?*/}
-            {/*      <Pagination*/}
-            {/*        className={'flex justify-end'}*/}
-            {/*        current={paginationListProjects.currentPage}*/}
-            {/*        total={paginationListProjects.totalRecord}*/}
-            {/*        pageSize={paginationListProjects.perPage}*/}
-            {/*        onChange={(e) => handleChangePaginationProject(e)}*/}
-            {/*        showSizeChanger={false}*/}
-            {/*      />*/}
-            {/*      : ''*/}
-            {/*}*/}
         </div>
     );
 }

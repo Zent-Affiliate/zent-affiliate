@@ -30,7 +30,7 @@ function Options(props) {
                 <div className={`btn-delete`} onClick={props.handleOnClickDelete}>
                     <Button className={styles.actionBtn}>
                         <InlineSVG src={Delete} width={14} height={14} className={'mr-2'} />
-                        Close
+                        Delete
                     </Button>
                 </div>
             </>

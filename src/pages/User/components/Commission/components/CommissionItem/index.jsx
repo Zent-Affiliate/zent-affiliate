@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Card} from 'antd';
 import '../../styles.scss';
 import styles from './styles.module.scss';
@@ -6,22 +6,30 @@ import Handle from '@/pages/User/components/Commission//components/CommissionIte
 
 function CommissionItem({commission}) {
   const {
+    commissions,
     activeCommission,
+    userActive,
 
     handleActiveCommission,
   } = Handle();
 
   const actionColors = ['danger', 'primary', 'warning', 'success'];
 
+  useEffect(() => {
+    if (commissions?.[0] && userActive) {
+      handleActiveCommission(commissions[0])
+    }
+  }, [userActive])
+
   return (
     <Card
-      className={`w-[250px] mr-5 cursor-pointer card-custom ${
+      className={`min-w-[230px] mr-5 cursor-pointer ${
         activeCommission?._id === commission?._id ? 'active-card' : 'non-active-card'
       }`}
       onClick={() => handleActiveCommission(commission)}
     >
       <div className={'mb-3'}>
-        <div className={'font-bold text-2xl'}>{commission.total}</div>
+        <div className={'font-bold text-2xl max-w-full overflow-hidden text-ellipsis whitespace-nowrap'}>{commission.total}</div>
       </div>
       <div className={styles.valueWrap}>
         <div className={'flex justify-between items-center'}>

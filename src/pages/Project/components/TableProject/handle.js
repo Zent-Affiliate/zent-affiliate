@@ -65,7 +65,7 @@ export default function Handle() {
     const handleDeleteProjectAlert = async (record) => {
         const result = await Swal.fire({
             title: `<p class="text-base !mt-[-74px] !overflow-visible !font-normal">
-            Are you sure you want to delete the project?<strong>${record.name}</strong>?
+            Are you sure you want to delete the project <strong>${record.name}</strong>?
       </p>`,
             icon: 'warning',
             showCancelButton: true,

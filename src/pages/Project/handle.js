@@ -70,7 +70,7 @@ export default function Handle() {
 
     const handleSearchProject = (value) => {
         dispatch(setDataFilter({...dataFilter, keySearch: value}));
-        if (!value) {
+        if (value === '') {
             dispatch(getListProjects());
         }
     };

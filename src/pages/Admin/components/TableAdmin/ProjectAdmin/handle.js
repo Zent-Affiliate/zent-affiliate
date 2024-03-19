@@ -1,6 +1,6 @@
 import { getListProjectAdmins, createProjectAdmin, updateProjectAdmin } from "@/api/projectAdmin";
 import { 
-    setDataFilter, 
+    setDataFilterProjectAdmin, 
     setErrorInfoProjectAdmin, 
     setInfoProjectAdmin, 
     setProjectAdminActive, 
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import './styles.module.scss';
 import { validate } from "@/utils/validates";
 import _ from "lodash";
-
+import { getSecretKey } from "@/api/project";
 
 export default function Handle(){
     const dispatch = useDispatch();
@@ -67,7 +67,7 @@ export default function Handle(){
     };
 
     const handleSearchProjectAdmin = (value) => {
-        dispatch(setDataFilter({ ...dataFilter, keySearch: value }));
+        dispatch(setDataFilterProjectAdmin({ ...dataFilter, keySearch: value }));
         if (!value) {
             dispatch(getListProjectAdmins());
         }
@@ -80,7 +80,7 @@ export default function Handle(){
     };
 
     const handleChangeSelectProjectAdmin = (perPage) => {
-        dispatch(setDataFilter({ ...paginationListProjectAdmins, perPage, page: 1 }));
+        dispatch(setDataFilterProjectAdmin({ ...paginationListProjectAdmins, perPage, page: 1 }));
         dispatch(getListProjectAdmins());
     };
 
@@ -115,7 +115,9 @@ export default function Handle(){
             });
         }
     };
-
+    const handleGetKey = () => {
+        dispatch(getSecretKey());
+    };
     return{
         handleSearchProjectAdmin,
         handleShowModalCreateProjectAdmin,
@@ -126,6 +128,7 @@ export default function Handle(){
         handleChangeSelectProjectAdmin,
         handleChangeInputInfo,
         handleFocus,
-        handleSubmit
+        handleSubmit,
+        handleGetKey,
     }
 } 

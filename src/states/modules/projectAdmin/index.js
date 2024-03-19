@@ -94,7 +94,7 @@ const projectAdminSlice = createSlice({
             ...state,
             projectAdminActive: action.payload
         }),
-        setDataFilter: (state, action) => ({
+        setDataFilterProjectAdmin: (state, action) => ({
             ...state,
             dataFilter: action.payload
         }),
@@ -176,7 +176,7 @@ const projectAdminSlice = createSlice({
 })
 
 export const {
-    setDataFilter,
+    setDataFilterProjectAdmin,
     setDataProjectAdmin,
     setVisibleModal,
     setProjectAdminActive,

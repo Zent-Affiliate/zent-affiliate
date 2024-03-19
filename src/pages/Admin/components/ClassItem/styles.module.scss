@@ -23,3 +23,21 @@
         @apply content-[''] absolute h-full w-1.5 bg-[#1b84ff] right-0 top-0 bottom-0;
     }
 }
+
+.optionsWrap {
+    @apply bg-[#e0e3e9] p-[2px] w-[20px] flex items-center justify-center rounded-md;
+
+    svg {
+        @apply ml-[0.5px];
+    }
+}
+
+.actionBtn {
+    @apply flex items-center w-full;
+
+    &:hover {
+        svg {
+            fill: #4096ff;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import { getListProjectAdmins, createProjectAdmin, updateProjectAdmin } from "@/api/projectAdmin";
 import { 
-    setDataFilter, 
+    setDataFilterProjectAdmin, 
     setErrorInfoProjectAdmin, 
     setInfoProjectAdmin, 
     setProjectAdminActive, 
@@ -68,7 +68,7 @@ export default function Handle(){
     };
 
     const handleSearchProjectAdmin = (value) => {
-        dispatch(setDataFilter({ ...dataFilter, keySearch: value }));
+        dispatch(setDataFilterProjectAdmin({ ...dataFilter, keySearch: value }));
         if (!value) {
             dispatch(getListProjectAdmins());
         }
@@ -81,7 +81,7 @@ export default function Handle(){
     };
 
     const handleChangeSelectProjectAdmin = (perPage) => {
-        dispatch(setDataFilter({ ...paginationListProjectAdmins, perPage, page: 1 }));
+        dispatch(setDataFilterProjectAdmin({ ...paginationListProjectAdmins, perPage, page: 1 }));
         dispatch(getListProjectAdmins());
     };
 

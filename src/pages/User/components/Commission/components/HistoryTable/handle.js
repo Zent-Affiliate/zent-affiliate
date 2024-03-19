@@ -30,7 +30,7 @@ export default function Handle() {
       width: 200,
       defaultSortOrder: '',
       render: (text) => {
-        return text;
+        return text.toLocaleString();
       },
     },
     {
@@ -50,7 +50,7 @@ export default function Handle() {
       width: 200,
       defaultSortOrder: '',
       render: (text) => {
-        return text;
+        return text.toLocaleString();
       },
     },
     {
@@ -70,7 +70,7 @@ export default function Handle() {
       width: 200,
       defaultSortOrder: '',
       render: (text) => {
-        return text;
+        return text.toLocaleString();
       },
     },
     {

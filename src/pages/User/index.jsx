@@ -1,20 +1,19 @@
-import React, {useEffect} from 'react';
-import {setBreadcrumb} from '@/states/modules/app';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Input, Select} from 'antd';
+import {Empty, Input, Select} from 'antd';
 import InlineSVG from 'react-inlinesvg';
 import SearchIcon from '@/assets/images/icons/duotone/magnifying-glass.svg';
 import TableUser from './components/TableUser';
 import Handle from './handle';
 import {isRouteActive} from '@/utils/helper.js';
 import MainLayout from '@/layouts/MainLayout/index.jsx';
-import Commission from '@/pages/User/components/Commission/index.jsx';
 
 function User() {
     const dispatch = useDispatch();
     const dataFilter = useSelector((state) => state.user.dataFilter);
     const paginationListUsers = useSelector((state) => state.user.paginationListUsers);
     const selectLimit = [20, 50, 100];
+    const dataListUsers = useSelector(state => state.user.users);
 
     const {
         handleSearchUser,
@@ -32,19 +31,26 @@ function User() {
                         onChange={(e) => handleSearchUser(e.target.value)}
                         prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                         className={`main-input`}
-                        placeholder='Enter search...'
+                        placeholder='Search by name or referral code'
                     />
                 </div>
             </div>
 
             <div className={`relative main-select`}>
-                <TableUser />
-                <Select
-                    className={`absolute bottom-0 border-[1px] !rounded-[6px] w-[140px]`}
-                    value={paginationListUsers.perPage}
-                    options={selectLimit.map((value) => ({value, label: `Hiển thị ${value}`}))}
-                    onChange={(e) => handleChangeSelectUser(e)}
-                />
+                {dataListUsers && dataListUsers?.length > 0 ?
+                    <>
+                        <TableUser />
+                        <Select
+                            className={`absolute bottom-0 border-[1px] !rounded-[6px] w-[140px]`}
+                            value={paginationListUsers.perPage}
+                            options={selectLimit.map((value) => ({value, label: `Quantity ${value}`}))}
+                            onChange={(e) => handleChangeSelectUser(e)}
+                        />
+                    </>
+                    : <div className={'h-[calc(100vh_-_350px)] flex justify-center items-center'}>
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'No data'} />
+                    </div>
+                }
             </div>
         </div>
     </div>;

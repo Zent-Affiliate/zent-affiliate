@@ -6,6 +6,8 @@ import { requestGetListHistory } from '@/api/commissions';
 export default function Handle() {
     const dispatch = useDispatch();
     const activeCommission = useSelector(state => state.commission.activeCommission);
+    const userActive = useSelector(state => state.commission.userActive);
+    const commissions = useSelector(state => state.commission.commissions);
 
     const handleActiveCommission = (commission) => {
         dispatch(setListHistories([]))
@@ -14,6 +16,8 @@ export default function Handle() {
     };
 
     return {
+        commissions,
+        userActive,
         activeCommission,
 
         handleActiveCommission

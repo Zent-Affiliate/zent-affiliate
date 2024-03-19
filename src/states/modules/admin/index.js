@@ -40,12 +40,17 @@ const initialState= {
         perPage: 20,
         totalRecord: 0
     },
-    admins: []
+    admins: [],
+    adminSelected: ''
 };
 const adminSlice = createSlice({
     name: 'admin',
     initialState,
     reducers:{
+        setAdminSelected: (state, action) => ({
+            ...state,
+            adminSelected: action.payload
+        }),
         setActiveClass: (state, action) => ({
             ...state,
             activeClass: action.payload
@@ -176,24 +181,9 @@ const adminSlice = createSlice({
             ...state,
             isLoadingBtnDeleteAdmin: false
         }),
-        changePassWordAdmin: (state) => ({
-            ...state,
-            isLoadingBtnChangePassWordAdmin: true
-        }),
-        changePassWordAdminSuccess: (state) => ({
-            ...state,
-            isLoadingBtnChangePassWordAdmin: false
-        }),
-        changePassWordAdminFail: (state) => ({
-            ...state,
-            isLoadingBtnChangePassWordAdmin: false
-        }),
         refreshRouteAdmin: () => ({
             ...initialState
         })
-
-
-        
     }
 })
 
@@ -226,10 +216,8 @@ export const {
     deleteAdmin,
     deleteAdminSuccess,
     deleteAdminFail,
-    changePassWordAdmin,
-    changePassWordAdminSuccess,
-    changePassWordAdminFail,
     refreshRouteAdmin,
-    setActiveClass
+    setActiveClass,
+    setAdminSelected
 } = adminSlice.actions;
 export default adminSlice.reducer;

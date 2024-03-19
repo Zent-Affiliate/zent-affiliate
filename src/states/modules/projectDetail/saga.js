@@ -23,7 +23,6 @@ function* loadRouteData() {
     const {app} = yield select();
     yield put(requestGetProjectDetail());
     yield put(requestGetListUser())
-    yield put(requestGetListUser());
     yield put(requestGetListRules());
 
     if (isRouteActive('my-project-detail/:project_id')) {

@@ -3,7 +3,7 @@ import React from 'react';
 import InlineSVG from 'react-inlinesvg';
 import IconEditTable from '@/assets/images/icons/duotone/pencil.svg';
 import IconDeleteTable from '@/assets/images/icons/duotone/trash-can.svg';
-import { Tooltip} from 'antd';
+import {Tooltip} from 'antd';
 import Handle from './handle';
 import {useSelector} from 'react-redux';
 import HiddenString from '@/components/HiddenString';
@@ -19,12 +19,12 @@ function TableProjectAdmin() {
         handleChangeTableProjectAdmin,
         handleDeleteProjectAdminAlert,
         handleChangePaginationProjectAdmin,
-        redirectToProject,
+        redirectToProject
     } = Handle();
 
     const columns = [
         {
-            title: 'Code of Project',
+            title: 'Code',
             dataIndex: 'code',
             key: 'code',
             width: 250,
@@ -35,14 +35,16 @@ function TableProjectAdmin() {
                 return (
                     <div className={`flex`}>
                         <div className={`ml-[10px] font-medium`}>
-                            <div className={`mb-[4px] mt-[4px] text-black-content cursor-pointer`} onClick={()=>redirectToProject(record._id)}>{text}</div>
+                            <div className={`mb-[4px] mt-[4px] text-black-content cursor-pointer font-bold hover:text-blue-55`}
+                                 onClick={() => redirectToProject(record._id)}><Tooltip
+                                title={'Click to view project detail'}><span>{text}</span></Tooltip></div>
                         </div>
                     </div>
                 );
             }
         },
         {
-            title: 'Name Project',
+            title: 'Name project',
             dataIndex: 'name',
             key: 'name',
             width: 250,
@@ -70,11 +72,11 @@ function TableProjectAdmin() {
             render: (text) => {
                 return (
                     <div className={`flex`}>
-                         <div className={`font-medium w-full`}>
-              <HiddenString
-                value={text}
-              />
-            </div>
+                        <div className={`font-medium w-full`}>
+                            <HiddenString
+                                value={text}
+                            />
+                        </div>
                     </div>
                 );
             }
@@ -89,23 +91,23 @@ function TableProjectAdmin() {
             render: (text, record) => {
                 return (
                     <div className={`flex w-full justify-center bg-white`}>
-                        <Tooltip title='Update information'>
+                        <Tooltip title='Update'>
                             <div
                                 className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] mr-2 cursor-pointer !fill-[#99A1B7] hover:!fill-blue-55`}
                                 onClick={() => handleShowModalUpdateProjectAdmin(record)}
                             >
-                                    <InlineSVG src={IconEditTable} className={`w-[16px] h-[16px] `} alt='' />
+                                <InlineSVG src={IconEditTable} className={`w-[16px] h-[16px] `} alt='' />
                             </div>
                         </Tooltip>
 
                         {
                             me._id !== record._id &&
-                            <Tooltip title='Delete information'>
+                            <Tooltip title='Delete'>
                                 <div
                                     className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] cursor-pointer !fill-[#99A1B7] hover:!fill-blue-60`}
                                     onClick={() => handleDeleteProjectAdminAlert(record)}
                                 >
-                                        <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt='' />
+                                    <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt='' />
                                 </div>
                             </Tooltip>
                         }

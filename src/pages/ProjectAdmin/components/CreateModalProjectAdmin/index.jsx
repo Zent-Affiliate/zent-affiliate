@@ -133,7 +133,7 @@ function ModalCreateProjectAdmin() {
                     size={'large'}
                     onClick={handleCancelModalCreateProjectAdmin}
                 >
-                    Đóng
+                    Close
                 </Button>
                 <Button
                     loading={isLoadingBtnCreateProjectAdmin}
@@ -141,7 +141,7 @@ function ModalCreateProjectAdmin() {
                     size={'large'}
                     onClick={() => handleSubmit(TYPE_SUBMIT.CREATE, createProjectAdminSchema, infoProjectAdmin)}
                 >
-                    Tạo mới
+                    Create
                 </Button>
             </div>
         </div>

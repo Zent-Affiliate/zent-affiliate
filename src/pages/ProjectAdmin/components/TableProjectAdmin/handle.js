@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 import {useDispatch, useSelector} from 'react-redux';
-import {setDataFilter, setErrorInfoProjectAdmin, setInfoProjectAdmin,  setVisibleModalDeleteProjectAdmin, setVisibleModalUpdateProjectAdmin } from '@/states/modules/projectAdmin';
+import {setDataFilterProjectAdmin, setErrorInfoProjectAdmin, setInfoProjectAdmin,  setVisibleModalDeleteProjectAdmin, setVisibleModalUpdateProjectAdmin } from '@/states/modules/projectAdmin';
 import { deleteProjectAdmin, getListProjectAdmins } from '@/api/projectAdmin';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,7 +40,7 @@ export default function Handle() {
         const sortOrder = sorter.order && sorter.field ? (sorter.order === 'descend' ? 'desc' : 'asc') : null;
         const column = sortOrder ? sorter.field : null;
         dispatch(
-            setDataFilter({
+            setDataFilterProjectAdmin({
                 ...dataFilter,
                 sort_order: sortOrder,
                 column
@@ -51,7 +51,7 @@ export default function Handle() {
 
     const handleChangePaginationProjectAdmin = (event) => {
         dispatch(
-            setDataFilter({
+            setDataFilterProjectAdmin({
                 ...dataFilter,
                 page: event
             })
@@ -62,13 +62,13 @@ export default function Handle() {
     const handleDeleteProjectAdminAlert = async (record) => {
         const result = await Swal.fire({
             title: `<p class="text-base !mt-[-74px] !overflow-visible !font-normal">
-        Bạn có chắn chắn muốn xóa dự án <strong>${record.name}</strong> không?
+            Are you sure you want to delete project <strong>${record.name}</strong>?
       </p>`,
             icon: 'warning',
             showCancelButton: true,
             buttonsStyling: false,
-            cancelButtonText: 'Đóng',
-            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Close',
+            confirmButtonText: 'Delete',
             customClass: {
                 popup: '!w-[416px] !h-[296px] !px-11 !important',
                 confirmButton: 'hover:!bg-[#D81A48] p-2.5 px-7 rounded-lg !bg-[#F8285A] !text-white !font-semibold !outline-none mx-[5px] !mt-[-60px]',

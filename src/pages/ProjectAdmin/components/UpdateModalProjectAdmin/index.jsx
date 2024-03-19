@@ -134,7 +134,7 @@ function ModalUpdateProjectAdmin() {
                     size={'large'}
                     onClick={handleCancelModalUpdateProjectAdmin}
                 >
-                    Đóng
+                    Close
                 </Button>
                 <Button
                     loading={isLoadingBtnUpdateProjectAdmin}
@@ -142,7 +142,7 @@ function ModalUpdateProjectAdmin() {
                     size={'large'}
                     onClick={() => handleSubmit(TYPE_SUBMIT.UPDATE, updateProjectAdminSchema, infoProjectAdmin)}
                 >
-                    Cập nhật
+                    Update
                 </Button>
             </div>
         </div>

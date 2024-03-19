@@ -5,14 +5,16 @@ import { setDataChangePassAdmin, setDataFilter, setErrorDataChangePassAdmin, set
     setInfoAdmin, setVisibleModalChangePass, setVisibleModalCreateAdmin, setVisibleModalDeleteAdmin,
     setVisibleModalUpdateAdmin
 } from '@/states/modules/admin';
+
 import { getListAdmins, handleDeleteAdmin } from '@/api/admin';
 import { useNavigate } from 'react-router-dom';
 import { createProjectAdmin, getListProjectAdmins, updateProjectAdmin } from '@/api/projectAdmin';
-import { setErrorInfoProjectAdmin, setInfoProjectAdmin, setVisibleModalCreateProjectAdmin, setVisibleModalDeleteProjectAdmin, setVisibleModalUpdateProjectAdmin } from '@/states/modules/projectAdmin';
+import { setDataFilterProjectAdmin, setErrorInfoProjectAdmin, setInfoProjectAdmin, setProjectAdminActive, setVisibleModalCreateProjectAdmin, setVisibleModalDeleteProjectAdmin, setVisibleModalUpdateProjectAdmin } from '@/states/modules/projectAdmin';
 
 export default function Handle() {
     const navigate = useNavigate()
     const dataFilter = useSelector((state) => state.admin.dataFilter);
+    const dataFilterProject = useSelector((state) => state.projectAdmin.dataFilter)
     const dispatch = useDispatch();
     const errorInfoProjectAdmin = useSelector((state) => state.projectAdmin.errorInfoProject);
     const visibleModalCreateProjectAdmin = useSelector((state)=> state.projectAdmin.visibleModalCreateProjectAdmin);
@@ -100,10 +102,11 @@ export default function Handle() {
     };
 
     const handleSearchProjectAdmin = (value) => {
-        dispatch(setDataFilter({ ...dataFilter, keySearch: value }));
-        if (!value) {
-            dispatch(getListProjectAdmins());
-        }
+        dispatch(
+            setDataFilterProjectAdmin({ ...dataFilterProject, keySearch: value }));
+        // if (!value) {
+        // }
+        dispatch(getListProjectAdmins());
     };
 
     const handleEnterSearchProjectAdmin = (event) => {
@@ -113,7 +116,7 @@ export default function Handle() {
     };
 
     const handleChangeSelectProjectAdmin = (perPage) => {
-        dispatch(setDataFilter({ perPage, page: 1 }));
+        dispatch(setDataFilterProjectAdmin({ perPage, page: 1 }));
         dispatch(getListProjectAdmins());
     };
 
@@ -175,23 +178,16 @@ export default function Handle() {
         dispatch(setVisibleModalDeleteAdmin(true));
     };
 
-    // const handleUpdateStatusAdmin = (admin) => {
-    //     dispatch(handleChangeStatusAdmin(
-    //         admin._id,
-    //         admin.status === ACTIVE_STATUS.LOCK ? ACTIVE_STATUS.UNLOCK : ACTIVE_STATUS.LOCK
-    //     ));
-    // };
-
-    const handleChangeTableAdmin = (pagination, filters, sorter) => {
-        const sortOrder = sorter.order && sorter.field ? (sorter.order === 'descend' ? 'desc' : 'asc') : null;
+    const handleChangeTableAdmin = (pagination, filters, sorter = {order : '' , field: ''}) => {
+        const sortOrder =  (sorter.order && sorter.field ) ? (sorter.order === 'descend' ? 'desc' : 'asc') : null;
         const column = sortOrder ? sorter.field : null;
-        dispatch(
-            setDataFilter({
-                ...dataFilter,
-                sort_order: sortOrder,
-                column
-            })
-        );
+        // dispatch(
+        //     setDataFilter({
+        //         ...dataFilter,
+        //         sort_order: sortOrder,
+        //         column: column
+        //     })
+        // );
         dispatch(getListAdmins());
     };
 
@@ -234,6 +230,27 @@ export default function Handle() {
         dispatch(getListProjectAdmins(admin_id));
     }
 
+    const handleEnterSearchAdmin = (event) => {
+        if (event.key === 'Enter') {
+            dispatch(getListAdmins());
+        }
+    };
+
+    const handleSearchAdmin = (value) => {
+        dispatch(setDataFilter(
+            { 
+                keySearch: value,
+                perPage: dataFilter.perPage,
+                page: dataFilter.page,
+                sort_order: dataFilter.sort_order,
+                column: dataFilter.column
+            
+            }));
+        if (!value) {
+            dispatch(getListAdmins());
+        }
+    };
+
     return {
         handleShowModalUpdateAdmin,
         handleShowModalChangePassAdmin,
@@ -244,12 +261,13 @@ export default function Handle() {
         handleChangePaginationAdmin,
         handleClick,
         dataFilter,
+        dataFilterProject ,
         handleSearchProjectAdmin,
+        handleEnterSearchProjectAdmin,
         handleShowModalCreateProjectAdmin,
         handleCancelModalCreateProjectAdmin,
         handleCancelModalUpdateProjectAdmin,
         handleCancelModalDeleteProjectAdmin,
-        handleEnterSearchProjectAdmin,
         handleChangeSelectProjectAdmin,
         handleChangeInputInfo,
         handleFocus,
@@ -257,6 +275,8 @@ export default function Handle() {
         handleShowModalCreateAdmin,
         handleCancelModalUpdateAdmin,
         handleCancelModalChangePass,
-        handleCancelModalDeleteAdmin
+        handleCancelModalDeleteAdmin,
+        handleEnterSearchAdmin,
+        handleSearchAdmin
     };
 }

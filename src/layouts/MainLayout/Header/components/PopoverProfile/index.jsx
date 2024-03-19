@@ -25,7 +25,7 @@ function PopoverProfile() {
     const items = [
         {
             key: '1',
-            label: 'Update information',
+            label: 'Update',
             children: <Information handleResetError={handleResetError} />
         },
         {

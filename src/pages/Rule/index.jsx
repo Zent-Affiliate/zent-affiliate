@@ -39,7 +39,7 @@ function Rule() {
 
     const content = <div>
         <div
-            className={`bg-white rounded-lg border shadow-sm ${isMyProjectDetail ? 'h-[calc(100vh_-_200px)]' : 'h-[calc(100vh_-_265px)]'}`}>
+            className={`bg-white rounded-lg border shadow-sm ${isMyProjectDetail ? 'h-[calc(100vh_-_210px)]' : 'h-[calc(100vh_-_265px)]'}`}>
             <div className={`py-8 px-8`}>
                 <div className={`flex justify-between mb-2.5`}>
                     <div className={`w-96`}>
@@ -76,7 +76,7 @@ function Rule() {
                                 }
                             </Row>
                             :
-                            <div className={'h-[calc(100vh_-_500px)] flex justify-center items-center'}>
+                            <div className={'h-[calc(100vh_-_450px)] flex justify-center items-center'}>
                                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                             </div>
                     }

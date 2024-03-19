@@ -31,6 +31,7 @@ export default function Project() {
         handleEnterSearchProject,
         handleShowModalCreateProject
     } = Handle()
+
     return (
         hasPermission(['super_admin']) ?
         <MainLayout>
@@ -38,7 +39,7 @@ export default function Project() {
                 <div className={`py-8 px-8`}>
                     <div className={`flex justify-between mb-2.5`}>
                         <div className={`w-96`}>
-                            <Input 
+                            <Input
                                 value={dataFilter.keySearch}
                                 onKeyDown={(e) => handleEnterSearchProject(e)}
                                 onChange={(e) => handleSearchProject(e.target.value)}
@@ -94,11 +95,11 @@ export default function Project() {
                         <div className={`w-96`}>
                             <Input
                                 value={dataFilter.keySearch}
-                                onKeyDown={(e) => handleEnterSearchProject}
+                                onKeyDown={handleEnterSearchProject}
                                 onChange={(e) => handleSearchProject(e.target.value)}
                                 prefix={<InlineSVG src={SearchIcon} className={`mr-1.5 w-4 h-4`} alt='' />}
                                 className={`main-input`}
-                                placeholder='Search for name or code of project'
+                                placeholder='Search by name or code'
                             />
                         </div>
                         <div>

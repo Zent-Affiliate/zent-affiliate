@@ -34,8 +34,7 @@ export default function Handle() {
     };
 
     const handleOpenCommission = (userId) => {
-        dispatch(goToPage({path: `/${isRouteActive('/my-project-detail/:project_id/users') ? 'my-' : ''}project-detail/${location.params.project_id}/users/${userId}`}))
-     
+        dispatch(goToPage({path: `/${isRouteActive('/my-project-detail/:project_id') ? 'my-' : ''}project-detail/${location.params.project_id}/users/${userId}`}))
     };
 
     return {

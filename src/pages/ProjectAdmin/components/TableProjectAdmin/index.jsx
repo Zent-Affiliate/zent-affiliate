@@ -86,7 +86,7 @@ function TableProjectAdmin() {
             render: (text, record) => {
                 return (
                     <div className={`flex w-full justify-center bg-white`}>
-                        <Tooltip title='Cập nhật thông tin'>
+                        <Tooltip title='Update'>
                             <div
                                 className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] mr-2 cursor-pointer !fill-[#99A1B7] hover:!fill-blue-55`}
                                 onClick={() => handleShowModalUpdateProjectAdmin(record)}
@@ -97,7 +97,7 @@ function TableProjectAdmin() {
 
                         {
                             me._id !== record._id &&
-                            <Tooltip title='Xóa thông tin'>
+                            <Tooltip title='Delete'>
                                 <div
                                     className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] cursor-pointer !fill-[#99A1B7] hover:!fill-blue-60`}
                                     onClick={() => handleDeleteProjectAdminAlert(record)}

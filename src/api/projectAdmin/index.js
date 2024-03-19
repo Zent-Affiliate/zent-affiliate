@@ -8,10 +8,9 @@ import {
 } from "../../states/modules/projectAdmin/index.js";
 
 export const getListProjectAdmins = (admin_id) => async (dispatch, getState) => {
-    const id = admin_id || getState().app.location.params.admin_id;
+    const id = getState().admin.adminSelected;
     const { dataFilter } = getState().projectAdmin;
     let path = `projects/${id}?page=${dataFilter.page}&per_page=${dataFilter.perPage}`
-
     if (dataFilter.keySearch) {
         path += `&q=${dataFilter.keySearch}`;
     }
@@ -35,7 +34,8 @@ export const getListProjectAdmins = (admin_id) => async (dispatch, getState) => 
 }
 
 export const createProjectAdmin = (data) => async (dispatch, getState) => {
-    const id = getState().app.location.params.admin_id;
+    const id = getState().admin.adminSelected;
+    // console.log(getState().projectAdmin.infoProject._id)
     return callApi({
         method: 'post',
         apiPath: `projects/${id}`,

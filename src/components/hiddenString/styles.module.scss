@@ -1,0 +1,9 @@
+.wrapper {
+    &:hover {
+        .copyBtn {
+            @apply inline-block;
+        }
+    }
+
+    @apply w-full pr-[50px] flex items-center justify-start;
+}

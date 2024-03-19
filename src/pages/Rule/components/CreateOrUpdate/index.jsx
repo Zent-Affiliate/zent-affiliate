@@ -65,7 +65,7 @@ function CreateOrUpdate(props) {
                     placeholder={'Enter the convention code'}
                 />
                 {
-                    errorCreateOrUpdate && errorCreateOrUpdate.code?.length > 0 ?
+                    errorCreateOrUpdate && errorCreateOrUpdate.code ?
                         <span className={'error'}>
                         <div className={'icon'}>
                             <InlineSVG src={IconWarning} width={14} height='auto' />
@@ -89,7 +89,7 @@ function CreateOrUpdate(props) {
 
                     <div className='py-2 pl-2 pr-4 overflow-y-auto max-h-[280px]'>
                         {
-                            rule.configs.map((config, index) => {
+                            rule.configs?.map((config, index) => {
                                 return (
                                     <div key={config?._id}>
                                         <div

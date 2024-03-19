@@ -9,19 +9,19 @@ function* loadRouteData() {
     yield put(requestGetListUserByRelationship())
 
     if (isRouteActive('/my-project-detail/:project_id/users/:id')) {
-        yield put(setTitlePage('Danh sách khách hàng'));
+        yield put(setTitlePage('List User'));
         yield put(setBreadcrumb([
             {
                 path: '/my-project',
-                name: 'Dự án của tôi'
+                name: 'My project'
             },
             {
                 path: `/my-project-detail/${location.params.project_id}/users`,
-                name: 'Danh sách khách hàng'
+                name: 'List User'
             },
             {
                 path: '/my-project-detail/${location.params.project_id}/users/:id',
-                name: 'Lịch sử giao dịch'
+                name: 'Transaction History'
             }
         ]));
     } else {

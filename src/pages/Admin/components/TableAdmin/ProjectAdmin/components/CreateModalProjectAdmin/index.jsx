@@ -3,7 +3,7 @@ import InlineSVG from 'react-inlinesvg';
 import { useDispatch, useSelector } from 'react-redux';
 import IconWarning from '@/assets/images/icons/light/warning.svg';
 import { Button, Input } from 'antd';
-import Handle from '@/pages/ProjectAdmin/handle';
+import Handle from '@/pages/Admin/components/TableAdmin/ProjectAdmin/handle';
 import { TYPE_SUBMIT } from '@/utils/constants';
 import { createProjectAdminSchema} from '../../schema';
 import {setInfoProjectAdmin} from '@/states/modules/projectAdmin/index.js';
@@ -112,17 +112,17 @@ function ModalCreateProjectAdmin() {
                         {errorInfoProjectAdmin.secret_key}
                     </span>
                 }
-                <div className='flex'>
+                <div className=''>
                     <Button
                         loading={isLoadingGenerateKey}
                         icon={<InlineSVG src={IconKeySkeleton} width={12} />}
-                        className='border border-solid mt-[5px] mr-[5px] flex items-center'
-                        onClick={() => handleGetKey()}>Autogenerate Secret Key</Button>
+                        className='border border-solid mt-[3px] mr-[5px] items-center bottom-[40px] left-[470px]'
+                        onClick={() => handleGetKey()}></Button>
 
-                    <Button className='border border-solid mt-[5px]' disabled={!infoProjectAdmin.secret_key}
+                    {/* <Button className='border border-solid mt-[5px]' disabled={!infoProjectAdmin.secret_key}
                             onClick={() => {
                                 copyToClipboard(infoProjectAdmin.secret_key);
-                            }}>Copy</Button>
+                            }}>Copy</Button> */}
                 </div>
             </div>
 

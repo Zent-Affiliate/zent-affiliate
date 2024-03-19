@@ -5,13 +5,16 @@ import {useSelector} from 'react-redux';
 import moment from 'moment';
 import {Tooltip} from 'antd';
 import '../../styles.scss';
-import {isRouteActive} from '@/utils/helper.js';
+import {copyToClipboard, isRouteActive} from '@/utils/helper.js';
+import InlineSVG from 'react-inlinesvg';
+import IconCopy from '@/assets/images/icons/duotone/copy.svg';
+import styles from './styles.module.scss'
 
 function TableUser() {
     // const dataListUsers = useSelector((state) => state.user.users);
     const isLoadingTableUser = useSelector((state) => state.user.isLoadingTableUser);
     const paginationListUsers = useSelector((state) => state.user.paginationListUsers);
-    const dataListUsers = useSelector(state=>state.user.users)
+    const dataListUsers = useSelector(state => state.user.users);
 
     const {
         handleChangeTableUser,
@@ -34,7 +37,7 @@ function TableUser() {
                     <div className={`font-semibold`}>
                         <div
                             className={`mb-[4px] mt-[4px] text-black-content`}>
-                            <Tooltip title={'Nhấn để xem lịch sử giao dịch'}><span
+                            <Tooltip title={'Click to view transaction history'}><span
                                 className={'cursor-pointer hover:text-blue-55'}
                                 onClick={() => handleOpenCommission(record._id)}>{text}</span></Tooltip>
                         </div>
@@ -52,8 +55,12 @@ function TableUser() {
             defaultSortOrder: '',
             render: (text, record) => {
                 return record.referral_code ?
-                    <div className={`text-black-subContent`}>
+                    <div className={`text-black-subContent flex items-center ${styles.hoverBtn}`}>
                         {record.referral_code}
+                        <button onClick={() => copyToClipboard(record.referral_code)}
+                                className={`!fill-[#99A1B7] hover:!fill-blue-60 ml-[10px] ${styles.btn}`}>
+                            <InlineSVG src={IconCopy} className={`w-[16px] h-[16px]`} alt='' />
+                        </button>
                     </div> :
                     <i className={`text-black-subContent`}>updating</i>;
             }
@@ -63,10 +70,11 @@ function TableUser() {
             dataIndex: 'total',
             key: 'total',
             width: 200,
+            sorter: true,
             showSorterTooltip: false,
             defaultSortOrder: '',
             render: (text) => {
-                return <span>{text}</span>
+                return <span>{text.toLocaleString()}</span>;
             }
         },
         {
@@ -78,9 +86,9 @@ function TableUser() {
             showSorterTooltip: false,
             defaultSortOrder: '',
             render: (text) => {
-                return moment(text).format('DD-MM-YYYY');
+                return moment(text).format('LLL');
             }
-        },
+        }
     ];
 
     return (

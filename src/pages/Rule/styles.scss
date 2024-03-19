@@ -1,11 +1,11 @@
 .rule-card-custom {
     .ant-card-head {
-        @apply border-y-white px-[25px] py-[15px] border-b-2 border-[#000];
+        @apply px-[25px] py-[15px];
     }
 
     .ant-card-body {
-        @apply pt-0 relative p-[13px];
-        @apply h-[225px] overflow-y-hidden hover:overflow-y-auto scroll-smooth ease-linear;
+        @apply relative p-[13px];
+        @apply h-[233px] overflow-y-hidden hover:overflow-y-auto scroll-smooth ease-linear;
         scrollbar-gutter: stable both-edges;
     }
 

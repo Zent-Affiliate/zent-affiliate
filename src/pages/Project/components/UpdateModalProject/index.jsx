@@ -91,7 +91,7 @@ function ModalUpdateProject() {
                 }
             </div>
 
-            <div className={`input-wrap`}>
+            <div className={`input-wrap relative`}>
                 <div className='label-wrap'>
                     <label htmlFor='secretKeyUpdateProject' className={`required`}>
                         Secret Key
@@ -119,13 +119,11 @@ function ModalUpdateProject() {
                     <Button
                         loading={isLoadingGenerateKey}
                         icon={<InlineSVG src={IconKeySkeleton} width={12} />}
-                        className='border border-solid mt-[5px] mr-[5px] flex items-center'
-                        onClick={() => handleGetKey()}>Autogenerate Secret Key</Button>
-
-                    <Button className='border border-solid mt-[5px]' disabled={!infoProject.secret_key}
-                            onClick={() => {
-                                copyToClipboard(infoProject.secret_key);
-                            }}>Copy</Button>
+                        className='flex border border-solid mt-[3px] mr-[5px] items-center absolute right-0 top-[30px]'
+                        onClick={() => handleGetKey()}
+                    >
+                        Generate key
+                    </Button>
                 </div>
             </div>
 

@@ -1,17 +1,13 @@
-import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
+import {all, call, fork, put, select, takeLatest} from 'redux-saga/effects';
 import {setBreadcrumb, setTitlePage} from '../app';
 import {
-    changePassWordAdminFail,
-    changePassWordAdminSuccess,
     changeStatusAdminSuccess,
     createAdminFail,
     createAdminSuccess,
     deleteAdminFail,
     deleteAdminSuccess,
     setDataFilter,
-    setErrorDataChangePassAdmin,
     setErrorInfoAdmin,
-    setVisibleModalChangePass,
     setVisibleModalCreateAdmin,
     setVisibleModalDeleteAdmin,
     setVisibleModalUpdateAdmin,
@@ -19,7 +15,18 @@ import {
     updateAdminSuccess
 } from '.';
 import {handleNotification} from '@/utils/helper';
-import { getListAdmins } from '@/api/admin';
+import {getListAdmins} from '@/api/admin';
+import {
+    createProjectAdminFail,
+    createProjectAdminSuccess,
+    deleteProjectAdminFail,
+    deleteProjectAdminSuccess,
+    setErrorInfoProjectAdmin,
+    updateProjectAdminFail,
+    updateProjectAdminSuccess
+} from '../projectAdmin';
+import {getListProjectAdmins} from '@/api/projectAdmin';
+import _ from 'lodash';
 
 function* loadRouteData() {
     yield put(setTitlePage('Admin Management'));
@@ -41,7 +48,7 @@ function* loadRouteData() {
             path: '/admin-management',
             name: 'Admin Management'
         }
-    ]))
+    ]));
 }
 
 function* handleActions() {
@@ -81,7 +88,7 @@ function* handleActions() {
         if (status === 400) {
             let errors = action.payload.data.detail;
             yield put(
-                setErrorInfoUser({
+                setErrorInfoAdmin({
                     ...errors
                 })
             );
@@ -90,32 +97,80 @@ function* handleActions() {
         }
     });
 
-    yield takeLatest(changePassWordAdminSuccess, function* () {
-        handleNotification('success', 'Thay đổi mật khẩu thành công.');
-        yield put(setVisibleModalChangePass(false));
+    yield takeLatest(createProjectAdminSuccess, function* () {
+        let {admin} = yield select();
+        yield put(getListProjectAdmins(admin.adminSelected));
+        yield put(getListAdmins());
+        handleNotification('success', 'Create Project Successfully');
     });
 
-    yield takeLatest(changePassWordAdminFail, function* (action) {
-        let status = action.payload.status;
-        if (status === 400) {
+    yield takeLatest(createProjectAdminFail, function* (action) {
+        let statusError = action.payload.status;
+        if (statusError === 400) {
             let errors = action.payload.data.detail;
-            yield put(
-                setErrorDataChangePassAdmin({
-                    ...errors
-                })
-            );
+            yield put(setErrorInfoProjectAdmin({
+                code: _.get(errors, 'code', ''),
+                name: _.get(errors, 'name', ''),
+                secret_key: _.get(errors, 'secret_key', '')
+            }));
+        } else if (statusError === 401) {
+            handleNotification('error', 'Invalid information.');
+        } else {
+            handleNotification('error', 'An error occurred, please try again later!');
         }
-        handleNotification('error', 'Thay đổi mật khẩu thất bại.');
+    });
+
+    yield takeLatest(updateProjectAdminSuccess, function* () {
+        const {admin, projectAdmin} = yield select();
+        handleNotification('success', 'Updated successfully');
+        yield put(getListProjectAdmins(admin.adminSelected, {
+            ...projectAdmin.dataFilter
+        }));
+    });
+
+    yield takeLatest(updateProjectAdminFail, function* (action) {
+        let statusError = action.payload.status;
+        if (statusError === 400) {
+            let errors = action.payload.data.detail;
+            yield put(setErrorInfoProjectAdmin({
+                code: _.get(errors, 'code', ''),
+                name: _.get(errors, 'name', ''),
+                secret_key: _.get(errors, 'secret_key', '')
+            }));
+        } else if (statusError === 401) {
+            handleNotification('error', 'Invalid information.');
+        } else {
+            handleNotification('error', 'An error occurred, please try again later!');
+        }
+    });
+
+    yield takeLatest(deleteProjectAdminSuccess, function* () {
+        handleNotification('success', 'Delete Successfully');
+        const {app, projectAdmin} = yield select();
+        yield put(getListAdmins());
+        yield put(getListProjectAdmins(app.location.params.id, {
+            ...projectAdmin.dataFilter
+        }));
+    });
+
+    yield takeLatest(deleteProjectAdminFail, function* (action) {
+        let statusError = action.payload.status;
+        if (statusError === 401 || statusError === 400) {
+            let errorId = _.get(action.payload.data.errors, 'id[0]', '');
+            handleNotification('error', (errorId ? errorId : 'Invalid information.'));
+        } else {
+            handleNotification('error', 'An error occurred, please try again later!');
+        }
     });
 
     yield takeLatest(deleteAdminSuccess, function* () {
-        handleNotification('success', 'Xoá người dùng thành công.');
-        yield put(setVisibleModalDeleteAdmin(false));
+        handleNotification('success', 'Delete successfully');
         yield put(getListAdmins());
+        yield put(setVisibleModalDeleteAdmin(false));
     });
 
     yield takeLatest(deleteAdminFail, function* () {
-        yield call(handleNotification, 'error', 'Xoá người dùng thất bại.');
+        yield call(handleNotification, 'error', 'Delete failed.');
     });
 }
 

@@ -10,12 +10,12 @@ export default function ProductDetail() {
     const items = [
         {
           key: '1',
-          label: 'List user',
+          label: 'List User',
           children: <User/>,
         },
         {
           key: '2',
-          label: 'Rule config',
+          label: 'Rule Config',
           children: <Rule/>,
         }
       ];
