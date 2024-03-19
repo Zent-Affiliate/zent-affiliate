@@ -87,7 +87,7 @@ function Rule() {
                         <Pagination
                             className={'absolute right-10'}
                             current={paginationListRules.currentPage}
-                            total={22}
+                            total={paginationListRules.totalRecord}
                             pageSize={paginationListRules.perPage}
                             onChange={(e) => handleSelectPagination(e)}
                             showSizeChanger={false}

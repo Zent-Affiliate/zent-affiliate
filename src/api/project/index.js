@@ -1,9 +1,11 @@
-import { createProject, createProjectFail, createProjectSuccess,
-     deleteProjectFail, deleteProjectSuccess, deleteProject,
-     getListProject, updateProject, updateProjectFail, 
-     updateProjectSuccess, 
-     getListProjectFailure,
-     getListProjectSuccess} from "@/states/modules/project";
+import {
+    createProject, createProjectFail, createProjectSuccess,
+    deleteProjectFail, deleteProjectSuccess, deleteProject,
+    getListProject, updateProject, updateProjectFail,
+    updateProjectSuccess,
+    getListProjectFailure,
+    getListProjectSuccess, getRecommendKey, getRecommendKeySuccess, getRecommendKeyFailure
+} from '@/states/modules/project';
 import callApi from "../callApi";
 
 import _ from "lodash";
@@ -78,6 +80,21 @@ export const handleDeleteProject = (id) => async (dispatch, getState) => {
             deleteProject,
             deleteProjectSuccess,
             deleteProjectFail
+        ],
+        variables: {},
+        dispatch,
+        getState
+    });
+};
+
+export const getSecretKey = () => async (dispatch, getState) => {
+    return callApi({
+        method: 'get',
+        apiPath: '/projects/proposed-secret-key',
+        actionTypes: [
+            getRecommendKey,
+            getRecommendKeySuccess,
+            getRecommendKeyFailure
         ],
         variables: {},
         dispatch,

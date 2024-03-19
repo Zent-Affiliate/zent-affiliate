@@ -3,19 +3,13 @@ import InlineSVG from 'react-inlinesvg';
 import IconEye from '@/assets/images/icons/duotone/eye.svg';
 import IconEyeSlash from '@/assets/images/icons/duotone/eye-slash.svg';
 import IconCopy from '@/assets/images/icons/duotone/copy.svg';
-import {getNotification} from '@/utils/helper';
+import {copyToClipboard, getNotification} from '@/utils/helper';
 
 const HiddenString = ({value}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
-  };
-
-  const copyToClipboard = () => {
-    navigator.clipboard
-      .writeText(value)
-      .then(() => getNotification('success', 'Copied!', 1))
   };
 
   return (
@@ -31,7 +25,7 @@ const HiddenString = ({value}) => {
             <InlineSVG src={IconEyeSlash} className={`w-[16px] h-[16px]`} alt="" />
           )}
         </button>
-        <button onClick={copyToClipboard} className="!fill-[#99A1B7] hover:!fill-blue-60">
+        <button onClick={() => copyToClipboard(value)} className="!fill-[#99A1B7] hover:!fill-blue-60">
           <InlineSVG src={IconCopy} className={`w-[16px] h-[16px]`} alt="" />
         </button>
       </div>

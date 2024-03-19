@@ -1,32 +1,42 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import InlineSVG from 'react-inlinesvg';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import IconWarning from '@/assets/images/icons/light/warning.svg';
-import { Button, Input, Tooltip } from 'antd';
+import {Button, Input} from 'antd';
 import Handle from '@/pages/Project/handle';
-import { TYPE_SUBMIT } from '@/utils/constants';
-import { createProjectSchema } from '../../schema';
-import { copyToClipboard } from '@/utils/helper';
-import IconKeySkeleton from '@/assets/images/icons/duotone/key-skeleton.svg'
-import { getSecretKey } from '@/api/secretKey';
+import {TYPE_SUBMIT} from '@/utils/constants';
+import {createProjectSchema} from '../../schema';
+import {copyToClipboard} from '@/utils/helper';
+import IconKeySkeleton from '@/assets/images/icons/duotone/key-skeleton.svg';
+import {setInfoProject} from '@/states/modules/project/index.js';
+import _ from 'lodash';
+
 function ModalCreateProject() {
     const dispatch = useDispatch();
     const errorInfoProject = useSelector((state) => state.project.errorInfoProject);
     const isLoadingBtnCreateProject = useSelector((state) => state.project.isLoadingBtnCreateProject);
     const infoProject = useSelector((state) => state.project.infoProject);
+    const recommendKey = useSelector((state) => state.project.recommendKey);
+    const isLoadingGenerateKey = useSelector((state) => state.project.isLoadingGenerateKey);
 
-    const errorInfoSecretKey = useSelector((state) => state.secretkey.errorInfoSecretKey);
-    const infoSecretKey = useSelector(state => state.secretkey.secretKey)
-    
     const {
         handleChangeInputInfo,
         handleFocus,
         handleCancelModalCreateProject,
         handleSubmit,
-        handleGetKey,
+        handleGetKey
     } = Handle();
 
-    
+    useEffect(() => {
+        if (recommendKey) {
+            const newInfoProject = _.cloneDeep(infoProject);
+            dispatch(setInfoProject({
+                ...newInfoProject,
+                secret_key: recommendKey
+            }));
+        }
+    }, [dispatch, recommendKey]);
+
     return (
         <div>
             <div className={`input-wrap`}>
@@ -87,23 +97,34 @@ function ModalCreateProject() {
                 </div>
                 <Input
                     id='secret_key'
-                    value={console.log(infoSecretKey ? infoSecretKey : '')}
+                    value={infoProject.secret_key}
                     onFocus={() => handleFocus('secret_key')}
                     onChange={(e) => handleChangeInputInfo(e, 'secret_key')}
-                    className={`main-input ${errorInfoSecretKey && errorInfoSecretKey.secret_key ? 'error-input' : ''}`}
+                    className={`main-input ${errorInfoProject && errorInfoProject.secret_key ? 'error-input' : ''}`}
                     placeholder={'Enter the secret key'}
-/>
+                />
 
                 {
-                    errorInfoSecretKey && errorInfoSecretKey.secret_key
+                    errorInfoProject && errorInfoProject.secret_key &&
+                    <span className={`error`}>
+                        <div className={`icon`}>
+                            <InlineSVG src={IconWarning} width={14} height={14} />
+                        </div>
+                        {errorInfoProject.secret_key}
+                    </span>
                 }
-                <div className='flex'>
-                    <Button 
-                    icon={<InlineSVG src={IconKeySkeleton} width={12 } />} 
-                    className='border border-solid mt-[5px] mr-[5px] flex items-center' onClick={() => handleGetKey() }>Autogenerate Secret Key</Button>
 
-                    <Button className='border border-solid mt-[5px]' disabled = {!infoProject.secret_key} 
-                    onClick={()=>{copyToClipboard(infoProject.secret_key)}}>Copy</Button>
+                <div className='flex'>
+                    <Button
+                        loading={isLoadingGenerateKey}
+                        icon={<InlineSVG src={IconKeySkeleton} width={12} />}
+                        className='border border-solid mt-[5px] mr-[5px] flex items-center'
+                        onClick={() => handleGetKey()}>Autogenerate Secret Key</Button>
+
+                    <Button className='border border-solid mt-[5px]' disabled={!infoProject.secret_key}
+                            onClick={() => {
+                                copyToClipboard(infoProject.secret_key);
+                            }}>Copy</Button>
                 </div>
             </div>
 

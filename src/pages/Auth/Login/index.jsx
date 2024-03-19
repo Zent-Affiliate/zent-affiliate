@@ -1,8 +1,7 @@
 import React from 'react';
 import './styles.scss';
 import AuthLayout from '@/layouts/AuthLayout';
-import { Button, Flex, Input } from 'antd';
-import styles from './styles.module.scss';
+import {Button, Flex, Input} from 'antd';
 import IconWarning from '@/assets/images/icons/light/warning.svg';
 import InlineSVG from 'react-inlinesvg';
 import Handle from './handle.js';
@@ -56,12 +55,6 @@ function Login() {
                         {errorLogin.password}
                     </span>
                 }
-            </div>
-
-            <div className={styles.forgot}>
-                <span onClick={() => navigate('/forgot-password')}>
-                    Forgot password?
-                </span>
             </div>
 
             <Flex vertical gap='small'>

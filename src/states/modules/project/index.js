@@ -39,9 +39,24 @@ const projectSlice = createSlice({
             name: '',
             admin_id: '',
             secret_key: ''
-        }
+        },
+        recommendKey: '',
+        isLoadingGenerateKey: false
     },
     reducers: {
+        getRecommendKey: (state) => ({
+            ...state,
+            isLoadingGenerateKey: true
+        }),
+        getRecommendKeySuccess: (state, action) => ({
+            ...state,
+            isLoadingGenerateKey: false,
+            recommendKey: action.payload.data
+        }),
+        getRecommendKeyFailure: (state) => ({
+            ...state,
+            isLoadingGenerateKey: false
+        }),
         setVisibleModalUpdateProject: (state, action) => ({
             ...state,
             visibleModalUpdateProject: action.payload
@@ -168,6 +183,9 @@ export const {
     deleteProject,
     deleteProjectSuccess,
     deleteProjectFail,
-    setListDataProject
+    setListDataProject,
+    getRecommendKey,
+    getRecommendKeySuccess,
+    getRecommendKeyFailure
 } = projectSlice.actions;
 export default projectSlice.reducer;

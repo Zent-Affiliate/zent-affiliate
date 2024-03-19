@@ -25,7 +25,7 @@ function* loadRouteData() {
             }
         ]));
     } else {
-        yield put(setTitlePage(`Quản lý dự án`));
+        yield put(setTitlePage(`Project Management`));
         yield put(setBreadcrumb([
             {
                 path: '/admin-management',

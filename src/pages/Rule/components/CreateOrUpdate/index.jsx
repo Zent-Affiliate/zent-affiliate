@@ -45,7 +45,7 @@ function CreateOrUpdate(props) {
                     placeholder={'Enter the convention name'}
                 />
                 {
-                    errorCreateOrUpdate && errorCreateOrUpdate.name.length > 0 ?
+                    errorCreateOrUpdate && errorCreateOrUpdate.name?.length > 0 ?
                         <span className={'error'}>
                         <div className={'icon'}>
                             <InlineSVG src={IconWarning} width={14} height='auto' />
@@ -65,7 +65,7 @@ function CreateOrUpdate(props) {
                     placeholder={'Enter the convention code'}
                 />
                 {
-                    errorCreateOrUpdate && errorCreateOrUpdate.code.length > 0 ?
+                    errorCreateOrUpdate && errorCreateOrUpdate.code?.length > 0 ?
                         <span className={'error'}>
                         <div className={'icon'}>
                             <InlineSVG src={IconWarning} width={14} height='auto' />

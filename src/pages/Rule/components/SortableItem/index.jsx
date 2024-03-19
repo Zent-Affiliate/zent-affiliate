@@ -47,7 +47,7 @@ function SortableItem(props) {
                     </div>
                     <div>
                         <span className={'font-semibold'}>Calculation type: </span>
-                        <span>{item.type === RULE_CONFIG.PERCENT ? 'Phần trăm' : 'Cố định'}</span>
+                        <span>{item.type === RULE_CONFIG.PERCENT ? 'Percent' : 'Fixed'}</span>
                     </div>
                 </div>
 

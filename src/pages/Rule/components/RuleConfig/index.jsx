@@ -7,6 +7,10 @@ import Handle from '@/pages/Rule/components/RuleConfig/handle.js';
 import '../../styles.scss';
 import Options from '@/pages/Rule/components/Options/index.jsx';
 import {restrictToVerticalAxis} from '@dnd-kit/modifiers';
+import {copyToClipboard} from '@/utils/helper.js';
+import InlineSVG from 'react-inlinesvg';
+import IconCopy from '@/assets/images/icons/duotone/copy.svg';
+import styles from './styles.module.scss';
 
 function RuleConfig(props) {
     const rule = props.record;
@@ -22,10 +26,16 @@ function RuleConfig(props) {
             <Card
                 key={rule._id}
                 title={
-                    <>
+                    <div className={styles.titleWrap}>
                         <div>{rule.name}</div>
-                        <div className={'text-sm text-[#99a1b7]'}>{rule.code}</div>
-                    </>
+                        <div className={'text-sm text-[#99a1b7]'}>
+                            <span className={'mr-2'}>{rule.code}</span>
+                            <button onClick={() => copyToClipboard(rule.code)}
+                                    className={`${styles.copyIcon} !fill-[#99A1B7] hover:!fill-blue-60`}>
+                                <InlineSVG src={IconCopy} className={`w-[14px] h-[14px]`} alt='' />
+                            </button>
+                        </div>
+                    </div>
                 }
                 extra={
                     <Options

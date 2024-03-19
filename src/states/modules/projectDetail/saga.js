@@ -17,10 +17,12 @@ import {
 } from '@/states/modules/rule/index.js';
 import _ from 'lodash';
 import {requestGetProjectDetail} from '@/api/projectDetail';
+import {requestGetListUser} from '@/api/users/index.js';
 
 function* loadRouteData() {
     const {app} = yield select();
     yield put(requestGetProjectDetail());
+    yield put(requestGetListUser());
     yield put(requestGetListRules());
 
     if (isRouteActive('my-project-detail/:project_id')) {

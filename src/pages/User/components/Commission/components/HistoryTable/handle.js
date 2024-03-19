@@ -118,7 +118,8 @@ export default function Handle() {
       title: 'Rule config level',
       dataIndex: 'rule_level',
       key: 'rule_level',
-      width: 200,
+      width: 150,
+      align: 'center',
       defaultSortOrder: '',
       render: (text) => {
         return text + 1;
@@ -128,7 +129,7 @@ export default function Handle() {
       title: 'Created at',
       dataIndex: 'created_at',
       key: 'created_at',
-      width: 200,
+      width: 250,
       defaultSortOrder: '',
       render: (text) => {
         return moment(text).format('LLL');

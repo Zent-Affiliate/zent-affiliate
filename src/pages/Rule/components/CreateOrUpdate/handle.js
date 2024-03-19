@@ -15,11 +15,11 @@ export default function Handle() {
     const dispatch = useDispatch();
     const typeSelection = [
         {
-            label: 'Phần trăm',
+            label: 'Percent',
             value: RULE_CONFIG.PERCENT
         },
         {
-            label: 'Cố định',
+            label: 'Fixed',
             value: RULE_CONFIG.FIXED
         }
     ];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import InlineSVG from 'react-inlinesvg';
 import { useDispatch, useSelector } from 'react-redux';
 import IconWarning from '@/assets/images/icons/light/warning.svg';
@@ -6,19 +6,36 @@ import { Button, Input } from 'antd';
 import Handle from '@/pages/ProjectAdmin/handle';
 import { TYPE_SUBMIT } from '@/utils/constants';
 import { createProjectAdminSchema} from '../../schema';
+import {copyToClipboard} from '@/utils/helper.js';
+import {setInfoProjectAdmin} from '@/states/modules/projectAdmin/index.js';
+import IconKeySkeleton from '@/assets/images/icons/duotone/key-skeleton.svg';
+import _ from 'lodash';
 
 function ModalCreateProjectAdmin() {
     const dispatch = useDispatch();
     const errorInfoProjectAdmin = useSelector((state) => state.projectAdmin.errorInfoProject);
     const isLoadingBtnCreateProjectAdmin = useSelector((state) => state.projectAdmin.isLoadingBtnCreateProjectAdmin);
     const infoProjectAdmin = useSelector((state) => state.projectAdmin.infoProject);
+    const recommendKey = useSelector((state) => state.project.recommendKey);
+    const isLoadingGenerateKey = useSelector((state) => state.project.isLoadingGenerateKey);
 
     const {
         handleChangeInputInfo,
         handleFocus,
         handleCancelModalCreateProjectAdmin,
-        handleSubmit
+        handleSubmit,
+        handleGetKey
     } = Handle();
+
+    useEffect(() => {
+        if (recommendKey) {
+            const newInfoProject = _.cloneDeep(infoProjectAdmin);
+            dispatch(setInfoProjectAdmin({
+                ...newInfoProject,
+                secret_key: recommendKey
+            }));
+        }
+    }, [dispatch, recommendKey]);
 
     return (
         <div>
@@ -95,6 +112,19 @@ function ModalCreateProjectAdmin() {
                         {errorInfoProjectAdmin.secret_key}
                     </span>
                 }
+
+                <div className='flex'>
+                    <Button
+                        loading={isLoadingGenerateKey}
+                        icon={<InlineSVG src={IconKeySkeleton} width={12} />}
+                        className='border border-solid mt-[5px] mr-[5px] flex items-center'
+                        onClick={() => handleGetKey()}>Autogenerate Secret Key</Button>
+
+                    <Button className='border border-solid mt-[5px]' disabled={!infoProjectAdmin.secret_key}
+                            onClick={() => {
+                                copyToClipboard(infoProjectAdmin.secret_key);
+                            }}>Copy</Button>
+                </div>
             </div>
 
             <div className={`flex justify-center mt-8`}>

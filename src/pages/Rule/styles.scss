@@ -1,6 +1,6 @@
 .rule-card-custom {
     .ant-card-head {
-        @apply border-y-white px-[25px] py-[15px];
+        @apply border-y-white px-[25px] py-[15px] border-b-2 border-[#000];
     }
 
     .ant-card-body {

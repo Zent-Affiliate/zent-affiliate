@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import './styles.module.scss';
 import { validate } from "@/utils/validates";
 import _ from "lodash";
+import {getSecretKey} from '@/api/project/index.js';
 
 
 export default function Handle(){
@@ -116,6 +117,10 @@ export default function Handle(){
         }
     };
 
+    const handleGetKey = () => {
+        dispatch(getSecretKey());
+    };
+
     return{
         handleSearchProjectAdmin,
         handleShowModalCreateProjectAdmin,
@@ -126,6 +131,7 @@ export default function Handle(){
         handleChangeSelectProjectAdmin,
         handleChangeInputInfo,
         handleFocus,
-        handleSubmit
+        handleSubmit,
+        handleGetKey
     }
 } 

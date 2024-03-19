@@ -1,30 +1,27 @@
-import { getListProjects, handleCreateProject, handleUpdateProject } from "@/api/project";
-import { 
-    setDataFilter, 
-    setErrorInfoProject, 
-    setInfoProject, 
-    setProjectActive, 
-    setVisibleModalCreateProject, 
-    setVisibleModalDeleteProject, 
-    setVisibleModalUpdateProject } from "@/states/modules/project";
-import { TYPE_SUBMIT } from "@/utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+import {getListProjects, getSecretKey, handleCreateProject, handleUpdateProject} from '@/api/project';
+import {
+    setDataFilter,
+    setErrorInfoProject,
+    setInfoProject,
+    setProjectActive,
+    setVisibleModalCreateProject,
+    setVisibleModalDeleteProject,
+    setVisibleModalUpdateProject
+} from '@/states/modules/project';
+import {TYPE_SUBMIT} from '@/utils/constants';
+import {useDispatch, useSelector} from 'react-redux';
 import './styles.module.scss';
-import { validate } from "@/utils/validates";
-import _ from "lodash";
-import {useEffect} from 'react';
-import {setBreadcrumb} from '@/states/modules/app/index.js';
-import { getSecretKey } from "@/api/secretKey";
-import { setErrorInfoSecretKey, setInfoSecretKey } from "@/states/modules/secretKey";
+import {validate} from '@/utils/validates';
+import _ from 'lodash';
 
-
-export default function Handle(){
+export default function Handle() {
     const dispatch = useDispatch();
     const infoProject = useSelector((state) => state.project.infoProject);
     const errorInfoProject = useSelector((state) => state.project.errorInfoProject);
     const dataFilter = useSelector((state) => state.project.dataFilter);
     const paginationListProjects = useSelector((state) => state.project.paginationListProjects);
-    const handleCancelModalCreateProject = () =>{
+
+    const handleCancelModalCreateProject = () => {
         dispatch(
             setErrorInfoProject({
                 code: '',
@@ -59,20 +56,20 @@ export default function Handle(){
                 secret_key: ''
             })
         );
-        dispatch(setVisibleModalCreateProject(true))
+        dispatch(setVisibleModalCreateProject(true));
     };
 
     const handleCancelModalUpdateProject = () => {
-        dispatch(setProjectActive(null))
-        dispatch(setVisibleModalUpdateProject(false))
-    }
+        dispatch(setProjectActive(null));
+        dispatch(setVisibleModalUpdateProject(false));
+    };
 
     const handleCancelModalDeleteProject = () => {
         dispatch(setVisibleModalDeleteProject(false));
     };
 
     const handleSearchProject = (value) => {
-        dispatch(setDataFilter({ ...dataFilter, keySearch: value }));
+        dispatch(setDataFilter({...dataFilter, keySearch: value}));
         if (!value) {
             dispatch(getListProjects());
         }
@@ -85,7 +82,7 @@ export default function Handle(){
     };
 
     const handleChangeSelectProject = (perPage) => {
-        dispatch(setDataFilter({ ...paginationListProjects, perPage, page: 1 }));
+        dispatch(setDataFilter({...paginationListProjects, perPage, page: 1}));
         dispatch(getListProjects());
     };
 
@@ -115,13 +112,13 @@ export default function Handle(){
 
         if (type === TYPE_SUBMIT.UPDATE) {
             validate(scheme, dataProject, {
-                onSuccess: (data) => dispatch(handleUpdateProject( data)),
+                onSuccess: (data) => dispatch(handleUpdateProject(data)),
                 onError: (error) => dispatch(setErrorInfoProject(error))
             });
         }
     };
 
-    return{
+    return {
         handleSearchProject,
         handleShowModalCreateProject,
         handleCancelModalCreateProject,
@@ -133,5 +130,5 @@ export default function Handle(){
         handleFocus,
         handleSubmit,
         handleGetKey
-    }
+    };
 } 
