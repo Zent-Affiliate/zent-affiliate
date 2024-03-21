@@ -14,7 +14,8 @@ function Login() {
         isLoadingBtnLogin,
         handleChangeInput,
         handleFocus,
-        handleConfirmLogin
+        handleConfirmLogin,
+        handleEnterAdmin
     } = Handle();
 
     return (
@@ -26,6 +27,7 @@ function Login() {
                     value={datFormLogin.email}
                     onChange={(e) => handleChangeInput(e, 'email')}
                     onFocus={(e) => handleFocus(e, 'email')}
+                    onKeyDown={(e) => handleEnterAdmin(e)}
                 />
                 {
                     errorLogin && errorLogin.email.length > 0 &&
@@ -45,6 +47,7 @@ function Login() {
                     value={datFormLogin.password}
                     onChange={(e) => handleChangeInput(e, 'password')}
                     onFocus={(e) => handleFocus(e, 'password')}
+                    onKeyDown={(e) => handleEnterAdmin(e)}
                 />
                 {
                     errorLogin && errorLogin.password.length > 0 &&
