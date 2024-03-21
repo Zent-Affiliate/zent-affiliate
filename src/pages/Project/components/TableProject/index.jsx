@@ -1,133 +1,56 @@
-import TableDefault from '@/components/Table';
 import React from 'react';
-import InlineSVG from 'react-inlinesvg';
-import IconEditTable from '@/assets/images/icons/duotone/pencil.svg';
-import IconDeleteTable from '@/assets/images/icons/duotone/trash-can.svg';
-import IconChangePass from '@/assets/images/icons/duotone/lock.svg';
-import { Avatar, Switch, Tooltip } from 'antd';
+import {Skeleton} from 'antd';
 import Handle from './handle';
-import { useSelector } from 'react-redux';
-import { ACTIVE_STATUS } from '@/utils/constants';
-import HiddenString from '@/components/HiddenString';
+import {useSelector} from 'react-redux';
+import styles from './styles.module.scss';
+import CardProject from '@/pages/Project/components/CardProject/index.jsx';
 
-
-function TableProject() {
+function TableProject(props) {
+    const { isSuperAdmin } = props;
     const dataListProjects = useSelector((state) => state.project.projects);
     const isLoadingTableProject = useSelector((state) => state.project.isLoadingTableProject);
-    const me = useSelector((state) => state.auth.me);
-    const paginationListProjects = useSelector((state) => state.project.paginationListProjects);
+    // const paginationListProjects = useSelector((state) => state.project.paginationListProjects);
+
     const {
         handleShowModalUpdateProject,
-        handleChangeTableProject,
         handleDeleteProjectAlert,
-        handleChangePaginationProject,
+        // handleChangePaginationProject,
         redirectToProject,
     } = Handle();
 
-    const columns = [
-        {
-            title: 'Code of Project',
-            dataIndex: 'code',
-            key: 'code',
-            width: 250,
-            sorter: (a, b) => a.age - b.age,
-            showSorterTooltip: false,
-            defaultSortOrder: '',
-            render: (text, record) => {
-                return (
-                    <div className={`flex`}>
-                        <div className={`font-medium`}>
-                            <div className={`mb-[4px] mt-[4px] text-black-content cursor-pointer`} onClick={() => redirectToProject(record._id)}>{text}</div>
-                        </div>
-                    </div>
-                );
-            }
-        },
-        {
-            title: 'Name Project',
-            dataIndex: 'name',
-            key: 'name',
-            width: 250,
-            sorter: (a, b) => a.age - b.age,
-            showSorterTooltip: false,
-            defaultSortOrder: '',
-            render: (text) => {
-                return (
-                    <div className={`flex`}>
-                        <div className={`font-medium`}>
-                            <div className={`mb-[4px] mt-[4px] text-black-content`}>{text}</div>
-                        </div>
-                    </div>
-                );
-            }
-        },
-        {
-            title: 'Secret Key',
-            dataIndex: 'secret_key',
-            key: 'secret_key',
-            width: 250,
-            sorter: (a, b) => a.age - b.age,
-            showSorterTooltip: false,
-            defaultSortOrder: '',
-            render: (text) => {
-                return (
-                    <div className={`flex`}>
-                        <div className={`font-medium w-full`}>
-                            <HiddenString
-                                value={text}
-                            />
-                        </div>
-                    </div>
-                );
-            }
-        },
-        {
-            title: 'Hoạt động',
-            dataIndex: 'actions',
-            key: 'actions',
-            align: 'center',
-            fixed: 'right',
-            width: 100,
-            render: (text, record) => {
-                return (
-                    <div className={`flex w-full justify-center bg-white`}>
-                        <div
-                            className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] mr-2 cursor-pointer !fill-[#99A1B7] hover:!fill-blue-55`}
-                            onClick={() => handleShowModalUpdateProject(record)}
-                        >
-                            <Tooltip title=' Update information'>
-                                <InlineSVG src={IconEditTable} className={`w-[16px] h-[16px] `} alt='' />
-                            </Tooltip>
-                        </div>
-
-                        {
-                            me._id !== record._id &&
-                            <div
-                                className={`flex justify-center items-center rounded-md w-8 h-8 bg-[#F9F9F9] cursor-pointer !fill-[#99A1B7] hover:!fill-blue-60`}
-                                onClick={() => handleDeleteProjectAlert(record)}
-                            >
-                                <Tooltip title='Delete information'>
-                                    <InlineSVG src={IconDeleteTable} className={`w-[16px] h-[16px]`} alt='' />
-                                </Tooltip>
-                            </div>
-                        }
-                    </div>
-                );
-            }
-        }
-    ];
-
     return (
         <div>
-            <TableDefault
-                loading={isLoadingTableProject}
-                onChange={handleChangeTableProject}
-                dataSource={dataListProjects}
-                pagination={paginationListProjects}
-                columns={columns}
-                rowKey={(record) => record._id}
-                handleSelectPagination={(e) => handleChangePaginationProject(e)}
-            />
+            <div className={`${isSuperAdmin?'h-[66vh]':'h-[80vh]'} ${styles.listProjectWrap}`}>
+            {
+                isLoadingTableProject?
+                    <Skeleton loading={true} active></Skeleton> :
+                    <div className={`${styles.listProject} gap-2.5`}>
+                        {
+                            dataListProjects.map((project) => {
+                                return <CardProject
+                                  key={project._id}
+                                  project={project}
+                                  handleShowModalUpdateProject={(pr) => handleShowModalUpdateProject(pr)}
+                                  handleDeleteProjectAlert={(pr) =>handleDeleteProjectAlert(pr)}
+                                  redirectToProject={(pr) =>redirectToProject(pr)}
+                                />
+                          })
+                        }
+                    </div>
+            }
+            </div>
+            {/*{*/}
+            {/*    paginationListProjects ?*/}
+            {/*      <Pagination*/}
+            {/*        className={'flex justify-end'}*/}
+            {/*        current={paginationListProjects.currentPage}*/}
+            {/*        total={paginationListProjects.totalRecord}*/}
+            {/*        pageSize={paginationListProjects.perPage}*/}
+            {/*        onChange={(e) => handleChangePaginationProject(e)}*/}
+            {/*        showSizeChanger={false}*/}
+            {/*      />*/}
+            {/*      : ''*/}
+            {/*}*/}
         </div>
     );
 }

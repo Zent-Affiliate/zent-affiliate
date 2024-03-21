@@ -12,7 +12,7 @@ import _ from "lodash";
 
 export const getListProjects = () => async(dispatch, getState) => {
     const dataFilter = getState().project.dataFilter;
-    let path = `projects?q=&page=${dataFilter.page}&per_page=${dataFilter.perPage}`;
+    let path = `projects?page=${dataFilter.page}&per_page=${dataFilter.perPage}`;
     if (dataFilter.keySearch) {
         path += `&q=${dataFilter.keySearch}`;
     }
