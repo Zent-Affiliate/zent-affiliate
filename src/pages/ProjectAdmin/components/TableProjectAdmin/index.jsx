@@ -41,7 +41,7 @@ function TableProjectAdmin() {
             }
         },
         {
-            title: 'Name Project',
+            title: 'Name',
             dataIndex: 'name',
             key: 'name',
             width: 250,

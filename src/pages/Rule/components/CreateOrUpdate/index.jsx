@@ -42,7 +42,7 @@ function CreateOrUpdate(props) {
                     className={`main-input`}
                     value={rule.name}
                     onChange={(e) => onChangeForm(e.target.value, 'name')}
-                    placeholder={'Enter the convention name'}
+                    placeholder={'Enter name'}
                 />
                 {
                     errorCreateOrUpdate && errorCreateOrUpdate.name?.length > 0 ?
@@ -62,7 +62,7 @@ function CreateOrUpdate(props) {
                     className={`main-input`}
                     value={rule.code}
                     onChange={(e) => onChangeForm(e.target.value, 'code')}
-                    placeholder={'Enter the convention code'}
+                    placeholder={'Enter code'}
                 />
                 {
                     errorCreateOrUpdate && errorCreateOrUpdate.code ?
@@ -155,12 +155,12 @@ function CreateOrUpdate(props) {
                     <Button
                         loading={isCreateRule ? isLoadingBtnCreateRule : isLoadingBtnUpdateRule}
                         onClick={() => handleSubmitForm(isCreateRule)}
-                        className={`main-btn-primary`} type={'primary'} size={'large'}>
+                        className={`main-btn-primary mr-2`} type={'primary'} size={'large'}>
                         {isCreateRule ? 'Create' : 'Update'}
                     </Button>
                     <Button
                         onClick={() => dispatch(setVisibleModalCreateOrUpdate(false))}
-                        className={`ant-btn-close mr-2`}
+                        className={`ant-btn-close`}
                         size={'large'}>
                         Close
                     </Button>

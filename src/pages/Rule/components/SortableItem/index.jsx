@@ -72,7 +72,7 @@ function SortableItem(props) {
                             }
                         </span>
                     </div>
-                    <div className={'flex mt-2'}>
+                    <div className={`flex ${(activeConfig && (activeConfig?._id === props.id)) ? 'mt-2' : ''}`}>
                         <span className={'font-semibold'}>Type:</span> &nbsp;
                         <span className={'flex w-[38%]'}>
                             {

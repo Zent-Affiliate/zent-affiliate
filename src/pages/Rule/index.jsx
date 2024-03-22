@@ -100,7 +100,7 @@ function Rule() {
             isModalOpen={visibleModalCreateOrUpdate}
             handleOk={() => dispatch(setVisibleModalCreateOrUpdate(!visibleModalCreateOrUpdate))}
             handleCancel={() => dispatch(setVisibleModalCreateOrUpdate(false))}
-            title={isCreateRule ? 'Create convention' : 'Update convention'}
+            title={isCreateRule ? 'Create new convention' : 'Update convention'}
         >
             <CreateOrUpdate
                 isCreateRule={isCreateRule}

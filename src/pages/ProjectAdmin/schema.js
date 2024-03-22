@@ -13,7 +13,7 @@ export const updateProjectAdminSchema = Joi.object({
         .trim()
         .max(MAX_STRING_SIZE)
         .required()
-        .label('Name of Project'),
+        .label('Name'),
     secret_key: Joi.string()
         .trim()
         .min(16)
@@ -33,7 +33,7 @@ export const createProjectAdminSchema = Joi.object({
         .trim()
         .max(MAX_STRING_SIZE)
         .required()
-        .label('Name of Project'),
+        .label('Name'),
     secret_key: Joi.string()
         .trim()
         .min(16)

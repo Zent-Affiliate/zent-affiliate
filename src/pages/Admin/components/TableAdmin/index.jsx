@@ -137,7 +137,7 @@ function TableAdmin() {
                         <ModalDefault
                             isModalOpen={visibleModalUpdateProjectAdmin}
                             handleCancel={handleCancelModalUpdateProjectAdmin}
-                            title='Update the project'
+                            title='Update project'
                         >
                             <ModalUpdateProjectAdmin />
                         </ModalDefault>

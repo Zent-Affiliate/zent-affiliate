@@ -69,7 +69,7 @@ function ModalUpdateProject() {
             <div className={`input-wrap`}>
                 <div className='label-wrap'>
                     <label htmlFor='nameUpdateProject' className={`required`}>
-                        Name of Project
+                        Name
                     </label>
                 </div>
                 <Input
@@ -78,7 +78,7 @@ function ModalUpdateProject() {
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     onFocus={() => handleFocus('name')}
                     className={`main-input ${errorInfoProject && errorInfoProject.name ? 'error-input' : ''}`}
-                    placeholder={'Name of Project'}
+                    placeholder={'Enter name'}
                 />
                 {
                     errorInfoProject && errorInfoProject.name &&
@@ -104,7 +104,7 @@ function ModalUpdateProject() {
                         onChange={(e) => handleChangeInputInfo(e, 'secret_key')}
                         onFocus={() => handleFocus('secret_key')}
                         className={`main-input ${errorInfoProject && errorInfoProject.secret_key ? 'error-input' : ''}`}
-                        placeholder={'Enter the secret key'}
+                        placeholder={'Enter secret key'}
                     />
                     {
                         errorInfoProject && errorInfoProject.secret_key &&

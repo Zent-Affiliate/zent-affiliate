@@ -71,7 +71,7 @@ export default function Project() {
                         <ModalDefault
                             isModalOpen={visibleModalUpdateProject}
                             handleCancel={handleCancelModalUpdateProject}
-                            title='Update the project'
+                            title='Update project'
                         >
                             <ModalUpdateProject />
                         </ModalDefault>
@@ -125,7 +125,7 @@ export default function Project() {
                         <ModalDefault
                             isModalOpen={visibleModalUpdateProject}
                             handleCancel={handleCancelModalUpdateProject}
-                            title='Update the project'
+                            title='Update project'
                         >
                             <ModalUpdateProject />
                         </ModalDefault>

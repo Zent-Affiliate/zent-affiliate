@@ -38,7 +38,7 @@ function TableUser() {
                         <div
                             className={`mb-[4px] mt-[4px] text-black-content`}>
                             <Tooltip title={'Click to view transaction history'}><span
-                                className={'cursor-pointer hover:text-blue-55'}
+                                className={'cursor-pointer text-blue-35 hover:text-blue-55'}
                                 onClick={() => handleOpenCommission(record._id)}>{text}</span></Tooltip>
                         </div>
                     </div>

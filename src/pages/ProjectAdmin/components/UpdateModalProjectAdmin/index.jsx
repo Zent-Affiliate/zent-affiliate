@@ -68,7 +68,7 @@ function ModalUpdateProjectAdmin() {
             <div className={`input-wrap`}>
                 <div className='label-wrap'>
                     <label htmlFor='nameUpdateProject' className={`required`}>
-                        Name of Project
+                        Name
                     </label>
                 </div>
                 <Input
@@ -77,7 +77,7 @@ function ModalUpdateProjectAdmin() {
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     onFocus={() => handleFocus('name')}
                     className={`main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.name ? 'error-input' : ''}`}
-                    placeholder={'Name of Project'}
+                    placeholder={'Name'}
                 />
                 {
                     errorInfoProjectAdmin && errorInfoProjectAdmin.name &&
@@ -103,7 +103,7 @@ function ModalUpdateProjectAdmin() {
                         onChange={(e) => handleChangeInputInfo(e, 'secret_key')}
                         onFocus={() => handleFocus('secret_key')}
                         className={`main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.secret_key ? 'error-input' : ''}`}
-                        placeholder={'Enter the secret key'}
+                        placeholder={'Enter secret key'}
                     />
                     {
                         errorInfoProjectAdmin && errorInfoProjectAdmin.secret_key &&

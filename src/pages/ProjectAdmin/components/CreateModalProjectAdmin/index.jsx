@@ -51,7 +51,7 @@ function ModalCreateProjectAdmin() {
                     onFocus={() => handleFocus('code')}
                     onChange={(e) => handleChangeInputInfo(e, 'code')}
                     className={`main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.code ? 'error-input' : ''}`}
-                    placeholder={'Enter the project code'}
+                    placeholder={'Enter code'}
                 />
                 {
                     errorInfoProjectAdmin && errorInfoProjectAdmin.code &&
@@ -67,7 +67,7 @@ function ModalCreateProjectAdmin() {
             <div className={`input-wrap`}>
                 <div className='label-wrap'>
                     <label htmlFor='name' className={`required`}>
-                        Name of Project
+                        Name
                     </label>
                 </div>
                 <Input
@@ -76,7 +76,7 @@ function ModalCreateProjectAdmin() {
                     onFocus={() => handleFocus('name')}
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     className={`main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.name ? 'error-input' : ''}`}
-                    placeholder={'Enter the project name'}
+                    placeholder={'Enter name'}
                 />
                 {
                     errorInfoProjectAdmin && errorInfoProjectAdmin.name &&
@@ -102,7 +102,7 @@ function ModalCreateProjectAdmin() {
                         onFocus={() => handleFocus('secret_key')}
                         onChange={(e) => handleChangeInputInfo(e, 'secret_key')}
                         className={`main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.secret_key ? 'error-input' : ''}`}
-                        placeholder={'Enter the secret key'}
+                        placeholder={'Enter secret key'}
                     />
                      {
                         errorInfoProjectAdmin && errorInfoProjectAdmin.secret_key &&

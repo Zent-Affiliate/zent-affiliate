@@ -50,7 +50,7 @@ function ModalCreateProject() {
                     onFocus={() => handleFocus('code')}
                     onChange={(e) => handleChangeInputInfo(e, 'code')}
                     className={`main-input ${errorInfoProject && errorInfoProject.code ? 'error-input' : ''}`}
-                    placeholder={'Enter the project code'}
+                    placeholder={'Enter code'}
                 />
                 {
                     errorInfoProject && errorInfoProject.code &&
@@ -75,7 +75,7 @@ function ModalCreateProject() {
                     onFocus={() => handleFocus('name')}
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     className={`main-input ${errorInfoProject && errorInfoProject.name ? 'error-input' : ''}`}
-                    placeholder={'Enter the project name'}
+                    placeholder={'Enter name'}
                 />
                 {
                     errorInfoProject && errorInfoProject.name &&
@@ -101,7 +101,7 @@ function ModalCreateProject() {
                         onFocus={() => handleFocus('secret_key')}
                         onChange={(e) => handleChangeInputInfo(e, 'secret_key')}
                         className={`main-input ${errorInfoProject && errorInfoProject.secret_key ? 'error-input' : ''}`}
-                        placeholder={'Enter the secret key'}
+                        placeholder={'Enter secret key'}
                     />
     
                     {

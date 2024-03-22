@@ -35,7 +35,7 @@ function TableProjectAdmin() {
                 return (
                     <div className={`flex`}>
                         <div className={`ml-[10px] font-medium`}>
-                            <div className={`mb-[4px] mt-[4px] text-black-content cursor-pointer font-bold hover:text-blue-55`}
+                            <div className={`mb-[4px] mt-[4px] text-black-content cursor-pointer font-bold text-blue-35 hover:text-blue-55`}
                                  onClick={() => redirectToProject(record._id)}><Tooltip
                                 title={'Click to view project detail'}><span>{text}</span></Tooltip></div>
                         </div>
@@ -44,7 +44,7 @@ function TableProjectAdmin() {
             }
         },
         {
-            title: 'Name project',
+            title: 'Name',
             dataIndex: 'name',
             key: 'name',
             width: 250,

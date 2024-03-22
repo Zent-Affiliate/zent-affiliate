@@ -75,7 +75,7 @@ function ModalUpdateProjectAdmin() {
                     onChange={(e) => handleChangeInputInfo(e, 'name')}
                     onFocus={() => handleFocus('name')}
                     className={`main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.name ? 'error-input' : ''}`}
-                    placeholder={'Name of Project'}
+                    placeholder={'Enter name'}
                 />
                 {
                     errorInfoProjectAdmin && errorInfoProjectAdmin.name &&
@@ -102,7 +102,7 @@ function ModalUpdateProjectAdmin() {
                             onChange={(e) => handleChangeInputInfo(e, 'secret_key')}
                             onFocus={() => handleFocus('secret_key')}
                             className={`mr-[5px] main-input ${errorInfoProjectAdmin && errorInfoProjectAdmin.secret_key ? 'error-input' : ''}`}
-                            placeholder={'Enter the secret key'}
+                            placeholder={'Enter secret key'}
                         />
                         {
                             errorInfoProjectAdmin && errorInfoProjectAdmin.secret_key &&

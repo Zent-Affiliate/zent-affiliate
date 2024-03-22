@@ -25,7 +25,7 @@ function ModalCreateAdmin() {
             <div className={`input-wrap`}>
                 <div className='label-wrap'>
                     <label htmlFor='name' className={`required`}>
-                        Name of Admin
+                        Name
                     </label>
                 </div>
                 <Input
