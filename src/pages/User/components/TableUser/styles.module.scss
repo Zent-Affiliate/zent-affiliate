@@ -1,0 +1,11 @@
+.hoverBtn {
+    .btn {
+        @apply hidden;
+    }
+
+    &:hover {
+        .btn {
+            @apply inline-block;
+        }
+    }
+}

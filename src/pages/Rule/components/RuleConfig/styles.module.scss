@@ -1,0 +1,11 @@
+.titleWrap {
+    .copyIcon {
+        @apply hidden ;
+    }
+
+    &:hover {
+        .copyIcon {
+            @apply inline-block;
+        }
+    }
+}

@@ -1,0 +1,98 @@
+.bodyWrap {
+  @apply relative;
+
+  .leftBodyWrap {
+    @apply rounded-xl w-[300px] fixed;
+    @apply shadow-card-box mr-[25px] bg-[#fff];
+
+    .cardWrap {
+      @apply col-span-1 rounded-xl mb-4;
+      @apply cursor-pointer hover:shadow-[0_0px_8px_rgba(0,0,0,.1)];
+
+      .cardContent {
+        @apply flex justify-between items-center;
+
+        .leftCardWrap {
+          .name {
+            @apply font-semibold;
+          }
+        }
+      }
+    }
+  }
+
+  .rightBodyWrap {
+    @apply relative;
+
+    .listClassResponsive576 {
+      @apply h-[calc(100vh-110px)] py-[40px] px-[80px] rounded-lg bg-white relative overflow-hidden flex flex-col shadow-card-box;
+
+      @media only screen and (max-width: 600px) {
+        @apply p-[40px];
+      }
+
+      @media only screen and (max-width: 500px) {
+        @apply p-[30px];
+      }
+
+      @media only screen and (max-width: 400px) {
+        @apply p-[20px];
+      }
+    }
+  }
+}
+
+.content {
+  @apply pb-[23px];
+
+  .topChartWrap {
+    @apply w-full bg-[#fff];
+
+    .topChartContainer {
+      @apply px-20 py-8 relative overflow-hidden;
+      @apply rounded-xl;
+      @apply shadow-card-box;
+
+      @media only screen and (max-width: 576px) {
+        @apply p-[10px];
+      }
+
+      .btnRightArrow {
+        @apply absolute top-[50%] translate-y-[-50%] right-[30px] opacity-20 hover:opacity-60 cursor-pointer;
+      }
+
+      .btnLeftArrow {
+        @apply absolute top-[50%] translate-y-[-50%] left-[30px] opacity-20 hover:opacity-60 cursor-pointer;
+      }
+    }
+  }
+
+  .boxChartWrap {
+    @apply h-full rounded-lg bg-white border border-gray-110 shadow-card-box overflow-hidden relative;
+    canvas {
+      margin: 0 auto !important;
+    }
+  }
+
+  .betweenChartWrap {
+    @apply w-full mt-[25px];
+  }
+
+  .bottomTableWrap {
+    @apply px-8 pb-[25px] mt-[25px];
+    @apply rounded-xl bg-[#fff];
+    @apply shadow-card-box;
+
+    @media only screen and (max-width: 576px) {
+      @apply p-[10px];
+    }
+
+    .tableName {
+      @apply w-full flex items-center justify-center h-[60px] text-[#787878] text-base font-bold;
+    }
+  }
+
+  .listMenuWrap {
+    @apply w-full rounded-lg bg-white border border-gray-110 shadow-card-box overflow-hidden mb-[30px] p-[20px] flex flex-col items-center;
+  }
+}

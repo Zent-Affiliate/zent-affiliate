@@ -9,7 +9,7 @@ import ImageUser from '@/assets/images/logos/user_default.png';
 
 const TitleInformation = (props) => {
     const {
-        authUser
+        me
     } = handle(props);
 
     return (
@@ -18,12 +18,12 @@ const TitleInformation = (props) => {
                 <Col span={6}>
                     <img
                         className={'w-[100px] h-[100px] rounded-[0.8em] object-cover'}
-                        src={authUser.avatar ? authUser.avatar : ImageUser} alt=''
+                        src={me.avatar ? me.avatar : ImageUser} alt=''
                     />
                 </Col>
                 <Col className={'pt-2 leading-2'}>
                     <div className={'text-l'}>
-                        {authUser.name}
+                        {me.name}
                     </div>
                     <div className={'flex text-[13px] font-medium text-[#99A1B7]'}>
                         <label
@@ -32,8 +32,8 @@ const TitleInformation = (props) => {
                         >
                             <InlineSVG src={emailIcon} alt='' className={`w-3.5 h-3.5`} />
                         </label>
-                        <a href={`mailto:${authUser.email}`} className={'ml-1'}>
-                            {authUser.email}
+                        <a href={`mailto:${me.email}`} className={'ml-1'}>
+                            {me.email}
                         </a>
                     </div>
                     <div className={'flex text-[13px] font-medium text-[#99A1B7]'}>
@@ -44,11 +44,11 @@ const TitleInformation = (props) => {
                             <InlineSVG src={phoneIcon} alt='' className={`w-3.5 h-3.5`} />
                         </label>
                         {
-                            authUser.phone ?
-                                <a href={`tel:${authUser?.phone}`} className={'ml-1'}>
-                                    {authUser.phone}
+                            me.phone ?
+                                <a href={`tel:${me?.phone}`} className={'ml-1'}>
+                                    {me.phone}
                                 </a> :
-                                <span className='italic ml-1'>Đang cập nhật</span>
+                                <span className='italic ml-1'>Updating</span>
                         }
                     </div>
                 </Col>

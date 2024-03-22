@@ -6,7 +6,7 @@ import Close from '@/assets/images/icons/duotone/times.svg';
 import InlineSVG from 'react-inlinesvg';
 
 export default function ModalDefault(props) {
-    const {isModalOpen, handleOk, handleCancel, children, title} = props;
+    const {isModalOpen, handleOk, handleCancel, children, title, width} = props;
     return (
         <Modal
             className={`general-dialog-wrap`}
@@ -14,7 +14,7 @@ export default function ModalDefault(props) {
             onOk={handleOk}
             onCancel={handleCancel}
             footer={false}
-            width={600}
+            width={width ?? 600}
             centered
             closeIcon={<InlineSVG src={Close} />}
         >

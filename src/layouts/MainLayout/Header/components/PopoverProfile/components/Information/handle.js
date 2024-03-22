@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Joi from 'joi';
 import {validate} from '@/utils/validates/index.js';
 import {setErrorInformation} from '@/states/modules/profile/index.js';
-import {TYPE_FILE} from '@/utils/constains.js';
+import {TYPE_FILE} from '@/utils/constants.js';
 
 const updateProfileValidateSchema = Joi.object({
     name: Joi.string()
@@ -14,7 +14,7 @@ const updateProfileValidateSchema = Joi.object({
         .trim()
         .max(255)
         .required()
-        .label('Họ và tên'),
+        .label('Name'),
     email: Joi.string()
         .trim()
         .lowercase()
@@ -26,7 +26,7 @@ const updateProfileValidateSchema = Joi.object({
         .trim()
         .allow('', null)
         .pattern(VALIDATE_PHONE_REGEX_RULE)
-        .label('Số điện thoại'),
+        .label('Phone'),
     avatar: Joi.any()
 });
 
@@ -43,25 +43,25 @@ export default function Handle(props) {
 
     const errorInformation = useSelector(state => state.profile.errorInformation);
     const isLoadingBtnInformation = useSelector(state => state.profile.isLoadingBtnInformation);
-    const authUser = useSelector(state => state.auth.authUser);
+    const me = useSelector(state => state.auth.me);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (authUser) {
+        if (me) {
             setDataInformation({
-                name: authUser.name,
-                email: authUser.email,
-                phone: authUser.phone,
-                avatar: authUser.avatar ? authUser.avatar : null
+                name: me.name,
+                email: me.email,
+                phone: me.phone,
+                avatar: me.avatar ? me.avatar : null
             });
         }
-    }, [authUser]);
+    }, [me]);
 
     useEffect(() => {
-        if (authUser) {
-            setImageUrl(authUser.avatar);
+        if (me) {
+            setImageUrl(me.avatar);
         }
-    }, [authUser]);
+    }, [me]);
 
     const handleChangeInput = (e, type) => {
         let value = e.target.value;
@@ -95,9 +95,9 @@ export default function Handle(props) {
             let currentFile = file.target.files[0];
             let fileUrl = URL.createObjectURL(file.target.files[0]);
             if (currentFile.size / 1024 / 1024 > 2.048) {
-                dataError = 'Kích thước ảnh không vượt quá 2MB.';
+                dataError = 'Image size must not exceed 2MB.';
             } else if (!TYPE_FILE.includes(currentFile.type)) {
-                dataError = 'Ảnh đại diện chỉ được hỗ trợ kiểu jpg, jpeg, png, svg, webp.';
+                dataError = 'Avatar images are only supported as jpg, jpeg, png, svg, webp file types.';
             }
 
             if (dataError) {

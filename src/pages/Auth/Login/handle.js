@@ -18,7 +18,7 @@ const loginValidateSchema = Joi.object({
         .min(8)
         .max(255)
         .required()
-        .label('Mật khẩu')
+        .label('Password')
 });
 
 export default function Handle() {
@@ -52,6 +52,19 @@ export default function Handle() {
         }));
     };
 
+    const handleEnterAdmin = (event) => {
+        if(event.key === 'Enter'){
+            validate(loginValidateSchema, datFormLogin, {
+                onSuccess: (data) => {
+                    dispatch(login(data));
+                },
+                onError: (err) => {
+                    dispatch(setErrorLogin({...errorLogin, ...err}));
+                }
+            });
+        }
+    }
+
     const handleConfirmLogin = () => {
         validate(loginValidateSchema, datFormLogin, {
             onSuccess: (data) => {
@@ -70,6 +83,7 @@ export default function Handle() {
         isLoadingBtnLogin,
         handleChangeInput,
         handleFocus,
-        handleConfirmLogin
+        handleConfirmLogin,
+        handleEnterAdmin
     };
 }

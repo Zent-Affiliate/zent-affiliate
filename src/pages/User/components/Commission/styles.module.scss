@@ -1,0 +1,26 @@
+.slideIcon {
+    &:active, &:hover {
+        svg {
+            fill: #2F6BFF;
+        }
+    }
+
+    @apply flex items-center cursor-pointer;
+}
+
+.slideIconDisabled {
+    svg {
+        fill: #8F90A6;
+    }
+
+    @apply flex items-center cursor-default;
+}
+
+.commissionsWrap {
+    .commissionsContainer {
+        @apply flex-1 flex w-[70%] overflow-hidden rounded-lg scroll-smooth ease-linear;
+    }
+
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+    @apply flex-1 flex w-[70%] overflow-hidden rounded-xl p-3 scroll-smooth ease-linear;
+}

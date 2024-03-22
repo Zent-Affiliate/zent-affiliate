@@ -19,13 +19,13 @@ export default function ChangePassword(props) {
             <div className={'input-wrap'}>
                 <div className='label-wrap'>
                     <label htmlFor={'password'} className={'required'}>
-                        Mật khẩu hiện tại
+                    Current password
                     </label>
                 </div>
                 <Input.Password
                     id={'password'}
                     className={'main-input'}
-                    placeholder={'Nhập mật khẩu hiện tại'}
+                    placeholder={'Enter current password'}
                     value={dataChangePassword.password}
                     onChange={(e) => handleChangeInput(e, 'password')}
                     onFocus={() => handleFocus('password')}
@@ -44,13 +44,13 @@ export default function ChangePassword(props) {
             <div className={'input-wrap mt-5'}>
                 <div className='label-wrap'>
                     <label htmlFor={'newPassword'} className={'required'}>
-                        Mật khẩu mới
+                    Current password
                     </label>
                 </div>
                 <Input.Password
                     id={'newPassword'}
                     className={'main-input'}
-                    placeholder={'Nhập mật khẩu mới'}
+                    placeholder={'Enter your new password'}
                     value={dataChangePassword.newPassword}
                     onChange={(e) => handleChangeInput(e, 'newPassword')}
                     onFocus={() => handleFocus('newPassword')}
@@ -69,13 +69,13 @@ export default function ChangePassword(props) {
             <div className={'input-wrap mt-5'}>
                 <div className='label-wrap'>
                     <label htmlFor={'confirmPassword'} className={'required'}>
-                        Xác nhận mật khẩu
+                        Confirm password
                     </label>
                 </div>
                 <Input.Password
                     id={'confirmPassword'}
                     className={'main-input'}
-                    placeholder={'Xác nhận mật khẩu'}
+                    placeholder={'Confirm password'}
                     value={dataChangePassword.confirmPassword}
                     onChange={(e) => handleChangeInput(e, 'confirmPassword')}
                     onFocus={() => handleFocus('confirmPassword')}
@@ -100,7 +100,7 @@ export default function ChangePassword(props) {
                     block
                     onClick={() => handleConfirmChangePassword()}
                 >
-                    Cập nhật
+                    Update
                 </Button>
             </div>
         </div>

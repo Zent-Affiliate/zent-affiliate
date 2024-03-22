@@ -1,0 +1,41 @@
+.card-custom {
+    .ant-card-head {
+        @apply border-y-white;
+
+        .ant-card-head-wrapper {
+            .ant-card-head-title {
+                @apply flex justify-center;
+            }
+        }
+    }
+
+    .ant-card:not(.ant-card-bordered) {
+        @apply bg-none shadow-none;
+    }
+}
+
+.card-custom-management {
+    .ant-card-body {
+        @apply h-[calc(100vh-290px)] mb-[40px];
+    }
+}
+
+.card-custom-teacher {
+    @apply shadow-lg pb-[40px] transition-transform duration-300 ease-in-out transform;
+}
+
+.statistics-table-custom {
+    .ant-table-content {
+        @apply min-h-[calc(100vh_-_350px)];
+        @apply hover:overflow-x-auto scroll-smooth ease-linear overflow-x-hidden #{!important};
+        scrollbar-gutter: stable both-edges;
+    }
+}
+
+.admin-card-custom {
+    .ant-card-body {
+        @apply pt-0 relative;
+        @apply h-[calc(100vh-310px)] overflow-y-hidden hover:overflow-y-auto scroll-smooth ease-linear;
+        scrollbar-gutter: stable both-edges;
+    }
+}

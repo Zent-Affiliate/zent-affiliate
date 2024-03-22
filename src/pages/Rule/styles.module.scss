@@ -1,0 +1,5 @@
+.ruleListWrap {
+    @apply relative mt-10 px-4 pb-4;
+    @apply overflow-y-hidden hover:overflow-y-auto scroll-smooth ease-linear mb-5;
+    scrollbar-gutter: stable both-edges;
+}

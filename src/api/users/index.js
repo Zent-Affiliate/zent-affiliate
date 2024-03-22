@@ -1,32 +1,11 @@
 import callApi from '@/api/callApi';
-import {
-    changePassWordUser,
-    changePassWordUserFail,
-    changePassWordUserSuccess,
-    changeStatusUser,
-    changeStatusUserFail,
-    changeStatusUserSuccess,
-    createUser,
-    createUserFail,
-    createUserSuccess,
-    deleteUser,
-    deleteUserFail,
-    deleteUserSuccess,
-    getDetailUser,
-    getDetailUserFailure,
-    getDetailUserSuccess,
-    getListUser,
-    getListUserFailure,
-    getListUserSuccess,
-    updateUser,
-    updateUserFail,
-    updateUserSuccess
-} from '@/states/modules/user';
-import _ from 'lodash';
+import {getListUser, getListUserFailure, getListUserSuccess} from '@/states/modules/user';
+import { getListUserByRelationship, getListUserByRelationshipSuccess, getListUserByRelationshipFail} from '@/states/modules/commission'
 
-export const getListUsers = () => async (dispatch, getState) => {
+export const requestGetListUser = () => async (dispatch, getState) => {
+    const id = getState().app.location.params.project_id;
     const dataFilter = getState().user.dataFilter;
-    let path = `users?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;
+    let path = `users/${id}?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;
 
     if (dataFilter.keySearch) {
         path += `&q=${dataFilter.keySearch}`;
@@ -50,110 +29,25 @@ export const getListUsers = () => async (dispatch, getState) => {
     });
 };
 
-export const getDetailUsers = (id) => (dispatch, getState) => {
-    return callApi({
-        method: 'get',
-        apiPath: `users/${id}`,
-        actionTypes: [
-            getDetailUser,
-            getDetailUserSuccess,
-            getDetailUserFailure
-        ],
-        variables: {},
-        dispatch,
-        getState
-    });
-};
+export const requestGetListUserByRelationship = () => async (dispatch, getState) => {
+    const project_id = getState().app.location.params.project_id;
+    const user_id = getState().app.location.params.id;
+    const dataFilter = getState().commission.dataFilterUsers;
+    let path = `users/${project_id}/${user_id}?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;
 
-export const handleCreateUser = (data) => async (dispatch, getState) => {
-    const headers = {
-        'Content-Type': 'multipart/form-data'
-    };
+    if (dataFilter.keySearch) {
+        path += `&q=${dataFilter.keySearch}`;
+    }
 
-    return callApi({
-        method: 'post',
-        apiPath: 'users',
-        actionTypes: [
-            createUser,
-            createUserSuccess,
-            createUserFail
-        ],
-        variables: {...data},
-        dispatch,
-        getState,
-        headers
-    });
-};
-
-export const handleUpdateUser = (id, data) => async (dispatch, getState) => {
-    const headers = {
-        'Content-Type': 'multipart/form-data'
-    };
-
-    let dataUser = _.cloneDeep(data);
-    delete dataUser?._id;
-
-    if (dataUser.avatar !== '' && typeof dataUser.avatar === 'string') {
-        delete dataUser.avatar;
+    if (dataFilter.sort_order) {
+        path += `&sort_order=${dataFilter.sort_order}&field=${dataFilter.column}`;
     }
 
     return callApi({
-        method: 'put',
-        apiPath: `users/${id}`,
+        method: 'get',
+        apiPath: path,
         actionTypes: [
-            updateUser,
-            updateUserSuccess,
-            updateUserFail
-        ],
-        variables: {...dataUser},
-        dispatch,
-        getState,
-        headers
-    });
-};
-
-export const handleChangeStatusUser = (id, data) => async (dispatch, getState) => {
-    return callApi({
-        method: 'put',
-        apiPath: `users/update-status/${id}`,
-        actionTypes: [
-            changeStatusUser,
-            changeStatusUserSuccess,
-            changeStatusUserFail
-        ],
-        variables: {
-            status: data
-        },
-        dispatch,
-        getState
-    });
-};
-
-export const handleChangePassUser = (id, data) => async (dispatch, getState) => {
-    return callApi({
-        method: 'patch',
-        apiPath: `users/reset-password/${id}`,
-        actionTypes: [
-            changePassWordUser,
-            changePassWordUserSuccess,
-            changePassWordUserFail
-        ],
-        variables: {
-            ...data
-        },
-        dispatch,
-        getState
-    });
-};
-
-export const handleDeleteUser = (id) => async (dispatch, getState) => {
-    return callApi({
-        method: 'delete',
-        apiPath: `users/${id}`,
-        actionTypes: [
-            deleteUser,
-            deleteUserSuccess,
-            deleteUserFail
+            getListUserByRelationship, getListUserByRelationshipSuccess, getListUserByRelationshipFail
         ],
         variables: {},
         dispatch,
